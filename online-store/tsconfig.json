@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "declarationMap": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "module": "commonjs",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "strict": true,
+        "strictFunctionTypes": false,
+        "target": "ES2021"
+    }
+}
