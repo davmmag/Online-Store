@@ -11,14 +11,15 @@ function createElement (type: string, parent: string, children: string, text?: s
         elParent.append(elem);
     }
 }
-/*
-function uniqueArray(array: productsArrayType, key: string) {
-        const newArr: [] = [];
-        for (let i: number = 0; i < array.length; i++){
-            newArr.push(array[i][key]);
-        }
-        const uniqueNames = new Set(newArr);
-        return Array.from(uniqueNames);
+
+function uniqueArray <T extends Object, P extends keyof T> (array: Array<T>,  key: P): Array<T[P]> {
+    const newArr: Array<T[P]> = [];
+    for (let i: number = 0; i < array.length; i++) {
+        newArr.push(array[i][key]);
+    }
+    const uniqueName = new Set (newArr);
+    return Array.from(uniqueName);
 }
-*/
-export { createElement };
+
+
+export { createElement, uniqueArray };
