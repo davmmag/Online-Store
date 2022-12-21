@@ -1,3 +1,5 @@
+import { productsArrayType } from "../../types/types";
+
 function createElement (type: string, parent: string, children: string, text?: string) {
     const elParent = document.querySelector(`.${parent}`);
     if (elParent !== null) {
@@ -10,18 +12,13 @@ function createElement (type: string, parent: string, children: string, text?: s
     }
 }
 /*
-function uniqueArray(array, key) {
-    let tmpArray = [];
-    
-    function itemCheck(item) {
-        if (tmpArray.indexOf(item[key]) === -1) {
-            tmpArray.push(item[key]);
-            return true;
+function uniqueArray(array: productsArrayType, key: string) {
+        const newArr: [] = [];
+        for (let i: number = 0; i < array.length; i++){
+            newArr.push(array[i][key]);
         }
-        return false;
-    }
-    array.filter((item) => itemCheck(item));
-  return tmpArray.sort();
+        const uniqueNames = new Set(newArr);
+        return Array.from(uniqueNames);
 }
 */
 export { createElement};

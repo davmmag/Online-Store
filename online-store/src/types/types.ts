@@ -14,4 +14,6 @@ interface ProductDescription {
     price: number;
 }
 
-export { ProductDescription }
+type productsArrayType = [ProductDescription];
+
+export { ProductDescription, productsArrayType }

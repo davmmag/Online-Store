@@ -1,6 +1,6 @@
-import { ProductDescription } from '../../types/types'
+import { productsArrayType } from '../../types/types'
 
-const productsArray: ProductDescription [] = [
+const productsArray: productsArrayType  = [
     {
         brand: 'QUA',
         country: 'Turkey',
