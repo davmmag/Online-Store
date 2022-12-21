@@ -1,4 +1,4 @@
-function createElement (type, parent, children, text) {
+function createElement (type: string, parent: string, children: string, text?: string) {
     const elParent = document.querySelector(`.${parent}`);
     if (elParent !== null) {
         const elem = document.createElement(`${type}`);
@@ -9,7 +9,7 @@ function createElement (type, parent, children, text) {
         elParent.append(elem);
     }
 }
-
+/*
 function uniqueArray(array, key) {
     let tmpArray = [];
     
@@ -23,5 +23,5 @@ function uniqueArray(array, key) {
     array.filter((item) => itemCheck(item));
   return tmpArray.sort();
 }
-
-export { createElement, uniqueArray };
+*/
+export { createElement};

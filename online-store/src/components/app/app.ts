@@ -1,6 +1,5 @@
-import { productsArray } from "../products/products.js";
-import { createElement, uniqueArray } from "../app/functions.js";
-console.log("App.js");
+import { productsArray } from "../products/products";
+import { createElement } from "./functions";
 
 class App {
 
@@ -18,17 +17,19 @@ class App {
                 createElement("div", "filters__content", "filters-country");
                     createElement("div", "filters-country", "filters-country__title", "Страна:");
                     createElement("ul", "filters-country", "filters-country__menu");
+                    /*
                         uniqueArray(productsArray, "country").forEach (element => {
                             createElement("li", "filters-country__menu", "filters-country__item", `${element}`);
                         });
-
+                    */
                 createElement("div", "filters__content", "filters-brand");
                     createElement("div", "filters-brand", "filters-brand__title", "Производитель");
                     createElement("ul", "filters-brand", "filters-brand__menu");
+                    /*
                         uniqueArray(productsArray, "brand").forEach (element => {
                             createElement("li", "filters-brand__menu", "filters-brand__item", `${element}`);
                         });
-
+                    */
                 createElement("div", "filters__content", "filters-rectified", );
                     createElement("div", "filters-rectified", "filters-rectified__title", "Ректификат:");
                     createElement("ul", "filters-rectified", "filters-rectified__menu");
