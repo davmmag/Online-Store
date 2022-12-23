@@ -1,4 +1,5 @@
 interface ProductDescription {
+    name: string;
     brand: string;
     country: string;
     size: {
