@@ -373,10 +373,25 @@ button img {
 }
 
 .checkbox__menu {
-    display: none;
+
 }
-.active{
+.checkbox__menu.active{
     display: block;
+}
+
+.filters-prime {
+    cursor: pointer;
+    background-color: black;
+    border-radius: 7px;
+    color: aliceblue;
+    height: 50px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+.filters-prime.active {
+    display: flex;
 }
 
 .main__table {

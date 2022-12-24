@@ -13,22 +13,17 @@ function createElement (type: string, parent: string, children: string, text?: s
 }
 
 function createCheckbox (value: string | number, container: string) {
-    let checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.id = `${value}`;
-    checkbox.value = `${value}`;
- 
-    let label = document.createElement('label')
-    label.htmlFor = `${value}`;
-    label.appendChild(document.createTextNode(`${value}`));
- 
-    const CONT = `.${container}`
-    console.log (CONT);
-    let cont = document.querySelector(`${CONT}`);
+    let label = document.createElement('label');
+    let cont = document.querySelector(`.${container}`);
     if (cont) {
-        cont.appendChild(checkbox);
         cont.appendChild(label);
     }
+    
+    let checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = `${value}`;
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(`${value}`));
 
 }
 function uniqueArray <T extends Object, P extends keyof T> (array: Array<T>,  key: P): Array<T[P]> {

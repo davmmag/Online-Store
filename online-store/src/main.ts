@@ -7,4 +7,4 @@ import { productsArray } from "./app/products";
 const app: App = new App();
 app.start();
 app.createTable(productsArray);
-app.filter();
+app.checked();

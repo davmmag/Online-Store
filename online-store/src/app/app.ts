@@ -12,24 +12,24 @@ class App {
                 
                 createElement("div", "filters__content", "filters-country filter-checkbox");
                     createElement("div", "filters-country", "filters-country__title checkbox__title", "Страна:");
-                    createElement("ul", "filters-country", "filters-country__menu checkbox__menu");
+                    createElement ("form", "filters-country", "checkboxes-country" );
                         uniqueArray(productsArray, "country").forEach (element => {
-                            createElement("li", "filters-country__menu", "filters-country__item");
-                            createCheckbox (`${element}`, "filters-country__item");
+                            createCheckbox (`${element}`, "checkboxes-country");
                         });
                     
                 createElement("div", "filters__content", "filters-brand filter-checkbox");
                     createElement("div", "filters-brand", "filters-brand__title checkbox__title", "Производитель:");
                     createElement("ul", "filters-brand", "filters-brand__menu checkbox__menu");
-                        uniqueArray(productsArray, "brand").forEach (element => {
-                            createElement("li", "filters-brand__menu", "filters-brand__item", `${element}`);
-                        });
+                    createElement ("form", "filters-brand", "checkboxes-brand" );
+                    uniqueArray(productsArray, "brand").forEach (element => {
+                        createCheckbox (`${element}`, "checkboxes-brand");
+                    });
                     
                 createElement("div", "filters__content", "filters-rectified filter-checkbox", );
                     createElement("div", "filters-rectified", "filters-rectified__title checkbox__title", "Ректификат:");
-                    createElement("ul", "filters-rectified", "filters-rectified__menu checkbox__menu");
-                        createElement("li", "filters-rectified__menu", "filters-rectified__item", `Да`);
-                        createElement("li", "filters-rectified__menu", "filters-rectified__item", `Нет`);
+
+                createElement("div", "filters__content", "filters-prime", "Применить фильтры");
+                        
     }
         
     createTable (array: ProductDescription[]) {
@@ -67,18 +67,23 @@ class App {
     }
 
 
-    filter () {
-        const filterCheckbox = document.querySelector('.filter-checkbox');
-        const checkboxMenu = document.querySelector('.checkbox__menu');
-        if (filterCheckbox) {
-            filterCheckbox.addEventListener('click', () => {
-                console.log ("click");
-                if (checkboxMenu) {
-                    checkboxMenu.classList.toggle('active');
+    checked () {
+        let checkboxes: NodeListOf<Element> = document.querySelectorAll('input[type=checkbox]');
+        for (let i= 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener('change', function(event) {
+                if (event.target instanceof HTMLInputElement) {
+                    if (event.target.checked) {
+                        alert(`${event.target.value} is checked`);
+                    } else {
+                        alert(`${event.target.value} is unchecked`);
+                    }
                 }
-            })
+            });
         }
-        
+    }
+
+    filtered () {
+
     }
 }
 
