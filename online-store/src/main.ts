@@ -1,7 +1,7 @@
 import './style.scss';
 import './app/index';
 
-import Card from './components/card/card';
+import Cart from './components/cart/cart';
 
 const dataObj = {
   name: 'Керамогранит QUA 60x120 Sun Onyx Full Lap',
@@ -27,5 +27,5 @@ const dataObj = {
   },
 }
 
-const card = new Card();
-card.draw(dataObj);
+const cart = new Cart();
+cart.draw(dataObj);
