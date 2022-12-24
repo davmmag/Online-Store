@@ -1,0 +1,36 @@
+.btn {
+  font-family: 'Cera Round Pro', sans-serif;
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+
+  &--circle {
+    border: 2px solid #000;
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    min-width: 180px;
+    min-height: 40px;
+    font-weight: 400;
+    transition: all .3s;
+
+    &:hover,
+    &:focus {
+      background-color: #000;
+      color: #fff;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .btn--circle {
+    min-width: 207px;
+    min-height: 40px;
+  }
+}
