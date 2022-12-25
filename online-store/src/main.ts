@@ -2,6 +2,8 @@ import './style.scss';
 import './app/index';
 
 import Cart from './components/cart/cart';
+import Modal from './components/modal/modal';
+import Form from './components/form/form';
 
 const dataObj = {
   name: 'Керамогранит QUA 60x120 Sun Onyx Full Lap',
