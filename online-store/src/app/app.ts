@@ -1,6 +1,8 @@
-import { createElement, uniqueArray, createCheckbox, filteredArray } from "../app/functions";
+import { createElement, uniqueArray, createCheckbox, removeArrEl } from "../app/functions";
 import { productsArray } from "../app/products";
-import { ProductDescription } from "./types";
+import { ProductDescription} from "./types";
+
+const checkedArray: string[] = [];
 class App {
     start() {
         /*Создание блока с фильтрами*/
@@ -69,19 +71,31 @@ class App {
 
     checked () {
         let checkboxes: NodeListOf<Element> = document.querySelectorAll('input[type=checkbox]');
+
         for (let i= 0; i < checkboxes.length; i++) {
             checkboxes[i].addEventListener('change', function(event) {
                 if (event.target instanceof HTMLInputElement) {
                     if (event.target.checked) {                       
-                        alert(`${event.target.value} is unchecked`);
+                        checkedArray.push(`${event.target.value}`);
                     } else {
-                        alert(`${event.target.value} is unchecked`);
+                        removeArrEl (checkedArray, `${event.target.value}`);
                     }
                 }
             });
         }
     }
 
+    filtered () {
+        const clickFilters = document.querySelector('.filters-prime');
+        if (clickFilters) {
+            clickFilters.addEventListener('click', () => {
+                for (let i: number = 0; i < checkedArray.length; i++) {
+                    
+                }
+            })
+        }
+        
+    }
 }
 
 export default App;

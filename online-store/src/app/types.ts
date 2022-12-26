@@ -14,7 +14,11 @@ interface ProductDescription {
     rectified: boolean;
     price: number;
 }
-
 type productsArrayType = [ProductDescription];
 
-export { ProductDescription, productsArrayType }
+interface checkedCategory {
+    [key: string]: string;
+}
+type checkedArrayType = [checkedCategory];
+
+export { ProductDescription, productsArrayType, checkedArrayType }
