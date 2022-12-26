@@ -1,4 +1,5 @@
-import { productsArrayType } from "../app/types";
+import { productsArray } from "../app/products";
+import { ProductDescription } from "../app/types";
 
 function createElement (type: string, parent: string, children: string, text?: string) {
     const elParent = document.querySelector(`.${parent}`);
@@ -35,5 +36,10 @@ function uniqueArray <T extends Object, P extends keyof T> (array: Array<T>,  ke
     return Array.from(uniqueName);
 }
 
+function filteredArray (value: string): ProductDescription[] {
+    const needToExclude = value;
+    let newArr = productsArray.filter((obj) => Object.values(obj).some((el) => el === needToExclude));
+    return newArr;
+}
 
-export { createElement, uniqueArray, createCheckbox };
+export { createElement, uniqueArray, createCheckbox, filteredArray };

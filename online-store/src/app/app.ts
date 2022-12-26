@@ -1,4 +1,4 @@
-import { createElement, uniqueArray, createCheckbox } from "../app/functions";
+import { createElement, uniqueArray, createCheckbox, filteredArray } from "../app/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription } from "./types";
 class App {
@@ -72,8 +72,8 @@ class App {
         for (let i= 0; i < checkboxes.length; i++) {
             checkboxes[i].addEventListener('change', function(event) {
                 if (event.target instanceof HTMLInputElement) {
-                    if (event.target.checked) {
-                        alert(`${event.target.value} is checked`);
+                    if (event.target.checked) {                       
+                        alert(`${event.target.value} is unchecked`);
                     } else {
                         alert(`${event.target.value} is unchecked`);
                     }
@@ -82,9 +82,6 @@ class App {
         }
     }
 
-    filtered () {
-
-    }
 }
 
 export default App;
