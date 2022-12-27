@@ -318,7 +318,7 @@ button img {
     color: rgb(138, 138, 138);
 }
 
-/*main*/
+/*=================================MAIN======================================*/
 
 .main {
     height: calc(100vh - 230px);
@@ -328,6 +328,9 @@ button img {
     margin-top: 20px;
     display: flex;
 }
+
+
+/*=================================MAIN FILTERS======================================*/
 .main__filters {
     width: 25%;
     height: 500px;
@@ -396,15 +399,35 @@ button img {
 .filters-prime.active {
     display: flex;
 }
-
+/*=================================MAIN TABLE======================================*/
 .main__table {
     width: 100%;
     height: 500px;
 }
+
+
+/*=================================TABLE TOOLBAR======================================*/
 .table__toolbar {
-    height: 50px;
-    background-color: tomato;
+    height: 70px;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
 }
+
+.sort-by {
+}
+
+.view-mode {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(237, 100, 210);
+}
+
+
+
+/*=================================TABLE PRODUCTS======================================*/
 .table__products {
     width: 100%;
     display: flex;

@@ -1,4 +1,4 @@
-import { createElement, uniqueArray, createCheckbox, removeArrEl, filteredArray } from "../app/functions";
+import { createElement, uniqueArray, createCheckbox, removeArrEl, filteredArray, sortingArray } from "../app/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription} from "./types";
 
@@ -38,6 +38,31 @@ function createTable (array: ProductDescription[]) {
         /*Создание таблицы с товарами*/
         createElement("div", "main__container", "main__table");
             createElement("div", "main__table", "table__toolbar");
+                createElement("div", "table__toolbar", "sort-by", "Сортировать по: ");
+                    createElement("select", "sort-by", "select-box");
+                    const selectBox = document.querySelector(`.select-box`);
+                        let option = document.createElement(`option`);
+                        option.value = "priceAscending";
+                        option.innerText = "Цена по возрастанию";
+                        selectBox?.appendChild(option);
+
+                        option = document.createElement(`option`);
+                        option.value = "priceDescending";
+                        option.innerText = "Цена по убыванию";
+                        selectBox?.appendChild(option);
+
+                        option = document.createElement(`option`);
+                        option.value = "sizeAscending";
+                        option.innerText = "Размер по возрастанию";
+                        selectBox?.appendChild(option);
+
+                        option = document.createElement(`option`);
+                        option.value = "sizeDescending";
+                        option.innerText = "Размер по убыванию";
+                        selectBox?.appendChild(option);
+
+                createElement("div", "table__toolbar", "view-mode");
+
             createElement("div", "main__table", "table__products");
                 for (let i: number = 0; i < array.length; i++) {
                     const elParent = document.querySelector(`.table__products`);
@@ -109,8 +134,16 @@ function filtered () {
 }
 
 function sortered () {
+    let sortingValue: string = '';
+    const selectSort = document.querySelector('.select-box') as HTMLInputElement;
 
+    if (selectSort) {
+        selectSort.onchange = function() {
+            sortingValue = selectSort.value;
+            document.querySelector('.main__table')?.remove();
+            createTable(sortingArray (productsArray, sortingValue));
+        };
+    }
 }
 
-
-export { start, createTable, checked, filtered };
+export { start, createTable, checked, filtered, sortered };

@@ -46,4 +46,11 @@ function removeArrEl (arr: string[], value: string) {
     return newArr;
 }
 
-export { createElement, uniqueArray, createCheckbox, filteredArray, removeArrEl };
+function sortingArray (array: ProductDescription[], value: string): ProductDescription[] {
+    if (value === "priceDescending") {return array.sort((a, b) => b.price > a.price ? 1 : -1);}
+    if (value === "sizeAscending") {return array.sort((a, b) => a.size.width > b.size.width ? 1 : -1);}
+    if (value === "sizeDescending") {return array.sort((a, b) => b.size.width > a.size.width ? 1 : -1);}
+    return array.sort((a, b) => a.price > b.price ? 1 : -1);
+}
+
+export { createElement, uniqueArray, createCheckbox, filteredArray, removeArrEl, sortingArray };
