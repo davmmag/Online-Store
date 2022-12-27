@@ -2,7 +2,9 @@ import { createElement, uniqueArray, createCheckbox, removeArrEl } from "../app/
 import { productsArray } from "../app/products";
 import { ProductDescription} from "./types";
 
-const checkedArray: string[] = [];
+let checkedArray: string[] = [];
+
+
 class App {
     start() {
         /*Создание блока с фильтрами*/
@@ -71,14 +73,22 @@ class App {
 
     checked () {
         let checkboxes: NodeListOf<Element> = document.querySelectorAll('input[type=checkbox]');
-
+        const clickFilters = document.querySelector('.filters-prime');
         for (let i= 0; i < checkboxes.length; i++) {
             checkboxes[i].addEventListener('change', function(event) {
                 if (event.target instanceof HTMLInputElement) {
                     if (event.target.checked) {                       
                         checkedArray.push(`${event.target.value}`);
+                        if (clickFilters) {
+                            clickFilters.classList.add('active');
+                        }
                     } else {
-                        removeArrEl (checkedArray, `${event.target.value}`);
+                        checkedArray = removeArrEl (checkedArray, `${event.target.value}`);
+                        if (checkedArray.length === 0) {
+                            if (clickFilters) {
+                                clickFilters.classList.remove('active');
+                            }
+                        }
                     }
                 }
             });

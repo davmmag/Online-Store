@@ -43,7 +43,8 @@ function filteredArray (value: string): ProductDescription[] {
 }
 
 function removeArrEl (arr: string[], value: string) {
-    return arr.filter(el => el !== value);
+    const newArr = arr.filter(el => el !== value);
+    return newArr;
   }
 
 export { createElement, uniqueArray, createCheckbox, filteredArray, removeArrEl };
