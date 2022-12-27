@@ -1,12 +1,10 @@
-import { createElement, uniqueArray, createCheckbox, removeArrEl } from "../app/functions";
+import { createElement, uniqueArray, createCheckbox, removeArrEl, filteredArray } from "../app/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription} from "./types";
 
+
 let checkedArray: string[] = [];
-
-
-class App {
-    start() {
+function start(): void {
         /*Создание блока с фильтрами*/
         createElement("div", "main__container", "main__filters");
             createElement("div", "main__filters", "filters__title", "Фильтры");
@@ -36,7 +34,7 @@ class App {
                         
     }
         
-    createTable (array: ProductDescription[]) {
+function createTable (array: ProductDescription[]) {
         /*Создание таблицы с товарами*/
         createElement("div", "main__container", "main__table");
             createElement("div", "main__table", "table__toolbar");
@@ -71,9 +69,9 @@ class App {
     }
 
 
-    checked () {
+function checked () {
+    const clickFilters = document.querySelector('.filters-prime');
         let checkboxes: NodeListOf<Element> = document.querySelectorAll('input[type=checkbox]');
-        const clickFilters = document.querySelector('.filters-prime');
         for (let i= 0; i < checkboxes.length; i++) {
             checkboxes[i].addEventListener('change', function(event) {
                 if (event.target instanceof HTMLInputElement) {
@@ -95,17 +93,24 @@ class App {
         }
     }
 
-    filtered () {
-        const clickFilters = document.querySelector('.filters-prime');
+function filtered () {
+    const clickFilters = document.querySelector('.filters-prime');
+    let newArr: ProductDescription[] = [];
         if (clickFilters) {
             clickFilters.addEventListener('click', () => {
+                document.querySelector('.main__table')?.remove();
                 for (let i: number = 0; i < checkedArray.length; i++) {
-                    
+                    newArr = filteredArray (checkedArray[i]);                  
                 }
+                createTable(newArr);
             })
         }
         
-    }
 }
 
-export default App;
+function sortered () {
+
+}
+
+
+export { start, createTable, checked, filtered };

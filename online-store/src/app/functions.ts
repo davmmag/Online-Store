@@ -37,14 +37,13 @@ function uniqueArray <T extends Object, P extends keyof T> (array: Array<T>,  ke
 }
 
 function filteredArray (value: string): ProductDescription[] {
-    const needToExclude = value;
-    let newArr = productsArray.filter((obj) => Object.values(obj).some((el) => el === needToExclude));
+    const newArr = productsArray.filter((obj) => Object.values(obj).some((el) => el === value));
     return newArr;
 }
 
 function removeArrEl (arr: string[], value: string) {
     const newArr = arr.filter(el => el !== value);
     return newArr;
-  }
+}
 
 export { createElement, uniqueArray, createCheckbox, filteredArray, removeArrEl };
