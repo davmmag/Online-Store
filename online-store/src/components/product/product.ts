@@ -1,12 +1,12 @@
 import { createElement } from "../../functions/functions";
-import { CardTable,DataCard } from "../../types/types";
+import { ProductTable,DataProduct } from "../../types/types";
 
-class Card {
-  card: HTMLElement;
-  cardFeaturesHeads: CardTable;
+class Product {
+  product: HTMLElement;
+  productFeaturesHeads: ProductTable;
   constructor() {
-    this.card = document.querySelector('.card') as HTMLElement;
-    this.cardFeaturesHeads = {
+    this.product = document.querySelector('.product') as HTMLElement;
+    this.productFeaturesHeads = {
       brand: 'Бренд',
       country: 'Страна',
       size: 'Размер',
@@ -20,15 +20,15 @@ class Card {
     }
   }
 
-  draw(data: DataCard): void {
-    const cardContainer: HTMLElement = createElement('div', 'container card__container');
-    const cardData = createElement('div', 'card__data');
-    const cardTitle = createElement('h1', 'card__title', data.name);
-    const featuresTop = createElement('div', 'card__features-top');
-    const cardValue = createElement('div', 'card__value', data.price);
-    const cardPriceBlock = createElement('div', 'card__price');
-    const cardCount = createElement('div', 'card__count count');
-    cardCount.innerHTML = 
+  draw(data: DataProduct): void {
+    const productContainer: HTMLElement = createElement('div', 'container product__container');
+    const productData = createElement('div', 'product__data');
+    const productTitle = createElement('h1', 'product__title', data.name);
+    const featuresTop = createElement('div', 'product__features-top');
+    const productValue = createElement('div', 'product__value', data.price);
+    const productPriceBlock = createElement('div', 'product__price');
+    const productCount = createElement('div', 'product__count count');
+    productCount.innerHTML = 
     `
     <button class="btn btn count__minus">
                 <i class="fa-solid fa-minus"></i>
@@ -37,20 +37,20 @@ class Card {
               <button class="btn count__plus">
                 <i class="fa-solid fa-plus"></i>
     </button>
-    `
-    const btnCart = createElement('button', 'btn btn--circle card__btn-cart');
-    btnCart.innerHTML = `
-    <i class="fa-solid fa-cart-shopping"></i>
+    `;
+    const btnProduct = createElement('button', 'btn btn--circle product__btn-product');
+    btnProduct.innerHTML = `
+    <i class="fa-solid fa-product-shopping"></i>
               <span>Добавить в корзину</span>
     `;
-    const btnPay = createElement('button', 'btn btn--circle card__btn-pay');
+    const btnPay = createElement('button', 'btn btn--circle product__btn-pay');
     btnPay.innerHTML = `
-    <i class="fa-regular fa-credit-card"></i>
+    <i class="fa-regular fa-credit-product"></i>
               <span>Купить сейчас</span>
     `
-    const featuresBottom = createElement('div', 'card__features-bottom');
-    const cardSlider = createElement('div', 'card__slider');
-    cardSlider.innerHTML = `
+    const featuresBottom = createElement('div', 'product__features-bottom');
+    const productSlider = createElement('div', 'product__slider');
+    productSlider.innerHTML = `
         <div
       style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
       class="swiper mySwiper2"
@@ -97,21 +97,21 @@ class Card {
     `
     const features = data.features;
     type KeyFeatures = keyof typeof features;
-    type KeyFeaturesHead = keyof typeof this.cardFeaturesHeads;
+    type KeyFeaturesHead = keyof typeof this.productFeaturesHeads;
     Object.keys(features).forEach((key) => {
       const value = features[key as KeyFeatures];
-      const cardBlock = createElement('div', 'card__features-block');
-      const cardBlockHead = createElement('div', 'card__features-head' , this.cardFeaturesHeads[key as KeyFeaturesHead]);
-      const cardBlockValue = createElement('div', 'card__features-value', value as string);
-      cardBlock.append(cardBlockHead, cardBlockValue);
-      featuresBottom.append(cardBlock);
+      const productBlock = createElement('div', 'product__features-block');
+      const productBlockHead = createElement('div', 'product__features-head' , this.productFeaturesHeads[key as KeyFeaturesHead]);
+      const productBlockValue = createElement('div', 'product__features-value', value as string);
+      productBlock.append(productBlockHead, productBlockValue);
+      featuresBottom.append(productBlock);
     })
-    cardPriceBlock.append(cardCount, btnCart, btnPay);
-    featuresTop.append(cardValue, cardPriceBlock);
-    cardData.append(cardTitle, featuresTop, featuresBottom);
-    cardContainer.append(cardData, cardSlider);
-    this.card.append(cardContainer);
+    productPriceBlock.append(productCount, btnProduct, btnPay);
+    featuresTop.append(productValue, productPriceBlock);
+    productData.append(productTitle, featuresTop, featuresBottom);
+    productContainer.append(productData, productSlider);
+    this.product.append(productContainer);
   }
 }
 
-export default Card;
+export default Product;

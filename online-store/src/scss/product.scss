@@ -1,4 +1,4 @@
-.card {
+.product {
   &__container {
     padding-top: 50px;
   }
@@ -45,12 +45,12 @@
     width: 100%;
   }
 
-  &__btn-cart {
+  &__btn-product {
     margin: 0 3%;
   }
 
   &__btn-pay i,
-  &__btn-cart i {
+  &__btn-product i {
     display: none;
   }
 
@@ -115,19 +115,19 @@
 }
 
 @media screen and (min-width: 680px) {
-  .card__features-bottom {
+  .product__features-bottom {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media screen and (min-width: 768px) {
-  .card__features-bottom {
+  .product__features-bottom {
     padding-left: 30px;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .card__container {
+  .product__container {
     display: grid;
     column-gap: 50px;
     grid-template-columns: minmax(auto, 30%) minmax(auto, 70%);
@@ -135,51 +135,51 @@
 }
 
 @media screen and (min-width: 300px) {
-  .card__container {
+  .product__container {
     display: grid;
   }
 
-  .card__img {
+  .product__img {
     width: 230px;
     order: -1;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .card__features-top {
+  .product__features-top {
     flex-wrap: wrap;
     row-gap: 15px;
   }
 
-  .card__features-bottom {
+  .product__features-bottom {
     grid-template-rows: repeat(auto);
     row-gap: 10px;
   }
 
-  .card__btn-pay i,
-  .card__btn-cart i {
+  .product__btn-pay i,
+  .product__btn-product i {
     display: block;
   }
 
-  .card__btn-pay span,
-  .card__btn-cart span {
+  .product__btn-pay span,
+  .product__btn-product span {
     display: none;
   }
 
-  .card__btn-cart,
-  .card__btn-pay {
+  .product__btn-product,
+  .product__btn-pay {
     min-width: 75px;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .card__features-bottom {
+  .product__features-bottom {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     row-gap: 0;
   }
 
-  .card__features-block {
+  .product__features-block {
     padding: 10px;
     align-self: center;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
