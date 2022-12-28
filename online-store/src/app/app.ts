@@ -1,11 +1,11 @@
 import { createElement, uniqueArray, createCheckbox, removeArrEl, filteredArray, sortingArray } from "../app/functions";
 import { productsArray } from "../app/products";
-import { ProductDescription} from "./types";
+import { ProductDescription, ProductFilters } from "./types";
 
 
-let checkedArray: string[] = [];
+let checkedArray: ProductFilters[] = [];
 function start(): void {
-        /*Создание блока с фильтрами*/
+        /*Создание блока с фильтрами и заголовка сортировки*/
         createElement("div", "main__container", "main__filters");
             createElement("div", "main__filters", "filters__title", "Фильтры");
             createElement("div", "main__filters", "filters__content");
@@ -31,11 +31,7 @@ function start(): void {
                     createElement("div", "filters-rectified", "filters-rectified__title checkbox__title", "Ректификат:");
 
                 createElement("div", "filters__content", "filters-prime", "Применить фильтры");
-                        
-    }
-        
-function createTable (array: ProductDescription[]) {
-        /*Создание таблицы с товарами*/
+
         createElement("div", "main__container", "main__table");
             createElement("div", "main__table", "table__toolbar");
                 createElement("div", "table__toolbar", "sort-by", "Сортировать по: ");
@@ -53,16 +49,19 @@ function createTable (array: ProductDescription[]) {
 
                         option = document.createElement(`option`);
                         option.value = "sizeAscending";
-                        option.innerText = "Размер по возрастанию";
+                        option.innerText = "Рейтинг по возрастанию";
                         selectBox?.appendChild(option);
 
                         option = document.createElement(`option`);
                         option.value = "sizeDescending";
-                        option.innerText = "Размер по убыванию";
+                        option.innerText = "Рейтинг по убыванию";
                         selectBox?.appendChild(option);
 
-                createElement("div", "table__toolbar", "view-mode");
-
+                createElement("div", "table__toolbar", "view-mode");               
+    }
+        
+function createTable (array: ProductDescription[]) {
+        /*Создание таблицы с товарами*/
             createElement("div", "main__table", "table__products");
                 for (let i: number = 0; i < array.length; i++) {
                     const elParent = document.querySelector(`.table__products`);
@@ -72,14 +71,14 @@ function createTable (array: ProductDescription[]) {
                         elParent.append(elem);
                             const img = document.createElement(`img`);
                             img.className = `product-image`;
-                            img.src = `${array[i].picture.onepicture}`;
+                            img.src = `${array[i].thumbnail}`;
                             elem.append(img);
                             const productShop = document.createElement(`div`);
                             productShop.className = `product-shop`;
                             elem.append(productShop);
                                 let div = document.createElement(`div`);
                                 div.className = `product-name`;
-                                div.innerHTML = `${array[i].name}`;
+                                div.innerHTML = `${array[i].title}`;
                                 productShop.append(div);
                                 div = document.createElement(`div`);
                                 div.className = `product-price`;
@@ -100,13 +99,21 @@ function checked () {
         for (let i= 0; i < checkboxes.length; i++) {
             checkboxes[i].addEventListener('change', function(event) {
                 if (event.target instanceof HTMLInputElement) {
-                    if (event.target.checked) {                       
-                        checkedArray.push(`${event.target.value}`);
+                    if (event.target.checked) {
+                        if (event.target.offsetParent?.className === "checkboxes-country"){
+                            checkedArray.push({country: `${event.target.value}`});
+                        }         
+                        if (event.target.offsetParent?.className === "checkboxes-brand"){
+                            checkedArray.push({brand: `${event.target.value}`});
+                        } 
                         if (clickFilters) {
                             clickFilters.classList.add('active');
                         }
+                        console.log (checkedArray);
                     } else {
-                        checkedArray = removeArrEl (checkedArray, `${event.target.value}`);
+                        if (event.target.offsetParent?.className === "checkboxes-country"){
+                            checkedArray.push({country: `${event.target.value}`});
+                        } 
                         if (checkedArray.length === 0) {
                             if (clickFilters) {
                                 clickFilters.classList.remove('active');
@@ -117,33 +124,35 @@ function checked () {
             });
         }
     }
-
+/*
 function filtered () {
     const clickFilters = document.querySelector('.filters-prime');
     let newArr: ProductDescription[] = [];
         if (clickFilters) {
             clickFilters.addEventListener('click', () => {
-                document.querySelector('.main__table')?.remove();
-                for (let i: number = 0; i < checkedArray.length; i++) {
-                    newArr = filteredArray (checkedArray[i]);                  
-                }
+                newArr = filteredArray (checkedArray);                  
+                document.querySelector('.table__products')?.remove();
                 createTable(newArr);
             })
-        }
-        
+        }        
 }
-
+*/
 function sortered () {
-    let sortingValue: string = '';
-    const selectSort = document.querySelector('.select-box') as HTMLInputElement;
+    let sortingValue: string = 'priceAscending';
+    createTable(sortingArray (productsArray, sortingValue));
+    const selectSort = document.querySelector('.select-box');
+
+    if (!(selectSort instanceof HTMLInputElement)) {
+        throw new Error('newsClone is not HTMLElement');
+    }
 
     if (selectSort) {
         selectSort.onchange = function() {
             sortingValue = selectSort.value;
-            document.querySelector('.main__table')?.remove();
+            document.querySelector('.table__products')?.remove();
             createTable(sortingArray (productsArray, sortingValue));
         };
     }
 }
 
-export { start, createTable, checked, filtered, sortered };
+export { start, createTable, checked, /*filtered,*/ sortered };
