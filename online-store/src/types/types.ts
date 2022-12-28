@@ -11,14 +11,14 @@ interface Features {
     weight: string,
 }
 
-interface DataCart {
+interface DataProduct {
   name: string,
   picture: string[],
   price: string,
   features: Features,
 }
 
-interface CartTable {
+interface ProductTable {
   brand: string,
   country: string,
   size: string,
@@ -31,4 +31,4 @@ interface CartTable {
   weight: string,
 }
 
-export { CartTable,DataCart,Features };
+export { ProductTable,DataProduct,Features };
