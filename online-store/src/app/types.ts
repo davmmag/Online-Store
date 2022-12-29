@@ -1,4 +1,11 @@
-interface Features {
+interface ProductDescription {
+  id: number;
+  title: string;
+  price: number;
+  rating: number;
+  category: string;
+  thumbnail: string;
+  images: string[];
   brand: string;
   country: string;
   size: {
@@ -12,16 +19,6 @@ interface Features {
   packaging: string;
   count: number;
   weight: string;
-}
-interface ProductDescription {
-  id: number;
-  title: string;
-  price: number;
-  rating: number;
-  features: Features;
-  category: string;
-  thumbnail: string;
-  images: string[];
 }
 
 interface ProductFilters {
@@ -37,4 +34,4 @@ interface checkedCategory {
 }
 type checkedArrayType = [checkedCategory];
 
-export { ProductDescription, productsArrayType, checkedArrayType, ProductFilters, Features }
+export { ProductDescription, productsArrayType, checkedArrayType, ProductFilters }

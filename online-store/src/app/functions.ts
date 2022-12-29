@@ -38,8 +38,10 @@ function uniqueArray <T extends Object, P extends keyof T> (array: Array<T>,  ke
     return Array.from(uniqueName);
 }
 
-function filteredArray (array: ProductDescription[]): ProductDescription[] {
-    return array;
+function filterArray (array: ProductDescription[], arrayCheck: string[]): ProductDescription[] {
+    let newArr = [];
+    newArr = array.filter(elem => arrayCheck.includes(elem.country));
+    return newArr;
 }
 
 function removeArrEl (arr: ProductFilters[], value: Object) {
@@ -52,4 +54,10 @@ function sortingArray (array: ProductDescription[], value: string): ProductDescr
     return array.sort((a, b) => a.price > b.price ? 1 : -1);
 }
 
-export { createElement, uniqueArray, createCheckbox, filteredArray, removeArrEl, sortingArray };
+function searchFunction (array: ProductDescription[], text: string): ProductDescription[] {
+    let newArr = [];
+    newArr = array.filter(elem => Object.values(elem).includes(text));
+    return newArr;
+}
+
+export { createElement, uniqueArray, createCheckbox, removeArrEl, sortingArray, filterArray, searchFunction };
