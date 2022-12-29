@@ -52,3 +52,21 @@ function sortingArray (array: ProductDescription[], value: string): ProductDescr
 }
 
 export { createElement, uniqueArray, createCheckbox, filteredArray, removeArrEl, sortingArray };
+
+/*
+function filteredArray (array, arrayCheck) {
+  let newArr = [];
+
+  newArr = array.filter(el => {
+    for (let i = 0; i < arrayCheck.length; i++){
+      let category = Object.keys(arrayCheck[i])[0];
+      if (el.features[category] == arrayCheck[i][category]){
+        return true;
+      };
+    }
+  })
+
+  return newArr;
+  
+}
+*/
