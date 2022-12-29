@@ -5,19 +5,21 @@
       "title": "Керамогранит Bien 600x1200x9 Infinity Dark Rec Full Lap",
       "price": 3450,
       "rating":	4.5,
-      "brand":	"Bien",
-      "country": "Турция",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"Bien",
+        "country": "Турция",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Полированная",
+        "application": "Стена/Пол",
+        "drawing": "Узор",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 2,
+        "weight": "29,8"
       },
-      "surface": "Полированная",
-      "application": "Стена/Пол",
-      "drawing": "Узор",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 2,
-      "weight": "29,8",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/1/1.jpg",
       "images": [
@@ -30,19 +32,21 @@
       "title": "Керамогранит NORDIC WOOD Rectified MATT 60x120",
       "price": 3280,
       "rating":	4.5,
-      "brand":	"KUTAHYA",
-      "country": "Турция",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"KUTAHYA",
+        "country": "Турция",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Дерево",
+        "rectified": "Да",
+        "packaging": "2,16",
+        "count": 3,
+        "weight": "52,73"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Дерево",
-      "rectified": "Да",
-      "packaging": "2,16",
-      "count": 3,
-      "weight": "52,73",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/2/1.jpg",
       "images": [
@@ -55,19 +59,21 @@
       "title": "Керамогранит ALBATROS Rectified MATT 60x120",
       "price": 3280,
       "rating":	4.5,
-      "brand":	"KUTAHYA",
-      "country": "Турция",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"KUTAHYA",
+        "country": "Турция",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Мрамор",
+        "rectified": "Да",
+        "packaging": "2,16",
+        "count": 3,
+        "weight": "52,73"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Мрамор",
-      "rectified": "Да",
-      "packaging": "2,16",
-      "count": 3,
-      "weight": "52,73",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/3/1.jpg",
       "images": [
@@ -81,19 +87,21 @@
       "title": "Керамогранит Bien 600x1200x9 Tiger Black Rec Full Lap",
       "price": 2100,
       "rating":	4,
-      "brand":	"Bien",
-      "country": "Турция",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"Bien",
+        "country": "Турция",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Полированная",
+        "application": "Стена/Пол",
+        "drawing": "Мрамор",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 2,
+        "weight": "29,8"
       },
-      "surface": "Полированная",
-      "application": "Стена/Пол",
-      "drawing": "Мрамор",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 2,
-      "weight": "29,8",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/4/1.jpg",
       "images": [
@@ -107,19 +115,21 @@
       "title": "Керамогранит QUA 60х120х6,5 Alone Nocge Full Lap",
       "price": 3280,
       "rating":	4.5,
-      "brand":	"QUA",
-      "country": "Турция",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"QUA",
+        "country": "Турция",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Полированная",
+        "application": "Стена/Пол",
+        "drawing": "Тераццо",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 4,
+        "weight": "29,8"
       },
-      "surface": "Полированная",
-      "application": "Стена/Пол",
-      "drawing": "Тераццо",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 4,
-      "weight": "29,8",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/5/1.jpg",
       "images": [
@@ -133,19 +143,21 @@
       "title": "Керамогранит QUA 60x120 Crystal Black Full Lap",
       "price": 3900,
       "rating":	3.7,
-      "brand":	"QUA",
-      "country": "Турция",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"QUA",
+        "country": "Турция",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Полированная",
+        "application": "Стена/Пол",
+        "drawing": "Моноколор",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 22,
+        "weight": "29,8"
       },
-      "surface": "Полированная",
-      "application": "Стена/Пол",
-      "drawing": "Моноколор",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 22,
-      "weight": "29,8",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/6/1.jpg",
       "images": [
@@ -158,19 +170,21 @@
       "title": "Керамогранит Liberty Light Rectified MATT 60x120",
       "price": 3420,
       "rating":	4.1,
-      "brand":	"QUTONE",
-      "country": "Индия",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"QUTONE",
+        "country": "Индия",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Бетон",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 2,
+        "weight": "32"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Бетон",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 2,
-      "weight": "32",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/7/1.jpg",
       "images": [
@@ -182,19 +196,21 @@
       "title": "Керамогранит Liberty Dark Rectified MATT 60x120",
       "price": 3420,
       "rating":	4.1,
-      "brand":	"QUTONE",
-      "country": "Индия",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"QUTONE",
+        "country": "Индия",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Бетон",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 2,
+        "weight": "32"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Бетон",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 2,
-      "weight": "32",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/7/1.jpg",
       "images": [
@@ -203,22 +219,24 @@
     },
       {
       "id":	9,
-      "title": "Керамогранит Pegas Silver GP40PEG15R 60*60",
+      "title": "Pegas Silver GP40PEG15R Керамогранит 60*60",
       "price": 2130,
       "rating":	4.3,
-      "brand":	"NEW TREND",
-      "country": "Россия",
-      "size": {
-        "width": 60,
-        "height": 60
+      "features": {
+        "brand":	"NEW TREND",
+        "country": "Россия",
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "surface": "sugar-эффект",
+        "application": "Стена/Пол",
+        "drawing": "Мрамор",
+        "rectified": "Да",
+        "packaging": "1,8",
+        "count": 5,
+        "weight": "38,4"
       },
-      "surface": "sugar-эффект",
-      "application": "Стена/Пол",
-      "drawing": "Мрамор",
-      "rectified": "Да",
-      "packaging": "1,8",
-      "count": 5,
-      "weight": "38,4",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/9/1.jpg",
       "images": [
@@ -229,22 +247,24 @@
     },
       {
       "id":	10,
-      "title": "Керамогранит Pegas GP40PEG01L лаппат. 60*60",
+      "title": "Pegas GP40PEG01L Керамогранит лаппат. 60*60",
       "price": 2130,
       "rating":	4.3,
-      "brand":	"NEW TREND",
-      "country": "Турция",
-      "size": {
-        "width": 60,
-        "height": 60
+      "features": {
+        "brand":	"NEW TREND",
+        "country": "Турция",
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "surface": "Лаппатированная",
+        "application": "Стена/Пол",
+        "drawing": "Мрамор",
+        "rectified": "Да",
+        "packaging": "1,8",
+        "count": 5,
+        "weight": "38,4"
       },
-      "surface": "Лаппатированная",
-      "application": "Стена/Пол",
-      "drawing": "Мрамор",
-      "rectified": "Да",
-      "packaging": "1,8",
-      "count": 5,
-      "weight": "38,4",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/10/1.jpg",
       "images": [
@@ -255,22 +275,24 @@
     },
       {
       "id":	11,
-      "title": " Керамогранит Zircon серый обрезной SG645620R 60х60",
+      "title": "Zircon Керамогранит серый обрезной SG645620R 60х60",
       "price": 2259,
       "rating":	3.5,
-      "brand":	"Laparet",
-      "country": "Россия",
-      "size": {
-        "width": 60,
-        "height": 60
+      "features": {
+        "brand":	"Laparet",
+        "country": "Россия",
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Бетон",
+        "rectified": "Да",
+        "packaging": "1,8",
+        "count": 5,
+        "weight": "36"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Бетон",
-      "rectified": "Да",
-      "packaging": "1,8",
-      "count": 5,
-      "weight": "36",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/11/1.jpg",
       "images": [
@@ -281,22 +303,24 @@
     },
       {
       "id":	12,
-      "title": "Керамогранит Marmostone Темный Греж Матовый R10B Ректификат 80х80 K950189R0001VTET",
+      "title": "Marmostone Темный Греж Матовый R10B Ректификат 80х80 K950189R0001VTET",
       "price": 3950,
       "rating":	4.5,
-      "brand":	"Vitra",
-      "country": "Россия",
-      "size": {
-        "width": 80,
-        "height": 80
+      "features": {
+        "brand":	"Vitra",
+        "country": "Россия",
+        "size": {
+          "width": 80,
+          "height": 80
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Камень",
+        "rectified": "Да",
+        "packaging": "1,28",
+        "count": 2,
+        "weight": "27"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Камень",
-      "rectified": "Да",
-      "packaging": "1,28",
-      "count": 2,
-      "weight": "27",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/12/1.jpg",
       "images": [
@@ -310,19 +334,21 @@
       "title": "Керамогранит 20х80 RusticWood Черный Матовый Ректификат R10A (9мм)",
       "price": 1887,
       "rating":	3.9,
-      "brand":	"Vitra",
-      "country": "Россия",
-      "size": {
-        "width": 20,
-        "height": 80
+      "features": {
+        "brand":	"Vitra",
+        "country": "Россия",
+        "size": {
+          "width": 20,
+          "height": 80
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Дерево",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 9,
+        "weight": "29,2"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Дерево",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 9,
-      "weight": "29,2",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/13/1.jpg",
       "images": [
@@ -333,22 +359,24 @@
     },
       {
       "id":	14,
-      "title": "Керамогранит Aspenwood Темный Венге Матовый R10A Ректификат 20x120 K946244R0001VTE0",
+      "title": "Aspenwood Темный Венге Матовый R10A Ректификат 20x120 K946244R0001VTE0",
       "price": 3956,
       "rating":	4.2,
-      "brand":	"Vitra",
-      "country": "Россия",
-      "size": {
-        "width": 20,
-        "height": 120
+      "features": {
+        "brand":	"Vitra",
+        "country": "Россия",
+        "size": {
+          "width": 20,
+          "height": 120
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Дерево",
+        "rectified": "Да",
+        "packaging": "0,96",
+        "count": 4,
+        "weight": "21,12"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Дерево",
-      "rectified": "Да",
-      "packaging": "0,96",
-      "count": 4,
-      "weight": "21,12",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/14/1.jpg",
       "images": [
@@ -359,22 +387,24 @@
     },
       {
       "id":	15,
-      "title": "Керамогранит Unika D12064M 120*60",
+      "title": "Unika D12064M Керамогранит 120*60",
       "price": 2130,
       "rating": 3.7,
-      "brand":	"Delacora",
-      "country": "Узбекистан",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"Delacora",
+        "country": "Узбекистан",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Тераццо",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 2,
+        "weight": "30"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Тераццо",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 2,
-      "weight": "30",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/15/1.jpg",
       "images": [
@@ -385,22 +415,24 @@
     },
       {
       "id":	16,
-      "title": "Керамогранит Arts Color D12047M 120*60",
+      "title": "Arts Color D12047M Керамогранит 120*60",
       "price": 2130,
       "rating":	4.7,
-      "brand":	"Delacora",
-      "country": "Узбекистан",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"Delacora",
+        "country": "Узбекистан",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Тераццо",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 2,
+        "weight": "30"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Тераццо",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 2,
-      "weight": "30",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/16/1.jpg",
       "images": [
@@ -411,22 +443,24 @@
     },
       {
       "id":	17,
-      "title": "Керамогранит Turin Light D12041M 120*60",
+      "title": "Turin Light D12041M Керамогранит 120*60",
       "price": 2130,
       "rating":	4.0,
-      "brand":	"Delacora",
-      "country": "Узбекистан",
-      "size": {
-        "width": 60,
-        "height": 120
+      "features": {
+        "brand":	"Delacora",
+        "country": "Узбекистан",
+        "size": {
+          "width": 60,
+          "height": 120
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Тераццо",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 2,
+        "weight": "30"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Тераццо",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 2,
-      "weight": "30",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/17/1.jpg",
       "images": [
@@ -440,19 +474,21 @@
       "title": "Керамогранит Prime Ceramics Carrara Bronze 60x60",
       "price": 2130,
       "rating":	4.7,
-      "brand":	"Prime Ceramics",
-      "country": "Узбекистан",
-      "size": {
-        "width": 60,
-        "height": 60
+      "features": {
+        "brand":	"Prime Ceramics",
+        "country": "Узбекистан",
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Мрамор",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 4,
+        "weight": "34"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Мрамор",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 4,
-      "weight": "34",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/18/1.jpg",
       "images": [
@@ -463,22 +499,24 @@
     },
       {
       "id":	19,
-      "title": "Керамогранит Destone Gray GP40DES15 60*60",
+      "title": "Destone Gray GP40DES15 Керамогранит 60*60",
       "price": 2130,
       "rating":	4.2,
-      "brand":	"Delacora",
-      "country": "Узбекистан",
-      "size": {
-        "width": 60,
-        "height": 60
+      "features": {
+        "brand":	"Delacora",
+        "country": "Узбекистан",
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Мрамор",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 4,
+        "weight": "34"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Мрамор",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 4,
-      "weight": "34",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/19/1.jpg",
       "images": [
@@ -489,22 +527,24 @@
     },
       {
       "id":	20,
-      "title": "Керамогранит Invisible Dark GP40INV55 60*60",
+      "title": "Invisible Dark GP40INV55 Керамогранит 60*60",
       "price": 1590,
       "rating":	3.5,
-      "brand":	"Delacora",
-      "country": "Узбекистан",
-      "size": {
-        "width": 60,
-        "height": 60
+      "features": {
+        "brand":	"Delacora",
+        "country": "Узбекистан",
+        "size": {
+          "width": 60,
+          "height": 60
+        },
+        "surface": "Матовая",
+        "application": "Стена/Пол",
+        "drawing": "Мрамор",
+        "rectified": "Да",
+        "packaging": "1,44",
+        "count": 4,
+        "weight": "34"
       },
-      "surface": "Матовая",
-      "application": "Стена/Пол",
-      "drawing": "Мрамор",
-      "rectified": "Да",
-      "packaging": "1,44",
-      "count": 4,
-      "weight": "34",
       "category":	"Керамогранит",
       "thumbnail":"./assets/images/products/20/1.jpg",
       "images": [

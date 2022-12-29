@@ -140,12 +140,7 @@ function filtered () {
 function sortered () {
     let sortingValue: string = 'priceAscending';
     createTable(sortingArray (productsArray, sortingValue));
-    const selectSort = document.querySelector('.select-box');
-
-    if (!(selectSort instanceof HTMLInputElement)) {
-        throw new Error('newsClone is not HTMLElement');
-    }
-
+    const selectSort = document.querySelector('.select-box') as HTMLInputElement;
     if (selectSort) {
         selectSort.onchange = function() {
             sortingValue = selectSort.value;

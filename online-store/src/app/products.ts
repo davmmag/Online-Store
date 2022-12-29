@@ -1,4 +1,4 @@
-import { ProductDescription } from "./types";
+import { ProductDescription, Features } from "./types";
 import * as data from '../products.json';
 
 const productsArray: ProductDescription[] = data.products;

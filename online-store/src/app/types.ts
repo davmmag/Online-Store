@@ -1,24 +1,27 @@
+interface Features {
+  brand: string;
+  country: string;
+  size: {
+    width: number;
+    height: number;
+  };
+  surface: string;
+  application: string;
+  drawing: string;
+  rectified: string;
+  packaging: string;
+  count: number;
+  weight: string;
+}
 interface ProductDescription {
-    id: number;
-    title: string;
-    price: number;
-    rating: number;
-    brand: string;
-    country: string;
-    size: {
-      width: number;
-      height: number;
-    };
-    surface: string;
-    application: string;
-    drawing: string;
-    rectified: string;
-    packaging: string;
-    count: number;
-    weight: string;
-    category: string;
-    thumbnail: string;
-    images: string[];
+  id: number;
+  title: string;
+  price: number;
+  rating: number;
+  features: Features;
+  category: string;
+  thumbnail: string;
+  images: string[];
 }
 
 interface ProductFilters {
@@ -34,4 +37,4 @@ interface checkedCategory {
 }
 type checkedArrayType = [checkedCategory];
 
-export { ProductDescription, productsArrayType, checkedArrayType, ProductFilters }
+export { ProductDescription, productsArrayType, checkedArrayType, ProductFilters, Features }

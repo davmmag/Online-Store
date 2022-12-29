@@ -1,6 +1,7 @@
 import { productsArray } from "../app/products";
 import { ProductDescription, ProductFilters } from "../app/types";
 
+
 function createElement (type: string, parent: string, children: string, text?: string) {
     const elParent = document.querySelector(`.${parent}`);
     if (elParent !== null) {
