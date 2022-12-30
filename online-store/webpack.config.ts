@@ -8,10 +8,10 @@ import { Configuration } from 'webpack';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const config: Configuration & Record<string, any> = {
   mode: 'development',
-  entry: './src/main.ts',
+  entry: ['./src/main.ts', './src/goods.ts'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle-[hash].js',
+    filename: '[name][hash].js',
   },
   target: ['web', 'es2015'],
   resolve: {
@@ -40,7 +40,7 @@ const config: Configuration & Record<string, any> = {
             options: {},
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               url: false,
             },
@@ -73,6 +73,16 @@ const config: Configuration & Record<string, any> = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       filename: 'index.html',
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+      },
+    }),
+    new HtmlWebpackPlugin({
+      template: 'src/goods.html',
+      filename: 'goods.html',
       minify: {
         collapseWhitespace: true,
         removeComments: true,
