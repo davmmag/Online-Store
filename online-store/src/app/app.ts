@@ -14,6 +14,22 @@ function start(): void {
             createElement("div", "main__filters", "filters__title", "Фильтры");
             createElement("div", "main__filters", "filters__content");
                 createElement("div", "filters__content", "filters-price", "Фильтр по ценам:");
+                createElement("div", "filters-price", "slider");
+                createElement("div", "slider", "range-slider");
+                  createElement("div", "range-slider", "range-slider__wrapper");
+                    createElement("div", "range-slider__wrapper", "rangeValuesMin");
+                    createElement("div", "range-slider__wrapper", "MinMax", "-");
+                    createElement("div", "range-slider__wrapper", "rangeValuesMax");
+                createElement("input", "range-slider", "slider-input_min");
+                  document.querySelector('.slider-input_min').value = 1000;
+                  document.querySelector('.slider-input_min').min = 1000;
+                  document.querySelector('.slider-input_min').max = 5000;
+                  document.querySelector('.slider-input_min').type = "range";
+                createElement("input", "range-slider", "slider-input_max");
+                  document.querySelector('.slider-input_max').value = 5000;
+                  document.querySelector('.slider-input_max').min = 1000;
+                  document.querySelector('.slider-input_max').max = 5000;
+                  document.querySelector('.slider-input_max').type = "range";
                 createElement("div", "filters__content", "filters-size", "Фильтр по размеру:");
                 
                 createElement("div", "filters__content", "filters-country filter-checkbox");
