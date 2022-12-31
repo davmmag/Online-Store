@@ -20,17 +20,23 @@ function start(): void {
                     createElement("div", "range-slider__wrapper", "rangeValuesMin");
                     createElement("div", "range-slider__wrapper", "MinMax", "-");
                     createElement("div", "range-slider__wrapper", "rangeValuesMax");
-                createElement("input", "range-slider", "slider-input_min");
-                  document.querySelector('.slider-input_min').value = 1000;
-                  document.querySelector('.slider-input_min').min = 1000;
-                  document.querySelector('.slider-input_min').max = 5000;
-                  document.querySelector('.slider-input_min').type = "range";
-                createElement("input", "range-slider", "slider-input_max");
-                  document.querySelector('.slider-input_max').value = 5000;
-                  document.querySelector('.slider-input_max').min = 1000;
-                  document.querySelector('.slider-input_max').max = 5000;
-                  document.querySelector('.slider-input_max').type = "range";
-                createElement("div", "filters__content", "filters-size", "Фильтр по размеру:");
+                createElement("input", "range-slider", "slider-input slider-input_min");
+                    let inputMin = document.querySelector('.slider-input_min') as HTMLInputElement;
+                    if (inputMin) {
+                        inputMin.value = '1000';
+                        inputMin.min = '1000';
+                        inputMin.max = '5000';
+                        inputMin.type = 'range';
+                    }
+                createElement("input", "range-slider", "slider-input slider-input_max");
+                    let inputMax = document.querySelector('.slider-input_max') as HTMLInputElement;
+                    if (inputMax) {
+                        inputMax.value = '5000';
+                        inputMax.min = '1000';
+                        inputMax.max = '5000';
+                        inputMax.type = 'range';
+                    }
+                createElement("div", "filters__content", "filters-size", "Фильтр по рейтингу:");
                 
                 createElement("div", "filters__content", "filters-country filter-checkbox");
                     createElement("div", "filters-country", "filters-country__title checkbox__title", "Страна:");

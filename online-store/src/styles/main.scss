@@ -1,0 +1,164 @@
+
+/*=================================MAIN======================================*/
+
+.main {
+    flex: 1 1 auto;
+}
+.main__container {
+    margin-top: 20px;
+    display: flex;
+}
+
+
+/*=================================MAIN FILTERS======================================*/
+.main__filters {
+    width: 25%;
+    height: 500px;
+    position: relative;
+}
+
+.filters__title {
+    font-family: 'FontAwesome';
+    font-weight: 400;
+    font-size: 25px;
+    margin: 5px 0 10px 0;
+}
+.filters__title::before {
+    content: "";
+    float: left;
+    margin: 2px 5px 0 0;
+    width: 25px;
+    height: 25px;
+    background-image: url('./assets/icons/filter.svg');
+}
+
+.filter-checkbox {
+    margin: 10px 0 30px 0;
+    position: relative;
+    cursor: pointer;
+}
+.checkbox__title:after,
+.checkbox__title:before {
+    content: " ";
+    width: 10px;
+    height: 1px;
+    background-color: black;
+    position: absolute;
+    top: 10px;
+}
+.checkbox__title:before{
+    transform: rotate(-40deg);
+    right: 20px;
+}
+.checkbox__title:after{
+    transform: rotate(40deg);
+    right: 13px;
+}
+
+.checkbox__menu {
+
+}
+.checkbox__menu.active{
+    display: block;
+}
+
+.filters-prime {
+    cursor: pointer;
+    background-color: black;
+    border-radius: 7px;
+    color: aliceblue;
+    height: 50px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+.filters-prime:hover{
+    background-color: rgb(99, 99, 99); 
+}
+.filters-prime.active {
+    display: flex;
+}
+/*=================================MAIN TABLE======================================*/
+.main__table {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*=================================TABLE TOOLBAR======================================*/
+.table__toolbar {
+    height: 70px;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.sort-by {
+}
+
+.view-mode {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(237, 100, 210);
+}
+
+
+
+/*=================================TABLE PRODUCTS======================================*/
+.table__products {
+    flex: 1 1 auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.product-item {
+    width: 33.333%;
+    border: 1px solid rgb(130, 130, 130);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+.product-item img {
+    cursor: pointer;
+    width: 50%;
+    height: 200px;
+}
+.product-shop {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.product-name {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-top: 10px;
+    text-overflow: ellipsis;
+}
+.product-price {
+    font-size: 25px;
+    font-weight: 600;
+}
+.product-price::after{
+    content: " \20BD"
+}
+.product-button {
+    background-color: black;
+    border-radius: 7px;
+    color: aliceblue;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.product-button:hover{
+    background-color: rgb(99, 99, 99); 
+}
