@@ -1,19 +1,17 @@
 import { ProductFilters } from "./types";
 import { minPriceFunc, maxPriceFunc } from "./functions"
+import { filtered } from "./app"
 
 let filtersObj: ProductFilters = {
   price: [minPriceFunc(), maxPriceFunc()],
 };
 
 function slider () {
-  console.log (filtersObj);
+
   let displayElementMin = document.querySelectorAll(".rangeValuesMin")[0];
   let displayElementMax = document.querySelectorAll(".rangeValuesMax")[0];
-    displayElementMin.innerHTML = `1590`;
-    displayElementMax.innerHTML = `3965`;
-
-    console.log(filtersObj);
-
+    displayElementMin.innerHTML = `${filtersObj.price[0]}`;
+    displayElementMax.innerHTML = `${filtersObj.price[1]}`;
 
   function getVals() {
     let slides = document.querySelectorAll(".slider-input") as NodeListOf<HTMLInputElement>;
@@ -26,7 +24,7 @@ function slider () {
           filtersObj.price[0] = slide1;
           filtersObj.price[1] = slide2;
         }
-    console.log (filtersObj);
+        filtered ()
   }
   
   window.onload = function(){

@@ -1,6 +1,7 @@
 import { createElement, uniqueArray, createCheckbox} from "../app/functions";
 import { productsArray } from "../app/products";
-import { ProductDescription,} from "./types";
+import { ProductDescription } from "./types";
+import { filtersObj } from "./slider"
 
 function start(): void {
     /*Создание блока с фильтрами и заголовка сортировки*/
@@ -17,17 +18,17 @@ function start(): void {
             createElement("input", "range-slider", "slider-input slider-input_min");
                 let inputMin = document.querySelector('.slider-input_min') as HTMLInputElement;
                 if (inputMin) {
-                    inputMin.value = '1590';
-                    inputMin.min = '1590';
-                    inputMin.max = '3965';
+                    inputMin.value = `${filtersObj.price[0]}`;
+                    inputMin.min = `${filtersObj.price[0]}`;
+                    inputMin.max = `${filtersObj.price[1]}`;
                     inputMin.type = 'range';
                 }
             createElement("input", "range-slider", "slider-input slider-input_max");
                 let inputMax = document.querySelector('.slider-input_max') as HTMLInputElement;
                 if (inputMax) {
-                    inputMax.value = '3965';
-                    inputMax.min = '1590';
-                    inputMax.max = '3965';
+                    inputMax.value = `${filtersObj.price[1]}`;
+                    inputMax.min = `${filtersObj.price[0]}`;
+                    inputMax.max = `${filtersObj.price[1]}`;
                     inputMax.type = 'range';
                 }
             createElement("div", "filters__content", "filters-size", "Фильтр по рейтингу:");

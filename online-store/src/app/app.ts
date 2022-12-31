@@ -7,7 +7,6 @@ import { filtersObj } from "../app/slider"
 let countryArray: string [] = [];
 let brandArray: string [] = [];
 
-
 function checked () {
     const clickFilters = document.querySelector('.filters-prime');
     let checkboxes: NodeListOf<Element> = document.querySelectorAll('input[type=checkbox]');
@@ -56,9 +55,11 @@ function filtered () {
     if (filtersObj.brand?.length) {
         newArr = newArr.filter(el => filtersObj.brand?.includes(el.brand));
     }
-    console.log (filtersObj.price?.length)
-    if (filtersObj.price?.length) {
-        //newArr = newArr.filter(el => el.price > filtersObj.price[0]);
+    if (filtersObj.price.length) {
+        newArr = newArr.filter(el => el.price >= filtersObj.price[0]);
+    }
+    if (filtersObj.price.length) {
+        newArr = newArr.filter(el => el.price <= filtersObj.price[1]);
     }
     createTable(newArr);
 }
