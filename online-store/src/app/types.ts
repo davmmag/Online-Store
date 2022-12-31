@@ -22,11 +22,16 @@ interface ProductDescription {
 }
 
 interface ProductFilters {
-  price?: number;
-  rating?: number;
-  brand?: string;
-  country?: string;
+  price: number[];
+  rating?: number[];
+  country?: CountryFilter;
+  brand?: BrandFilter;
 }
+type PriceFilter = number [];
+type RatingFilter = number [];
+type CountryFilter = string [];
+type BrandFilter = string [];
+
 type productsArrayType = [ProductDescription];
 
 interface checkedCategory {
@@ -34,4 +39,4 @@ interface checkedCategory {
 }
 type checkedArrayType = [checkedCategory];
 
-export { ProductDescription, productsArrayType, checkedArrayType, ProductFilters }
+export { ProductDescription, productsArrayType, checkedArrayType, ProductFilters, CountryFilter, BrandFilter }
