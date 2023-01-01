@@ -1,20 +1,22 @@
-import { ProductFilters } from "./types";
+import { ProductFilters, ProductDescription } from "./types";
 import { minPriceFunc, maxPriceFunc } from "./functions"
 import { filtered } from "./app"
+import { productsArray } from "./products";
 
 let filtersObj: ProductFilters = {
-  price: [minPriceFunc(), maxPriceFunc()],
+  price: [minPriceFunc(productsArray), maxPriceFunc(productsArray)],
 };
 
-function slider () {
-
+function slider (array: ProductDescription[]) {
   let displayElementMin = document.querySelectorAll(".rangeValuesMin")[0];
   let displayElementMax = document.querySelectorAll(".rangeValuesMax")[0];
-    displayElementMin.innerHTML = `${filtersObj.price[0]}`;
-    displayElementMax.innerHTML = `${filtersObj.price[1]}`;
+    displayElementMin.innerHTML = `${minPriceFunc(array)}`;
+    displayElementMax.innerHTML = `${maxPriceFunc(array)}`;
+    let slides = document.querySelectorAll(".slider-input") as NodeListOf<HTMLInputElement>;
+    slides[0].value = `${minPriceFunc(array)}`;
+    slides[1].value = `${maxPriceFunc(array)}`;
 
   function getVals() {
-    let slides = document.querySelectorAll(".slider-input") as NodeListOf<HTMLInputElement>;
     let slide1 = parseFloat( slides[0].value );
     let slide2 = parseFloat( slides[1].value );
     if( slide1 > slide2 ){ let tmp = slide2; slide2 = slide1; slide1 = tmp; }
@@ -24,7 +26,7 @@ function slider () {
           filtersObj.price[0] = slide1;
           filtersObj.price[1] = slide2;
         }
-        filtered ()
+        filtered();
   }
   
   window.onload = function(){
@@ -38,8 +40,7 @@ function slider () {
               }
             }
           }
-
-        }
+      }
   }
 }
 

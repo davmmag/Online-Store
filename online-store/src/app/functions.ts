@@ -60,12 +60,12 @@ function searchFunction (array: ProductDescription[], text: string): ProductDesc
     return newArr;
 }
 
-function minPriceFunc (): number {
-    return productsArray.reduce((min, p) => p.price < min ? p.price : min, productsArray[0].price);
+function minPriceFunc (array: ProductDescription[]): number {
+    return array.reduce((min, p) => p.price < min ? p.price : min, productsArray[0].price);
 }
 
-function maxPriceFunc (): number {
-    return productsArray.reduce((max, p) => p.price > max ? p.price : max, productsArray[0].price); 
+function maxPriceFunc (array: ProductDescription[]): number {
+    return array.reduce((max, p) => p.price > max ? p.price : max, productsArray[0].price); 
 }
 
 export { createElement, uniqueArray, createCheckbox, removeArrEl, sortingArray, filterArray, searchFunction, minPriceFunc, maxPriceFunc };

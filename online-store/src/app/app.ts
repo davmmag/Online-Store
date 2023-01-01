@@ -2,10 +2,12 @@ import { searchFunction, sortingArray } from "../app/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription } from "./types";
 import { createTable } from "../app/rendering";
-import { filtersObj } from "../app/slider"
+import { filtersObj, slider } from "../app/slider"
 
 let countryArray: string [] = [];
 let brandArray: string [] = [];
+let sortArray = productsArray;
+let sortingValue: string = 'priceAscending';
 
 function checked () {
     const clickFilters = document.querySelector('.filters-prime');
@@ -17,12 +19,14 @@ function checked () {
                     if (event.target.offsetParent?.className === "checkboxes-country") {                           
                         countryArray.push(`${event.target.value}`) ;
                         filtersObj.country = countryArray;
-                        filtered () 
+                        filtered();
+                        slider(filtered());
                     }         
                     if (event.target.offsetParent?.className === "checkboxes-brand") {
                         brandArray.push(`${event.target.value}`);
                         filtersObj.brand = brandArray;
-                        filtered ()
+                        filtered();
+                        slider(filtered());
                     }
                     if (clickFilters) {
                         clickFilters.classList.add('active');
@@ -32,13 +36,15 @@ function checked () {
                         let deleteCountry = `${event.target.value}`;
                         countryArray = countryArray.filter((name) => name !== deleteCountry);
                         filtersObj.country = countryArray;
-                        filtered ()
+                        filtered();
+                        slider(filtered());
                     }         
                     if (event.target.offsetParent?.className === "checkboxes-brand") {
                         let deleteBrand = `${event.target.value}`;
                         brandArray = brandArray.filter((name) => name !== deleteBrand);
                         filtersObj.brand = brandArray;
-                        filtered ()
+                        filtered();
+                        slider(filtered());
                     }
                 }
             }
@@ -46,9 +52,8 @@ function checked () {
     }
 }
 
-
 function filtered () {
-    let newArr: ProductDescription[] = productsArray;
+    let newArr: ProductDescription[] = sortArray;
     if (filtersObj.country?.length) {
         newArr = newArr.filter(el => filtersObj.country?.includes(el.country));
     }
@@ -62,19 +67,19 @@ function filtered () {
         newArr = newArr.filter(el => el.price <= filtersObj.price[1]);
     }
     createTable(newArr);
-}
 
-function sortered () {
-    let sortingValue: string = 'priceAscending';
-    createTable(sortingArray (productsArray, sortingValue));
-    const selectSort = document.querySelector('.select-box') as HTMLInputElement;
-    if (selectSort) {
-        selectSort.onchange = function() {
-            sortingValue = selectSort.value;
-            
-            createTable(sortingArray (productsArray, sortingValue));
-        };
+    function sortered () {
+        createTable(sortingArray (newArr, sortingValue));
+        const selectSort = document.querySelector('.select-box') as HTMLInputElement;
+        if (selectSort) {
+            selectSort.onchange = function() {
+                sortingValue = selectSort.value;
+                createTable(sortingArray (newArr, sortingValue));
+            };
+        }
     }
+    sortered ();
+    return newArr;
 }
 
 function search() {
@@ -89,4 +94,4 @@ function search() {
     })
 }
 
-export { checked, filtered, sortered, search, filtersObj };
+export { checked, filtered, search, filtersObj };
