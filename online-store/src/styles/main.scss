@@ -20,9 +20,16 @@
 
 .filters__title {
     font-family: 'FontAwesome';
-    font-weight: 400;
+    font-weight: 600;
     font-size: 25px;
     margin: 5px 0 10px 0;
+}
+
+.filter-title {
+    font-family: 'FontAwesome';
+    font-size: 18px;
+    font-weight: 600;
+    color: #2a3034;
 }
 .filters__title::before {
     content: "";
@@ -55,9 +62,20 @@
     transform: rotate(40deg);
     right: 13px;
 }
-
-.checkbox__menu {
-
+.checkbox-label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+.checkbox-input {
+    border: none;
+    outline: none;
+    background: transparent;
+    border: 1px solid #7e7e7e;
+    width: 20px;
+    height: 20px;
 }
 .checkbox__menu.active{
     display: block;
@@ -79,6 +97,16 @@
 }
 .filters-prime.active {
     display: flex;
+}
+.checkbox-amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    color: #5d7483;
+    background-color: #f1f1f1;
 }
 /*=================================MAIN TABLE======================================*/
 .main__table {

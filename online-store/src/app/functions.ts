@@ -14,18 +14,33 @@ function createElement (type: string, parent: string, children: string, text?: s
     }
 }
 
-function createCheckbox (value: string | number, container: string) {
+function createCheckbox<T extends keyof ProductDescription> (value: string, container: string, key: T) {
     let label = document.createElement('label');
+    label.className = 'checkbox-label';
     let cont = document.querySelector(`.${container}`);
-    if (cont) {
-        cont.appendChild(label);
-    }
-    
+    if (cont) {cont.appendChild(label)}
+    let amount = productsArray.filter(obj => obj[key] === `${value}`).length;
+
     let checkbox = document.createElement('input');
+    checkbox.className = 'checkbox-input';
     checkbox.type = 'checkbox';
     checkbox.value = `${value}`;
     label.appendChild(checkbox);
-    label.appendChild(document.createTextNode(`${value}`));
+    label.appendChild(document.createTextNode(`${value} `));
+
+    let span = document.createElement('span');
+    span.className = 'checkbox-amount';
+    span.innerHTML = `${amount}`;
+    label.appendChild(span);
+}
+
+function changeCheckbox (array: ProductDescription[], key: string){
+    
+    let nodeList = document.querySelectorAll(".checkbox-input") as NodeListOf<HTMLInputElement>;
+    for (let i = 0; i < nodeList.length; i++) {
+        console.dir (nodeList[i]);
+        nodeList[i].value;
+    }
 
 }
 
@@ -68,4 +83,4 @@ function maxPriceFunc (array: ProductDescription[]): number {
     return array.reduce((max, p) => p.price > max ? p.price : max, productsArray[0].price); 
 }
 
-export { createElement, uniqueArray, createCheckbox, removeArrEl, sortingArray, filterArray, searchFunction, minPriceFunc, maxPriceFunc };
+export { createElement, uniqueArray, createCheckbox, removeArrEl, sortingArray, filterArray, searchFunction, minPriceFunc, maxPriceFunc, changeCheckbox };

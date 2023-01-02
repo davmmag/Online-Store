@@ -10,6 +10,7 @@
   .range-slider__wrapper{
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
   }
   .rangeValuesMin, 
   .rangeValuesMax {
@@ -34,7 +35,7 @@
     border: 1px solid white;
     width: 80%;
     position: absolute;
-    left: 0;
+    left: 10px;
   }
   
   .slider-input::-webkit-slider-runnable-track {

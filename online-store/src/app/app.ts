@@ -1,7 +1,7 @@
-import { searchFunction, sortingArray } from "../app/functions";
+import { searchFunction, sortingArray, changeCheckbox } from "../app/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription } from "./types";
-import { createTable } from "../app/rendering";
+import { createTable, renderCheckbox } from "../app/rendering";
 import { filtersObj, slider } from "../app/slider"
 
 let countryArray: string [] = [];
@@ -11,40 +11,46 @@ let sortingValue: string = 'priceAscending';
 
 function checked () {
     const clickFilters = document.querySelector('.filters-prime');
-    let checkboxes: NodeListOf<Element> = document.querySelectorAll('input[type=checkbox]');
+    let checkboxes: NodeListOf<Element> = document.querySelectorAll('.checkbox-input');
+    
     for (let i= 0; i < checkboxes.length; i++) {
         checkboxes[i].addEventListener('change', function(event) {
+            
             if (event.target instanceof HTMLInputElement) {
                 if (event.target.checked) {
-                    if (event.target.offsetParent?.className === "checkboxes-country") {                           
-                        countryArray.push(`${event.target.value}`) ;
+
+                    if (event.target.form?.className === "checkboxes-country") {                           
+                        countryArray.push(`${event.target.value}`) ;                      
                         filtersObj.country = countryArray;
                         filtered();
                         slider(filtered());
                     }         
-                    if (event.target.offsetParent?.className === "checkboxes-brand") {
+                    if (event.target.form?.className === "checkboxes-brand") {
                         brandArray.push(`${event.target.value}`);
                         filtersObj.brand = brandArray;
                         filtered();
                         slider(filtered());
+                        
                     }
                     if (clickFilters) {
                         clickFilters.classList.add('active');
                     }
                 } else {
-                    if (event.target.offsetParent?.className === "checkboxes-country") {
+                    if (event.target.form?.className === "checkboxes-country") {
                         let deleteCountry = `${event.target.value}`;
                         countryArray = countryArray.filter((name) => name !== deleteCountry);
                         filtersObj.country = countryArray;
                         filtered();
                         slider(filtered());
+                        
                     }         
-                    if (event.target.offsetParent?.className === "checkboxes-brand") {
+                    if (event.target.form?.className === "checkboxes-brand") {
                         let deleteBrand = `${event.target.value}`;
                         brandArray = brandArray.filter((name) => name !== deleteBrand);
                         filtersObj.brand = brandArray;
                         filtered();
                         slider(filtered());
+                        
                     }
                 }
             }
