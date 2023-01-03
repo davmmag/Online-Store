@@ -1,6 +1,6 @@
-import { createElement } from "../../functions/functions";
-import { ProductTable,DataProduct } from "../../types/types";
-
+import { returnElement } from "../../functions/functions";
+import { ProductTable, ProductDescription } from "../../types/types";
+import ModalZoom from "../modal/modal-zoom";
 class Product {
   product: HTMLElement;
   productFeaturesHeads: ProductTable;
@@ -17,100 +17,98 @@ class Product {
       packaging: 'Кв. м. в упаковке',
       count: 'Штук в упаковке',
       weight: 'Вес упаковки (кг)',
-    }
+    };
   }
 
-  draw(data: DataProduct): void {
-    const productContainer: HTMLElement = createElement('div', 'container product__container');
-    const productData = createElement('div', 'product__data');
-    const productTitle = createElement('h1', 'product__title', data.name);
-    const featuresTop = createElement('div', 'product__features-top');
-    const productValue = createElement('div', 'product__value', data.price);
-    const productPriceBlock = createElement('div', 'product__price');
-    const productCount = createElement('div', 'product__count count');
-    productCount.innerHTML = 
-    `
-    <button class="btn btn count__minus">
-                <i class="fa-solid fa-minus"></i>
-              </button>
-              <input type="text" class="count__value" placeholder="${data.features.packaging}" value="${data.features.packaging}">
-              <button class="btn count__plus">
-                <i class="fa-solid fa-plus"></i>
-    </button>
-    `
-    const btnProduct = createElement('button', 'btn btn--circle product__btn-product');
-    btnProduct.innerHTML = `
-    <i class="fa-solid fa-product-shopping"></i>
-              <span>Добавить в корзину</span>
-    `;
-    const btnPay = createElement('button', 'btn btn--circle product__btn-pay');
-    btnPay.innerHTML = `
-    <i class="fa-regular fa-credit-product"></i>
-              <span>Купить сейчас</span>
-    `
-    const featuresBottom = createElement('div', 'product__features-bottom');
-    const productSlider = createElement('div', 'product__slider');
-    productSlider.innerHTML = `
-        <div
-      style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-      class="swiper mySwiper2"
-    >
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[0]}" />
-        </div>
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[1]}" />
-        </div>
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[2]}" />
-        </div>
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[3]}" />
-        </div>
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[4]}" />
-        </div>
-      </div>
-    </div>
-    <div thumbsSlider="" class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[0]}" />
-        </div>
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[1]}" />
-        </div>
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[2]}" />
-        </div>
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[3]}" />
-        </div>
-        <div class="swiper-slide">
-          <img src="./assets/${data.picture[4]}" />
-        </div>
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-    </div>
-    `
-    const features = data.features;
-    type KeyFeatures = keyof typeof features;
-    type KeyFeaturesHead = keyof typeof this.productFeaturesHeads;
-    Object.keys(features).forEach((key) => {
-      const value = features[key as KeyFeatures];
-      const productBlock = createElement('div', 'product__features-block');
-      const productBlockHead = createElement('div', 'product__features-head' , this.productFeaturesHeads[key as KeyFeaturesHead]);
-      const productBlockValue = createElement('div', 'product__features-value', value as string);
-      productBlock.append(productBlockHead, productBlockValue);
-      featuresBottom.append(productBlock);
-    })
+  draw(data: ProductDescription): void {
+    const { title, price, packaging, weight } = data;
+    const productContainer: HTMLElement = returnElement('div', 'container product__container');
+    const productImages = this.fillingImages(data);
+    const productData = returnElement('div', 'product__data');
+    const productTitle = returnElement('h1', 'product__title', title);
+    const featuresTop = returnElement('div', 'product__features-top');
+    const productValue = returnElement('div', 'product__value', `${price}`);
+    const productPriceBlock = returnElement('div', 'product__price');
+    const productCount = returnElement('div', 'product__count count');
+    const breadcrumbs = document.querySelector('.breadcrumbs__link--title') as HTMLLinkElement;
+    breadcrumbs.textContent = data.title;
+    const btnRemove = returnElement('button', 'btn btn count__minus', '-');
+    const inputValue = returnElement('input', 'count__value', '', {
+      type: 'text',
+      placeholder: `${packaging}`,
+      value: `${packaging}`,
+    });
+    const btnAdd = returnElement('button', 'btn btn count__plus', '+');
+    btnRemove.addEventListener('click', (e: Event) => this.countPackage(packaging, weight, e));
+    btnAdd.addEventListener('click', (e: Event) => this.countPackage(packaging, weight, e));
+    productCount.append(btnRemove, inputValue, btnAdd);
+    const btnProduct = returnElement(
+      'button',
+      'btn btn--circle product__btn-product',
+      'Добавить в корзину',
+    );
+    const btnPay = returnElement('button', 'btn btn--circle product__btn-pay', 'Купить сейчас');
+    const featuresBottom = returnElement('div', 'product__features-bottom');
+    const featuresBlocks = this.fillingProperties(data);
+    featuresBottom.append(...featuresBlocks);
     productPriceBlock.append(productCount, btnProduct, btnPay);
     featuresTop.append(productValue, productPriceBlock);
     productData.append(productTitle, featuresTop, featuresBottom);
-    productContainer.append(productData, productSlider);
+    productContainer.append(productData, productImages);
     this.product.append(productContainer);
+  }
+
+  fillingProperties(data: ProductDescription): HTMLElement[] {
+    const keys = Object.keys(this.productFeaturesHeads);
+    type KeyFeaturesHead = keyof typeof this.productFeaturesHeads;
+    const { width, height } = data.size;
+    const blocksArray: HTMLElement[] = [];
+    for (const key of keys) {
+      const productBlock = returnElement('div', 'product__features-block');
+      const productBlockHead = returnElement('div', 'product__features-head',this.productFeaturesHeads[key as KeyFeaturesHead]);
+      const productBlockValue = returnElement('div', 'product__features-value');
+      if (key === 'size') productBlockValue.textContent = `${width}x${height}`;
+      else productBlockValue.textContent = `${data[key as KeyFeaturesHead]}`;
+      productBlock.append(productBlockHead, productBlockValue);
+      blocksArray.push(productBlock);
+    }
+    return blocksArray;
+  }
+
+  fillingImages(data: ProductDescription): HTMLElement {
+    const { images } = data;
+    const productImages = returnElement('div', 'product__images');
+    const productImagesTop = returnElement('div', 'product__images-top');
+    const productImagesBottom = returnElement('div', 'product__images-bottom');
+    for (let i = 0; i < images.length; i++) {
+      const zoom = returnElement('a', 'zoom');
+      const image = returnElement('img', 'img product__img') as HTMLImageElement;
+      image.src = `${images[i]}`;
+      image.addEventListener('click', () => new ModalZoom().create(image.src));
+      zoom.append(image);
+      if (i === 0) {
+        productImagesTop.append(zoom);
+      } else {
+        const productImagesBlock = returnElement('div', 'product__images-block');
+        productImagesBlock.append(zoom);
+        productImagesBottom.append(productImagesBlock);
+      }
+    }
+    productImages.append(productImagesTop, productImagesBottom);
+    return productImages;
+  }
+
+  countPackage(packaging: string, weight: string, e: Event): void {
+    const target = e.target as HTMLButtonElement;
+    const flag = target.classList.contains('count__plus');
+    const inputValue = document.querySelector('.count__value') as HTMLInputElement;
+    if (flag === true) {
+      const result = `${+inputValue.value + +packaging}`;
+      inputValue.value = result;
+    } else {
+      const result = `${+inputValue.value - +packaging}`;
+      if (+result > 0) inputValue.value = result;
+    }
   }
 }
 
