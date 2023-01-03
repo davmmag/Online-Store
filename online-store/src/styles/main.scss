@@ -131,11 +131,41 @@
 }
 
 .view-mode {
+    float: right;
+    cursor: pointer;
+}
+.view-mode-btn {
+    display: block;
+    float: left;
     width: 30px;
     height: 30px;
-    background-color: rgb(237, 100, 210);
+    text-align: center;
+    color: #758e9e;
+    background-color: #f1f1f1;
+    font-size: 14px;
+    border: 1px solid #ccd8df;
 }
-
+.view-active {
+    background-color: #9f9f9f;
+}
+.view-mode__table::before {
+    content: "";
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px 5px 5px 5px;
+    background-size: 20px 20px;
+    background-image: url('../assets/icons/database-table.svg');
+}
+.view-mode__list::before {
+    content: "";
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px 5px 5px 5px;
+    background-size: 20px 20px;
+    background-image: url('../assets/icons/list.svg');
+}
 
 
 /*=================================TABLE PRODUCTS======================================*/

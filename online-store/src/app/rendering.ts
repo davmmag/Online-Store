@@ -61,7 +61,9 @@ function start(): void {
                     option.innerText = "Рейтинг по убыванию";
                     selectBox?.appendChild(option);
 
-            createElement("div", "table__toolbar", "view-mode");               
+            createElement("div", "table__toolbar", "view-mode");
+                createElement("div", "view-mode", "view-mode-btn view-mode__table");
+                createElement("div", "view-mode", "view-mode-btn view-mode__list");
 }
     
 function renderCheckbox () {

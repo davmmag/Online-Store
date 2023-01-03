@@ -35,13 +35,11 @@ function createCheckbox<T extends keyof ProductDescription> (value: string, cont
 }
 
 function changeCheckbox (array: ProductDescription[], key: string){
-    
     let nodeList = document.querySelectorAll(".checkbox-input") as NodeListOf<HTMLInputElement>;
     for (let i = 0; i < nodeList.length; i++) {
         console.dir (nodeList[i]);
         nodeList[i].value;
     }
-
 }
 
 function uniqueArray <T extends Object, P extends keyof T> (array: Array<T>,  key: P): Array<T[P]> {
