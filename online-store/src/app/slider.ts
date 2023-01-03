@@ -1,5 +1,5 @@
-import { ProductFilters, ProductDescription } from "./types";
-import { minPriceFunc, maxPriceFunc } from "./functions"
+import { ProductFilters, ProductDescription } from "../types/types";
+import { minPriceFunc, maxPriceFunc } from "../functions/functions"
 import { filtered } from "./app"
 import { productsArray } from "./products";
 

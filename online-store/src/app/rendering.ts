@@ -1,6 +1,6 @@
-import { createElement, uniqueArray, createCheckbox} from "../app/functions";
+import { createElement, uniqueArray, createCheckbox} from "../functions/functions";
 import { productsArray } from "../app/products";
-import { ProductDescription } from "./types";
+import { ProductDescription } from "../types/types";
 import { filtersObj } from "./slider"
 
 function start(): void {

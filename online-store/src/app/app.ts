@@ -1,6 +1,6 @@
-import { searchFunction, sortingArray, changeCheckbox } from "../app/functions";
+import { searchFunction, sortingArray, changeCheckbox } from "../functions/functions";
 import { productsArray } from "../app/products";
-import { ProductDescription } from "./types";
+import { ProductDescription } from "../types/types";
 import { createTable, renderCheckbox } from "../app/rendering";
 import { filtersObj, slider } from "../app/slider"
 
