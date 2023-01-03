@@ -1,22 +1,22 @@
-import { createElement } from "../../functions/functions";
+import { returnElement } from "../../functions/functions";
 
 class Form {
   formContainer: HTMLElement;
   constructor() {
-    this.formContainer = createElement('div', 'form-box');
+    this.formContainer = returnElement('div', 'form-box');
   }
 
   create(): HTMLElement {
-    const form = createElement('form', 'form') as HTMLElement;
-    const formItemPersonal = createElement('fieldset', 'form__item form__item--personal') as HTMLElement;
-    const formItemCard = createElement('fieldset', 'form__item form__item--card') as HTMLElement;
+    const form = returnElement('form', 'form') as HTMLElement;
+    const formItemPersonal = returnElement('fieldset', 'form__item form__item--personal') as HTMLElement;
+    const formItemCard = returnElement('fieldset', 'form__item form__item--card') as HTMLElement;
     formItemPersonal.innerHTML = `
                   <input type="text" class="input form__name" placeholder="Name" />
                   <input type="tel" class="input form__phone-number" placeholder="Phone number" />
                   <input type="text" class="input form__address" placeholder="Delivery address" />
                   <input type="email" class="input form__email" placeholder="E-mail" />
     `;
-    const btnNext = createElement('button', 'btn btn--circle form__btn', 'Next', {
+    const btnNext = returnElement('button', 'btn btn--circle form__btn', 'Next', {
       type: 'button',
     }) as HTMLElement;
     btnNext.addEventListener('click', () => {
@@ -46,7 +46,7 @@ class Form {
                     </div>
                   </div>
     `;
-    const btnSubmit = createElement('button', 'btn btn--circle form__btn btn--submit', 'Confirm') as HTMLElement;
+    const btnSubmit = returnElement('button', 'btn btn--circle form__btn btn--submit', 'Confirm') as HTMLElement;
     formItemCard.append(btnSubmit);
     form.append(formItemPersonal, formItemCard);
     this.formContainer.append(form);
