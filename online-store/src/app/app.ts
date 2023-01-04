@@ -119,6 +119,15 @@ function viewDisplay(view: string){
             if (elem instanceof HTMLDivElement) {
                 elem.style.flexDirection = 'row';
                 elem.style.width = '100%';
+                if (elem.childNodes[0] instanceof HTMLImageElement) {
+                    elem.childNodes[0].style.maxWidth = '200px';
+                    elem.childNodes[0].style.marginRight = '20px';
+                }
+                console.dir(elem.childNodes[1].childNodes[2]);
+                if (elem.childNodes[1].childNodes[2] instanceof HTMLDivElement) {
+                    
+                    elem.childNodes[1].childNodes[2].style.width = '50%';                  
+                }
             }
         })
     }
