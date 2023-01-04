@@ -2,7 +2,8 @@ import { searchFunction, sortingArray, changeCheckbox } from "../functions/funct
 import { productsArray } from "../app/products";
 import { ProductDescription } from "../types/types";
 import { createTable, renderCheckbox } from "../app/rendering";
-import { filtersObj, slider } from "../app/slider"
+import { filtersObj, slider } from "../app/slider";
+import Product from "../components/product/product";
 
 let countryArray: string [] = [];
 let brandArray: string [] = [];

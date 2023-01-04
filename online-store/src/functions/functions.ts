@@ -104,6 +104,15 @@ function maxPriceFunc(array: ProductDescription[]): number {
   return array.reduce((max, p) => (p.price > max ? p.price : max), productsArray[0].price);
 }
 
+const getProduct = (products: ProductDescription[]): ProductDescription | undefined => {
+  const id = localStorage.getItem('id');
+  if (id) {
+    const component = products.find((item) => item.id === +id) as ProductDescription;
+    if (component) return component;
+    return undefined;
+  }
+};
+
 export {
   createElement,
   uniqueArray,
@@ -115,5 +124,6 @@ export {
   minPriceFunc,
   maxPriceFunc,
   changeCheckbox,
-  returnElement
+  returnElement,
+  getProduct
 };

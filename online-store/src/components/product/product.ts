@@ -20,42 +20,44 @@ class Product {
     };
   }
 
-  draw(data: ProductDescription): void {
-    const { title, price, packaging, weight } = data;
-    const productContainer: HTMLElement = returnElement('div', 'container product__container');
-    const productImages = this.fillingImages(data);
-    const productData = returnElement('div', 'product__data');
-    const productTitle = returnElement('h1', 'product__title', title);
-    const featuresTop = returnElement('div', 'product__features-top');
-    const productValue = returnElement('div', 'product__value', `${price}`);
-    const productPriceBlock = returnElement('div', 'product__price');
-    const productCount = returnElement('div', 'product__count count');
-    const breadcrumbs = document.querySelector('.breadcrumbs__link--title') as HTMLLinkElement;
-    breadcrumbs.textContent = data.title;
-    const btnRemove = returnElement('button', 'btn btn count__minus', '-');
-    const inputValue = returnElement('input', 'count__value', '', {
-      type: 'text',
-      placeholder: `${packaging}`,
-      value: `${packaging}`,
-    });
-    const btnAdd = returnElement('button', 'btn btn count__plus', '+');
-    btnRemove.addEventListener('click', (e: Event) => this.countPackage(packaging, weight, e));
-    btnAdd.addEventListener('click', (e: Event) => this.countPackage(packaging, weight, e));
-    productCount.append(btnRemove, inputValue, btnAdd);
-    const btnProduct = returnElement(
-      'button',
-      'btn btn--circle product__btn-product',
-      'Добавить в корзину',
-    );
-    const btnPay = returnElement('button', 'btn btn--circle product__btn-pay', 'Купить сейчас');
-    const featuresBottom = returnElement('div', 'product__features-bottom');
-    const featuresBlocks = this.fillingProperties(data);
-    featuresBottom.append(...featuresBlocks);
-    productPriceBlock.append(productCount, btnProduct, btnPay);
-    featuresTop.append(productValue, productPriceBlock);
-    productData.append(productTitle, featuresTop, featuresBottom);
-    productContainer.append(productData, productImages);
-    this.product.append(productContainer);
+  draw(data: ProductDescription | undefined): void {
+    if (data) {
+      const { title, price, packaging, weight } = data;
+      const productContainer: HTMLElement = returnElement('div', 'container product__container');
+      const productImages = this.fillingImages(data);
+      const productData = returnElement('div', 'product__data');
+      const productTitle = returnElement('h1', 'product__title', title);
+      const featuresTop = returnElement('div', 'product__features-top');
+      const productValue = returnElement('div', 'product__value', `${price}`);
+      const productPriceBlock = returnElement('div', 'product__price');
+      const productCount = returnElement('div', 'product__count count');
+      const breadcrumbs = document.querySelector('.breadcrumbs__link--title') as HTMLLinkElement;
+      breadcrumbs.textContent = data.title;
+      const btnRemove = returnElement('button', 'btn btn count__minus', '-');
+      const inputValue = returnElement('input', 'count__value', '', {
+        type: 'text',
+        placeholder: `${packaging}`,
+        value: `${packaging}`,
+      });
+      const btnAdd = returnElement('button', 'btn btn count__plus', '+');
+      btnRemove.addEventListener('click', (e: Event) => this.countPackage(packaging, weight, e));
+      btnAdd.addEventListener('click', (e: Event) => this.countPackage(packaging, weight, e));
+      productCount.append(btnRemove, inputValue, btnAdd);
+      const btnProduct = returnElement(
+        'button',
+        'btn btn--circle product__btn-product',
+        'Добавить в корзину',
+      );
+      const btnPay = returnElement('button', 'btn btn--circle product__btn-pay', 'Купить сейчас');
+      const featuresBottom = returnElement('div', 'product__features-bottom');
+      const featuresBlocks = this.fillingProperties(data);
+      featuresBottom.append(...featuresBlocks);
+      productPriceBlock.append(productCount, btnProduct, btnPay);
+      featuresTop.append(productValue, productPriceBlock);
+      productData.append(productTitle, featuresTop, featuresBottom);
+      productContainer.append(productData, productImages);
+      this.product.append(productContainer);
+    }
   }
 
   fillingProperties(data: ProductDescription): HTMLElement[] {
