@@ -183,7 +183,6 @@
     padding: 15px;
 }
 .product-image {
-    cursor: pointer;
     width: 50%;
     height: 200px;
 }
@@ -194,6 +193,7 @@
     gap: 10px;
 }
 .product-name {
+    cursor: pointer;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;

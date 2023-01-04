@@ -109,7 +109,9 @@ function viewDisplay(view: string){
                 elem.style.flexDirection = 'column';
                 elem.style.width = '33.333%';
             }
-
+            if (elem.childNodes[1].childNodes[2] instanceof HTMLDivElement) { 
+                elem.childNodes[1].childNodes[2].style.width = '100%';                  
+            }
         })
     }
     if (view === 'list') {
@@ -124,8 +126,7 @@ function viewDisplay(view: string){
                     elem.childNodes[0].style.marginRight = '20px';
                 }
                 console.dir(elem.childNodes[1].childNodes[2]);
-                if (elem.childNodes[1].childNodes[2] instanceof HTMLDivElement) {
-                    
+                if (elem.childNodes[1].childNodes[2] instanceof HTMLDivElement) { 
                     elem.childNodes[1].childNodes[2].style.width = '50%';                  
                 }
             }
@@ -145,4 +146,21 @@ function changeView () {
     });
 }
 
-export { checked, filtered, search, filtersObj, changeView };
+function productSelection() {
+    const tableProducts = document.querySelector('.table__products');
+    if (tableProducts instanceof HTMLElement) {
+        tableProducts.addEventListener('click', (event) => {
+            if (event.target instanceof HTMLDivElement) {
+                const titleProduct = event.target.textContent;
+                productsArray.forEach(element => {
+                    if (element.title === titleProduct){
+                        //Добавь функцию перехода на страницу продукта по его id
+                        console.dir(element.id);
+                    };
+                });           
+            }   
+        })
+    }
+}
+
+export { checked, filtered, search, filtersObj, viewDisplay, changeView, productSelection };
