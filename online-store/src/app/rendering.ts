@@ -105,11 +105,13 @@ function createTable (array: ProductDescription[]) {
                         const productShop = document.createElement(`div`);
                         productShop.className = `product-shop`;
                         elem.append(productShop);
+                            let a = document.createElement(`a`);
+                            a.className = `product-name`;
+                            a.target = "_blank";
+                            a.href = "goods.html";
+                            a.innerHTML = `${array[i].title}`;
+                            productShop.append(a);
                             let div = document.createElement(`div`);
-                            div.className = `product-name`;
-                            div.innerHTML = `${array[i].title}`;
-                            productShop.append(div);
-                            div = document.createElement(`div`);
                             div.className = `product-price`;
                             div.innerHTML = `${array[i].price}`;
                             productShop.append(div);

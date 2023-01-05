@@ -154,8 +154,7 @@ function productSelection() {
                 const titleProduct = event.target.textContent;
                 productsArray.forEach(element => {
                     if (element.title === titleProduct){
-                        //Добавь функцию перехода на страницу продукта по его id
-                        console.dir(element.id);
+                        localStorage.setItem(`id`, `${element.id}`);
                     };
                 });           
             }   
