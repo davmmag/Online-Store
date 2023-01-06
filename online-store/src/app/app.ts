@@ -11,7 +11,7 @@ let sortArray = productsArray;
 let sortingValue: string = 'priceAscending';
 
 function checked () {
-    const clickFilters = document.querySelector('.filters-prime');
+    const clickFilters: NodeListOf<Element> = document.querySelectorAll('.filters-buttons');
     let checkboxes: NodeListOf<Element> = document.querySelectorAll('.checkbox-input');
     
     for (let i= 0; i < checkboxes.length; i++) {
@@ -33,9 +33,8 @@ function checked () {
                         slider(filtered());
                         
                     }
-                    if (clickFilters) {
-                        clickFilters.classList.add('active');
-                    }
+                    clickFilters.forEach((el) => el.classList.add('active'));
+                    
                 } else {
                     if (event.target.form?.className === "checkboxes-country") {
                         let deleteCountry = `${event.target.value}`;
@@ -163,4 +162,23 @@ function productSelection() {
     }
 }
 
-export { checked, filtered, search, filtersObj, viewDisplay, changeView, productSelection };
+function filtersReset() {
+    const filtersReset = document.querySelector('.filters-reset');
+    filtersReset?.addEventListener('click', () => {
+        /*
+        filtersObj = {
+            price: [minPriceFunc(productsArray), maxPriceFunc(productsArray)],
+        };
+        */
+    })
+}
+
+function filtersSave() {
+    let serialObj = JSON.stringify(filtersObj);
+
+    localStorage.setItem("myFilters", serialObj); //запишем его в хранилище по ключу "myKey"
+    
+    //serialObj = JSON.parse(localStorage.getItem("myFilters"));
+}
+
+export { checked, filtered, search, filtersObj, viewDisplay, changeView, productSelection, filtersReset, filtersSave };

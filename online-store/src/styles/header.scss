@@ -99,10 +99,21 @@
     height: 25px;
 }
 
+.header-button img {
+    width: 25px;
+    height: 25px;
+}
+.header-main__basket{
+    width: 282px;
+    display: flex;
+    align-items: center;
+}
+
 .header-main__basket img {
     height: 32px;
     width: 32px;
     cursor: pointer;
+    margin: 20px;
 }
 
 .header-bottom {
