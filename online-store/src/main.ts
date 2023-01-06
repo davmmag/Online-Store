@@ -6,13 +6,15 @@ import { start, renderCheckbox } from "./app/rendering";
 import { slider } from "./app/slider";
 import { productsArray } from './app/products';
 
-
-start();
-renderCheckbox ();
-slider(productsArray);
-checked();
-search();
-filtered();
-viewDisplay('table');
-changeView();
-productSelection ();
+const page = document.body.className;
+if (page === 'main') {
+  start();
+  renderCheckbox();
+  slider(productsArray);
+  checked();
+  search();
+  filtered();
+  viewDisplay('table');
+  changeView();
+  productSelection();
+}

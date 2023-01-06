@@ -150,7 +150,7 @@ function productSelection() {
     const tableProducts = document.querySelector('.table__products');
     if (tableProducts instanceof HTMLElement) {
         tableProducts.addEventListener('click', (event) => {
-            if (event.target instanceof HTMLDivElement) {
+            if (event.target instanceof HTMLElement) {
                 const titleProduct = event.target.textContent;
                 productsArray.forEach(element => {
                     if (element.title === titleProduct){
