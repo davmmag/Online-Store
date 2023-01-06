@@ -1,11 +1,9 @@
-import { ProductFilters, ProductDescription } from "../types/types";
+import {  ProductDescription } from "../types/types";
 import { minPriceFunc, maxPriceFunc } from "../functions/functions"
-import { filtered } from "./app"
+import { filtered, filtersObj } from "./app"
 import { productsArray } from "./products";
 
-let filtersObj: ProductFilters = {
-  price: [minPriceFunc(productsArray), maxPriceFunc(productsArray)],
-};
+
 
 function slider (array: ProductDescription[]) {
   let displayElementMin = document.querySelectorAll(".rangeValuesMin")[0];
@@ -44,4 +42,4 @@ function slider (array: ProductDescription[]) {
   }
 }
 
-export { slider, filtersObj }
+export { slider }

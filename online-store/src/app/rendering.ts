@@ -1,7 +1,7 @@
 import { createElement, uniqueArray, createCheckbox} from "../functions/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription } from "../types/types";
-import { filtersObj } from "./slider"
+import { filtersObj } from "./app"
 
 function start(): void {
     /*Создание блока с фильтрами и заголовка сортировки*/

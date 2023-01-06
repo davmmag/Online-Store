@@ -1,7 +1,7 @@
 import './style.scss';
 import './app/index';
 
-import { search, checked, filtered, viewDisplay, changeView, productSelection } from "./app/app";
+import { search, checked, filtered, viewDisplay, changeView, productSelection, filtersReset } from "./app/app";
 import { start, renderCheckbox } from "./app/rendering";
 import { slider } from "./app/slider";
 import { productsArray } from './app/products';
@@ -17,4 +17,5 @@ if (page === 'main') {
   viewDisplay('table');
   changeView();
   productSelection();
+  filtersReset();
 }

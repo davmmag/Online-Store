@@ -1,14 +1,17 @@
-import { searchFunction, sortingArray, changeCheckbox } from "../functions/functions";
+import { searchFunction, sortingArray, minPriceFunc, maxPriceFunc  } from "../functions/functions";
 import { productsArray } from "../app/products";
-import { ProductDescription } from "../types/types";
-import { createTable, renderCheckbox } from "../app/rendering";
-import { filtersObj, slider } from "../app/slider";
-import Product from "../components/product/product";
+import { ProductDescription, ProductFilters } from "../types/types";
+import { createTable, } from "../app/rendering";
+import { slider } from "../app/slider";
+
 
 let countryArray: string [] = [];
 let brandArray: string [] = [];
 let sortArray = productsArray;
 let sortingValue: string = 'priceAscending';
+let filtersObj: ProductFilters = {
+    price: [minPriceFunc(productsArray), maxPriceFunc(productsArray)],
+};
 
 function checked () {
     const clickFilters: NodeListOf<Element> = document.querySelectorAll('.filters-buttons');
@@ -34,7 +37,7 @@ function checked () {
                         
                     }
                     clickFilters.forEach((el) => el.classList.add('active'));
-                    
+
                 } else {
                     if (event.target.form?.className === "checkboxes-country") {
                         let deleteCountry = `${event.target.value}`;
@@ -164,12 +167,16 @@ function productSelection() {
 
 function filtersReset() {
     const filtersReset = document.querySelector('.filters-reset');
+    const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
     filtersReset?.addEventListener('click', () => {
-        /*
         filtersObj = {
             price: [minPriceFunc(productsArray), maxPriceFunc(productsArray)],
         };
-        */
+        filtered ();
+        checkboxInput.forEach((el) => {
+            el.checked = false;
+        });
+        slider(productsArray);
     })
 }
 
