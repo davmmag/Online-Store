@@ -85,7 +85,8 @@ function renderCheckbox () {
                 createCheckbox (`${element}`, "checkboxes-brand", "brand");
             });
         
-        createElement("div", "checkboxes-wrapper", "filters-prime", "Сбросить фильтры");
+        createElement("div", "checkboxes-wrapper", "filters-buttons filters-reset", "Сбросить фильтры");
+        createElement("div", "checkboxes-wrapper", "filters-buttons filters-save", "Сохранить фильтры");
 }   
 
 function createTable (array: ProductDescription[]) {
