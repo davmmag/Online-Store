@@ -13,7 +13,6 @@ if (page === 'main') {
   slider(productsArray);
   checked();
   search();
-  filtered();
   viewDisplay('table');
   changeView();
   productSelection();

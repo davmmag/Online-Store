@@ -14,10 +14,25 @@ let filtersObj: ProductFilters = {
 };
 
 function getLocalStorage() {
+    const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
     if(localStorage.getItem("myFilters")) {
         let jsonFilters = localStorage.getItem("myFilters");
         if (jsonFilters) {
             filtersObj = JSON.parse(jsonFilters);
+            filtered();
+            slider(filtered());
+            checkboxInput.forEach((el) => {
+                if (filtersObj.country) {
+                    if (filtersObj.country.includes(el.value)){
+                        el.checked = true;
+                    }
+                }
+                if (filtersObj.brand) {
+                    if (filtersObj.brand.includes(el.value)){
+                        el.checked = true;
+                    }
+                }               
+            });
         } 
     }
   }
@@ -33,7 +48,6 @@ function checked () {
             
             if (event.target instanceof HTMLInputElement) {
                 if (event.target.checked) {
-
                     if (event.target.form?.className === "checkboxes-country") {                           
                         countryArray.push(`${event.target.value}`) ;                      
                         filtersObj.country = countryArray;

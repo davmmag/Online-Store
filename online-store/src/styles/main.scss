@@ -87,7 +87,7 @@
     border-radius: 7px;
     color: aliceblue;
     height: 50px;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 15px;
@@ -97,7 +97,7 @@
     background-color: rgb(99, 99, 99); 
 }
 .filters-buttons.active {
-    display: flex;
+    
 }
 .checkbox-amount {
     display: flex;
