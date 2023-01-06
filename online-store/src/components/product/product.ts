@@ -1,4 +1,4 @@
-import { returnElement } from "../../functions/functions";
+import { returnElement, countPackage, createCountPackage } from "../../functions/functions";
 import { ProductTable, ProductDescription } from "../../types/types";
 import ModalZoom from "../modal/modal-zoom";
 class Product {
@@ -30,19 +30,19 @@ class Product {
       const featuresTop = returnElement('div', 'product__features-top');
       const productValue = returnElement('div', 'product__value', `${price}`);
       const productPriceBlock = returnElement('div', 'product__price');
-      const productCount = returnElement('div', 'product__count count');
+      const productCount = createCountPackage('product', packaging, weight);
       const breadcrumbs = document.querySelector('.breadcrumbs__link--title') as HTMLLinkElement;
       breadcrumbs.textContent = data.title;
-      const btnRemove = returnElement('button', 'btn btn count__minus', '-');
-      const inputValue = returnElement('input', 'count__value', '', {
-        type: 'text',
-        placeholder: `${packaging}`,
-        value: `${packaging}`,
-      });
-      const btnAdd = returnElement('button', 'btn btn count__plus', '+');
-      btnRemove.addEventListener('click', (e: Event) => this.countPackage(packaging, weight, e));
-      btnAdd.addEventListener('click', (e: Event) => this.countPackage(packaging, weight, e));
-      productCount.append(btnRemove, inputValue, btnAdd);
+      // const btnRemove = returnElement('button', 'btn btn count__minus', '-');
+      // const inputValue = returnElement('input', 'count__value', '', {
+      //   type: 'text',
+      //   placeholder: `${packaging}`,
+      //   value: `${packaging}`,
+      // });
+      // const btnAdd = returnElement('button', 'btn btn count__plus', '+');
+      // btnRemove.addEventListener('click', (e: Event) => countPackage(packaging, weight, e));
+      // btnAdd.addEventListener('click', (e: Event) => countPackage(packaging, weight, e));
+      // productCount.append(btnRemove, inputValue, btnAdd);
       const btnProduct = returnElement(
         'button',
         'btn btn--circle product__btn-product',

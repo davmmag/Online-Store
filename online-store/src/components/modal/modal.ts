@@ -2,7 +2,7 @@ import { returnElement } from '../../functions/functions';
 class Modal {
   modal: HTMLElement;
   constructor() {
-    this.modal = returnElement('div', 'body', 'modal visually-hidden');
+    this.modal = returnElement('div', 'modal visually-hidden');
   }
 
   draw(data: HTMLElement): void {
