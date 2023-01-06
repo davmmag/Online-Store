@@ -42,21 +42,25 @@ function start(): void {
                 createElement("select", "sort-by", "select-box");
                 const selectBox = document.querySelector(`.select-box`);
                     let option = document.createElement(`option`);
+                    option.className = "select-input";
                     option.value = "priceAscending";
                     option.innerText = "Цена по возрастанию";
                     selectBox?.appendChild(option);
 
                     option = document.createElement(`option`);
+                    option.className = "select-input"
                     option.value = "priceDescending";
                     option.innerText = "Цена по убыванию";
                     selectBox?.appendChild(option);
 
                     option = document.createElement(`option`);
+                    option.className = "select-input"
                     option.value = "sizeAscending";
                     option.innerText = "Рейтинг по возрастанию";
                     selectBox?.appendChild(option);
 
                     option = document.createElement(`option`);
+                    option.className = "select-input"
                     option.value = "sizeDescending";
                     option.innerText = "Рейтинг по убыванию";
                     selectBox?.appendChild(option);

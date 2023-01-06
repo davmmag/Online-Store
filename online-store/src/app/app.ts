@@ -15,6 +15,8 @@ let filtersObj: ProductFilters = {
 
 function getLocalStorage() {
     const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
+    
+    
     if(localStorage.getItem("myFilters")) {
         let jsonFilters = localStorage.getItem("myFilters");
         if (jsonFilters) {
@@ -35,8 +37,24 @@ function getLocalStorage() {
             });
         } 
     }
-  }
-window.addEventListener('load', getLocalStorage);
+
+    const sortInput: NodeListOf<HTMLOptionElement> = document.querySelectorAll(".select-input");
+    sortInput.forEach((el) => {
+        if (localStorage.getItem("mySort") === el.value) {
+            el.selected = true;
+        }
+    })
+    
+
+    if (localStorage.getItem("mySort")) {
+        let sortValue = localStorage.getItem("mySort");
+        if (sortValue) {
+            createTable(sortingArray (filtered(), sortValue));
+        }
+
+    }
+}
+
 
 
 function checked () {
@@ -109,6 +127,7 @@ function filtered () {
             selectSort.onchange = function() {
                 sortingValue = selectSort.value;
                 createTable(sortingArray (newArr, sortingValue));
+                localStorage.setItem("mySort", sortingValue);
             };
         }
     }
