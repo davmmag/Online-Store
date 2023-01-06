@@ -55,7 +55,6 @@ function createCheckbox<T extends keyof ProductDescription>(
 function changeCheckbox(array: ProductDescription[], key: string) {
   let nodeList = document.querySelectorAll('.checkbox-input') as NodeListOf<HTMLInputElement>;
   for (let i = 0; i < nodeList.length; i++) {
-    console.dir(nodeList[i]);
     nodeList[i].value;
   }
 }

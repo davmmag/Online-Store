@@ -13,6 +13,17 @@ let filtersObj: ProductFilters = {
     price: [minPriceFunc(productsArray), maxPriceFunc(productsArray)],
 };
 
+function getLocalStorage() {
+    if(localStorage.getItem("myFilters")) {
+        let jsonFilters = localStorage.getItem("myFilters");
+        if (jsonFilters) {
+            filtersObj = JSON.parse(jsonFilters);
+        } 
+    }
+  }
+window.addEventListener('load', getLocalStorage);
+
+
 function checked () {
     const clickFilters: NodeListOf<Element> = document.querySelectorAll('.filters-buttons');
     let checkboxes: NodeListOf<Element> = document.querySelectorAll('.checkbox-input');
@@ -128,7 +139,6 @@ function viewDisplay(view: string){
                     elem.childNodes[0].style.maxWidth = '200px';
                     elem.childNodes[0].style.marginRight = '20px';
                 }
-                console.dir(elem.childNodes[1].childNodes[2]);
                 if (elem.childNodes[1].childNodes[2] instanceof HTMLDivElement) { 
                     elem.childNodes[1].childNodes[2].style.width = '50%';                  
                 }
@@ -177,15 +187,18 @@ function filtersReset() {
             el.checked = false;
         });
         slider(productsArray);
+        let localObj = JSON.stringify(filtersObj);
+        localStorage.setItem("myFilters", localObj);
     })
 }
 
 function filtersSave() {
-    let serialObj = JSON.stringify(filtersObj);
+    const filtersSave = document.querySelector('.filters-save');
+    filtersSave?.addEventListener('click', () => {
+        let localObj = JSON.stringify(filtersObj);
+        localStorage.setItem("myFilters", localObj);
+    }) 
 
-    localStorage.setItem("myFilters", serialObj); //запишем его в хранилище по ключу "myKey"
-    
-    //serialObj = JSON.parse(localStorage.getItem("myFilters"));
 }
 
-export { checked, filtered, search, filtersObj, viewDisplay, changeView, productSelection, filtersReset, filtersSave };
+export { checked, filtered, search, filtersObj, viewDisplay, changeView, productSelection, filtersReset, filtersSave, getLocalStorage };
