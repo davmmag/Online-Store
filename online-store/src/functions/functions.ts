@@ -1,5 +1,5 @@
 import { productsArray } from '../app/products';
-import { ProductDescription, ProductFilters } from '../types/types';
+import { ProductDescription, ProductFilters, ParamsUrl } from '../types/types';
 
 const returnElement = (selector: string, name: string, text?: string, attrs?: object) => {
   const element = document.createElement(selector);
@@ -103,6 +103,21 @@ function maxPriceFunc(array: ProductDescription[]): number {
   return array.reduce((max, p) => (p.price > max ? p.price : max), productsArray[0].price);
 }
 
+function toUrlParams (filterObj: ProductFilters) {
+  let newObj: Record<string, string> = {
+    minprice: `${filterObj.price[0]}`,
+    maxprice: `${filterObj.price[1]}`,
+  }
+  
+  if (filterObj.country) {
+    newObj.country = filterObj.country.join('+');
+  }
+  if (filterObj.brand) {
+    newObj.brand = filterObj.brand.join('+');
+  }
+  return newObj;
+}
+
 const getProduct = (products: ProductDescription[]): ProductDescription | undefined => {
   const id = localStorage.getItem('id');
   if (id) {
@@ -124,5 +139,6 @@ export {
   maxPriceFunc,
   changeCheckbox,
   returnElement,
-  getProduct
+  getProduct,
+  toUrlParams
 };

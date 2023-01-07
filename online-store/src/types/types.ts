@@ -40,6 +40,12 @@ interface ProductFilters {
   country?: CountryFilter;
   brand?: BrandFilter;
 }
+interface ParamsUrl {
+  minprice: string;
+  maxprice: string;
+  country?: string;
+  brand?: string;
+}
 type PriceFilter = number [];
 type RatingFilter = number [];
 type CountryFilter = string [];
@@ -52,4 +58,13 @@ interface checkedCategory {
 }
 type checkedArrayType = [checkedCategory];
 
-export { ProductTable, ProductDescription, productsArrayType, checkedArrayType, ProductFilters, CountryFilter, BrandFilter };
+export { 
+  ProductTable, 
+  ProductDescription, 
+  productsArrayType, 
+  checkedArrayType, 
+  ProductFilters, 
+  CountryFilter, 
+  BrandFilter, 
+  ParamsUrl 
+};

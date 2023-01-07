@@ -1,4 +1,4 @@
-import { searchFunction, sortingArray, minPriceFunc, maxPriceFunc  } from "../functions/functions";
+import { searchFunction, sortingArray, minPriceFunc, maxPriceFunc, toUrlParams  } from "../functions/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription, ProductFilters } from "../types/types";
 import { createTable, } from "../app/rendering";
@@ -13,10 +13,12 @@ let filtersObj: ProductFilters = {
     price: [minPriceFunc(productsArray), maxPriceFunc(productsArray)],
 };
 
-function getLocalStorage() {
+
+function getUrlQuery() {
     const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
-    
-    
+    const params = new URLSearchParams(window.location.search);
+
+    console.log(params.toString());
     if(localStorage.getItem("myFilters")) {
         let jsonFilters = localStorage.getItem("myFilters");
         if (jsonFilters) {
@@ -228,10 +230,69 @@ function filtersReset() {
 function filtersSave() {
     const filtersSave = document.querySelector('.filters-save');
     filtersSave?.addEventListener('click', () => {
-        let localObj = JSON.stringify(filtersObj);
-        localStorage.setItem("myFilters", localObj);
+            const paramObj = toUrlParams (filtersObj);
+            console.log (paramObj);
+            const params = new URLSearchParams(paramObj);
+            const url = 'http://192.168.0.103:3000/';
+            const postUrl = new URL("posts", url);
+            postUrl.search = params.toString();
+            console.log (`${postUrl}`);
+            window.location.href = `${postUrl}`;
     }) 
-
 }
 
-export { checked, filtered, search, filtersObj, viewDisplay, changeView, productSelection, filtersReset, filtersSave, getLocalStorage };
+export { 
+    checked, 
+    filtered, 
+    search, 
+    filtersObj, 
+    viewDisplay, 
+    changeView, 
+    productSelection, 
+    filtersReset, 
+    filtersSave, 
+    getUrlQuery
+}
+
+/*
+function getLocalStorage() {
+    const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
+    
+    if(localStorage.getItem("myFilters")) {
+        let jsonFilters = localStorage.getItem("myFilters");
+        if (jsonFilters) {
+            filtersObj = JSON.parse(jsonFilters);
+            filtered();
+            slider(filtered());
+            checkboxInput.forEach((el) => {
+                if (filtersObj.country) {
+                    if (filtersObj.country.includes(el.value)){
+                        el.checked = true;
+                    }
+                }
+                if (filtersObj.brand) {
+                    if (filtersObj.brand.includes(el.value)){
+                        el.checked = true;
+                    }
+                }               
+            });
+        } 
+    }
+
+    const sortInput: NodeListOf<HTMLOptionElement> = document.querySelectorAll(".select-input");
+    sortInput.forEach((el) => {
+        if (localStorage.getItem("mySort") === el.value) {
+            el.selected = true;
+        }
+    })
+    
+
+    if (localStorage.getItem("mySort")) {
+        let sortValue = localStorage.getItem("mySort");
+        if (sortValue) {
+            createTable(sortingArray (filtered(), sortValue));
+        }
+
+    }
+}
+*/
