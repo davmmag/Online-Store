@@ -1,37 +1,41 @@
-import { ProductDescription } from "../../types/types";
-import { returnElement, countPackage, createCountPackage } from "../../functions/functions";
+import {
+  ProductDescription,
+  ProductCartInfo,
+  LocalStorageCartInfo,
+} from '../../types/types';
+import { returnElement } from "../../functions/functions";
 import Modal from "../modal/modal";
 import Form from "../form/form";
-import { type } from "os";
-
-interface ProductCartInfo {
-  id: number;
-  price: number;
-  packaging: number;
-  cost: number;
-}
-
-interface LocalStorageInfo {
-  cost: number;
-  length: number;
-}
 
 class Cart {
   cart: HTMLElement;
   totalCost: number;
   priceCondition: Map<number, ProductCartInfo>;
-  totalCostElement!: HTMLElement;
-  localStorageInfo!: LocalStorageInfo;
+  totalCostElement: HTMLElement;
+  localStorageInfo!: LocalStorageCartInfo;
+  clearCartBtn: HTMLElement;
+  buyCartBtn: HTMLElement;
   constructor() {
     this.cart = document.querySelector('.cart') as HTMLElement;
     this.priceCondition = new Map<number, ProductCartInfo>();
     this.totalCost = 0;
+    this.totalCostElement = returnElement('div', 'cart__amount-value', `${this.totalCost} рублей`);
+    this.clearCartBtn = returnElement(
+      'button',
+      'btn btn--circle btn__cart btn--clear',
+      'Очистить корзину',
+    );
+    this.buyCartBtn = returnElement('button', 'btn btn--circle btn--buy btn__cart', 'Купить');
+    this.localStorageInfo = {
+      cost: this.totalCost,
+      length: this.priceCondition.size,
+    }
   }
 
   draw(data: ProductDescription[]): void {
     const cartContainer = returnElement('div', 'container cart__container');
     const listProducts = returnElement('ul', 'cart__products');
-    const cartHeader = returnElement('li', 'cart__head');
+    const cartHeader = returnElement('div', 'cart__head');
     cartHeader.innerHTML = `
       <div class="cart__head-item">Товар</div>
       <div class="cart__head-item">Цена</div>
@@ -40,45 +44,39 @@ class Cart {
       <div class="cart__head-item"> </div>
     `;
     const cartItems = data.map((item) => this.createCartItem(item));
-    listProducts.append(cartHeader, ...cartItems);
+    listProducts.append( ...cartItems);
     const footerCart = this.createFooterCart();
-    cartContainer.append(listProducts, ...footerCart);
+    cartContainer.append(cartHeader, listProducts, ...footerCart);
     this.cart.append(cartContainer);
   }
 
   clearCart(e: Event): void {
     const target = e.target as HTMLButtonElement;
     target.disabled = true;
-    const cartProducts = Array.from(document.querySelectorAll('.cart__product'));
-    const cartAmountValue = document.querySelector('.cart__amount-value') as HTMLElement;
+    const cartProducts = document.querySelector('.cart__products') as HTMLElement;
+    cartProducts.innerHTML = '';
+    this.priceCondition.clear();
     this.totalCost = 0;
     this.totalCostElement.textContent = `${this.totalCost} рублей`;
-    this.priceCondition.clear();
-    if (cartProducts.length !== 0) {
-      for (const product of cartProducts) {
-        product.remove();
-      }
-      this.localStorageInfo.cost = 0;
-      this.localStorageInfo.length = 0;
-      localStorage.setItem('cart', JSON.stringify(this.localStorageInfo));
-    }
+    this.loadToLocalStorage();
   }
 
-  deleteProduct(e: Event): void {
-    const target = e.target as HTMLElement;
-    const productToDel = target.closest('.cart__product');
-    const id = productToDel?.getAttribute('data-id');
-    const parent = target.closest('.cart__product') as HTMLElement;
-    
-    if (id) {
-      const costDelElementValue = this.priceCondition.get(+id)?.cost;
-      // parent.querySelector('.cart__cost')?.textContent = `${co}`
-      if (costDelElementValue) {
-        this.totalCost -= costDelElementValue;
-        this.totalCostElement.textContent = `${this.totalCost} рублей`;
-      }
-      this.priceCondition.delete(+id);
-      productToDel?.remove();
+  loadToLocalStorage() {
+    this.localStorageInfo.cost = this.totalCost;
+    this.localStorageInfo.length = this.priceCondition.size;
+    localStorage.setItem('cart', JSON.stringify(this.localStorageInfo));
+  }
+
+  deleteProduct(target: HTMLElement ): void {
+    const productToDel = target.closest('.cart__product') as HTMLElement;
+    const dataId = productToDel?.getAttribute('data-id');
+    if (dataId) {
+      const costDelElement = this.priceCondition.get(+dataId) as ProductCartInfo;
+      this.priceCondition.delete(+dataId);
+      productToDel.remove();
+      this.totalCost -= costDelElement.cost;
+      this.totalCostElement.textContent = `${this.totalCost} рублей`;
+      this.loadToLocalStorage();
     }
   }
 
@@ -102,13 +100,15 @@ class Cart {
     const cartPackagingSection = cartSection.cloneNode() as HTMLElement;
     const cartItemCost = cartSection.cloneNode() as HTMLElement;
     const countBlock = this.createCountPackage('cart', packaging, weight, price, id);
-    const cost = this.calculationThePrice(
+    const cartCost = returnElement('div', 'cart__cost');
+    this.calculationThePrice({
       id,
       price,
-      +packaging,
-      countBlock.children[1] as HTMLInputElement,
-    );
-    const cartCost = returnElement('div', 'cart__cost', `${cost} рублей`);
+      packaging: +packaging,
+      input: countBlock.children[1] as HTMLInputElement,
+      cost: 0,
+      costElement: cartCost,
+    }, 'create');
     cartItemCost.append(cartCost);
     cartPackagingSection.append(countBlock);
     const btnDelete = returnElement('div', 'cart__trash');
@@ -117,31 +117,50 @@ class Cart {
         <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/>
       </svg>
     `;
-    btnDelete.addEventListener('click', (e: Event) => this.deleteProduct(e));
+    btnDelete.addEventListener('click', (e: Event) => this.deleteProduct(e.target as HTMLElement));
     cartSection.append(btnDelete);
     cartItem.append(cartPackagingSection, cartItemCost, cartSection);
     return cartItem;
   }
 
-  calculationThePrice(
-    id: number,
-    price: number,
-    packaging: number,
-    input: HTMLInputElement,
-  ): number {
-    const cost = (+input.value / packaging) * price;
-    this.totalCost += cost;
-    this.priceCondition.set(id, { id, price, packaging, cost });
-    return cost;
+  calculationThePrice(args: ProductCartInfo, flag: boolean | 'create'): void {
+    const { id, price, packaging, input, costElement } = args;
+    const del = document.querySelector('.cart__trash') as HTMLElement;
+    if (flag !== undefined) {
+      if (flag === 'create') {
+        const amount = +input.value / packaging;
+        const newCost = amount * price;
+        costElement.textContent = `${newCost} рублей`;
+        this.priceCondition.set(id, { id, price, packaging, input, cost: newCost,packagingAmount: packaging, costElement });
+        this.totalCost += newCost;
+        this.totalCostElement.textContent = `${this.totalCost} рублей`;
+      }
+      if (flag === true) {
+        const newPackaging = +(+input.value + packaging).toFixed(2);
+        input.value = `${newPackaging}`;
+        const newCost = +(newPackaging / packaging * price).toFixed();
+        costElement.textContent = `${newCost} рублей`;
+        this.priceCondition.set(id, { id, price, packaging, input, cost: newCost, packagingAmount: newPackaging, costElement });
+        this.totalCost = this.totalCost + price;
+      }
+      if (flag === false) {
+        const newPackaging = +(+input.value - packaging).toFixed(2);
+        input.value = `${newPackaging}`;
+        const newCost = +((newPackaging / packaging) * price).toFixed();
+        costElement.textContent = `${newCost} рублей`;
+        this.priceCondition.set(id, {id, price, packaging, input, cost: newCost, packagingAmount: newPackaging, costElement,});
+        if (newCost === 0) {
+          this.deleteProduct(del);
+          this.totalCost = this.totalCost - newCost;
+        }
+        this.totalCost = this.totalCost - price;
+      }
+      this.totalCostElement.textContent = `${this.totalCost} рублей`;
+      this.loadToLocalStorage();
+    }
   }
 
-  createCountPackage(
-    selector: string,
-    packaging: string,
-    weight: string,
-    price: number,
-    id: number
-  ): HTMLElement {
+  createCountPackage(selector: string, packaging: string, weight: string, price: number, id: number,): HTMLElement {
     const countBlock = returnElement('div', `${selector} count`);
     const btnRemove = returnElement('button', 'btn btn count__minus', '-');
     const inputValue = returnElement('input', 'count__value', '', {
@@ -150,38 +169,20 @@ class Cart {
       value: `${packaging}`,
     }) as HTMLInputElement;
     const btnAdd = returnElement('button', 'btn btn count__plus', '+');
-    countBlock.addEventListener('click', (e: Event) => this.countPackage(packaging, weight, e, id));
+    countBlock.addEventListener('click', (e: Event) => this.countPackage(e, id));
     countBlock.append(btnRemove, inputValue, btnAdd);
     return countBlock;
   }
 
-  countPackage = (packaging: string, weight: string, e: Event, id: number): void => {
+  countPackage (e: Event, idElem: number): void  {
+    const item = this.priceCondition.get(idElem);
     const target = e.target as HTMLButtonElement;
-    const currentTarget = e.currentTarget as HTMLElement;
-    const inputValue = currentTarget.querySelector('.count__value') as HTMLInputElement;
-    const elem = this.priceCondition.get(id) as ProductCartInfo;
-    const parent = target.closest('.cart__product') as HTMLElement;
-    const cartCost = parent.querySelector('.cart__cost') as HTMLElement;
-    if (target.classList.contains('count__plus')) {
-      const result = `${+inputValue.value + +packaging}`;
-      inputValue.value = result;
-      elem.cost += elem.price;
-      elem.packaging += +packaging;
-      this.totalCost += elem.cost;
-      this.totalCostElement.textContent = `${this.totalCost} рублей`;
-      this.priceCondition.set(id, elem);
-      cartCost.textContent = `${elem.cost} рублей`;
-      console.log(this.priceCondition);
-    } else {
-      const result = `${+inputValue.value - +packaging}`;
-      if (+result > 0) {
-        inputValue.value = result;
-        elem.cost -= elem.price;
-        elem.packaging -= +packaging;
-        this.totalCost -= elem.cost;
-        this.totalCostElement.textContent = `${this.totalCost} рублей`;
-        this.priceCondition.set(id, elem);
-        cartCost.textContent = `${elem.cost} рублей`;
+    if (item) {
+      if (target.classList.contains('count__plus')) {
+        this.calculationThePrice(item, true);
+      } 
+      if (target.classList.contains('count__minus')) {
+        this.calculationThePrice(item, false);
       }
     }
   };
@@ -189,24 +190,19 @@ class Cart {
   createFooterCart(): HTMLElement[] {
     const cartAmount = returnElement('div', 'cart__amount');
     const cartAmountName = returnElement('div', 'cart__amount-name', 'Общая сумма:');
-    this.totalCostElement = returnElement('div', 'cart__amount-value', `${this.totalCost} рублей`);
     cartAmount.append(cartAmountName, this.totalCostElement);
     const cartBottom = returnElement('div', 'cart__bottom');
-    const btnBuy = returnElement('button', 'btn btn--circle btn--buy btn__cart', 'Купить');
-    btnBuy.addEventListener('click', () => {
-      const modal = new Modal();
-      const form = new Form();
-      modal.draw(form.create());
-      Modal.switchModal();
-    });
-    const btnClear = returnElement(
-      'button',
-      'btn btn--circle btn__cart btn--clear',
-      'Очистить корзину',
-    );
-    btnClear.addEventListener('click', (e) => this.clearCart(e));
-    cartBottom.append(btnClear, btnBuy);
+    this.buyCartBtn.addEventListener('click', () => this.buy());
+    this.clearCartBtn.addEventListener('click', (e) => this.clearCart(e));
+    cartBottom.append(this.clearCartBtn, this.buyCartBtn);
     return [cartAmount, cartBottom];
+  }
+
+  buy() {
+    const modal = new Modal();
+    const form = new Form();
+    modal.draw(form.create());
+    Modal.switchModal();
   }
 }
 
