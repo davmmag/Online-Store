@@ -108,6 +108,7 @@ function checked () {
 
 function filtered () {
     let newArr: ProductDescription[] = sortArray;
+
     if (filtersObj.country?.length) {
         newArr = newArr.filter(el => filtersObj.country?.includes(el.country));
     }
@@ -134,6 +135,17 @@ function filtered () {
         }
     }
     sortered ();
+
+    const presentValue: NodeListOf<Element> = document.querySelectorAll('.checkbox-label');
+    presentValue.forEach (el => {
+        const valElem = el.childNodes[0] as HTMLInputElement;
+        let sum = 0;
+            newArr.forEach(el => {
+                if (Object.values(el).includes(valElem.value)) {sum++}
+            });
+        let checkboxValue = el.childNodes[2].childNodes[0] as HTMLInputElement
+        checkboxValue.innerText = `${sum}`;
+    })
     return newArr;
 }
 

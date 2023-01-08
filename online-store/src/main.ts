@@ -1,6 +1,5 @@
 import './style.scss';
 import './app/index';
-
 import { 
   search, 
   checked, 
@@ -12,6 +11,7 @@ import {
   filtersSave, 
   getUrlQuery 
 } from "./app/app";
+
 import { start, renderCheckbox } from "./app/rendering";
 import { slider } from "./app/slider";
 import { productsArray } from './app/products';

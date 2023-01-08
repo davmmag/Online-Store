@@ -45,11 +45,25 @@ function createCheckbox<T extends keyof ProductDescription>(
   checkbox.value = `${value}`;
   label.appendChild(checkbox);
   label.appendChild(document.createTextNode(`${value} `));
+  
+  let div = document.createElement('div');
+  div.className = 'checkbox-values';
+  label.appendChild(div);
 
-  let span = document.createElement('span');
-  span.className = 'checkbox-amount';
-  span.innerHTML = `${amount}`;
-  label.appendChild(span);
+    let span = document.createElement('span');
+    span.className = 'checkbox-value';
+    span.innerHTML = `${amount} `;
+    div.appendChild(span);
+
+    span = document.createElement('span');
+    span.className = 'checkbox-jumper';
+    span.innerHTML = `/`;
+    div.appendChild(span);
+
+    span = document.createElement('span');
+    span.className = 'checkbox-amount';
+    span.innerHTML = ` ${amount}`;
+    div.appendChild(span);
 }
 
 function changeCheckbox(array: ProductDescription[], key: string) {
