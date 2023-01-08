@@ -38,7 +38,7 @@ class Prime {
       productSelection();
       filtersReset();
       filtersSave();
-      getUrlQuery;
+      getUrlQuery();
       //window.addEventListener('load', getLocalStorage);
     }
   }

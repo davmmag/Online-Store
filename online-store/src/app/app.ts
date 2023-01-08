@@ -16,9 +16,28 @@ let filtersObj: ProductFilters = {
 
 function getUrlQuery() {
     const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
-    const params = new URLSearchParams(window.location.search);
+    
+    const urlPage = window.location.href;
+    console.log (urlPage);
+    const paramArr = new URLSearchParams (urlPage);
+    console.log (paramArr);
+    paramArr.forEach (el => {
+        console.log (el);
+    })
+    /*
+    function getQueryParams(url: string) {
+        const paramArr = url.slice(url.indexOf('?') + 1).split('&');
+        console.log (paramArr);
+        const params = {};
+        paramArr.map(param => {
+            const [key, val] = param.split('=');
+            //params[key] = decodeURIComponent(val);
+        })
+        return params;
+    }
+    getQueryParams(urlPage);
 
-    console.log(params.toString());
+    //console.log(params.toString());
     if(localStorage.getItem("myFilters")) {
         let jsonFilters = localStorage.getItem("myFilters");
         if (jsonFilters) {
@@ -55,6 +74,7 @@ function getUrlQuery() {
         }
 
     }
+    */
 }
 
 function checked () {
@@ -269,13 +289,12 @@ function filtersSave() {
     const filtersSave = document.querySelector('.filters-save');
     filtersSave?.addEventListener('click', () => {
             const paramObj = toUrlParams (filtersObj);
-            console.log (paramObj);
+            const currentUrl = window.location.href;
             const params = new URLSearchParams(paramObj);
-            const url = 'http://192.168.0.103:3000/';
-            const postUrl = new URL("posts", url);
-            postUrl.search = params.toString();
-            console.log (`${postUrl}`);
-            //window.location.href = `${postUrl}`;
+            const fullUrl = currentUrl + '?' + params;
+            console.log (fullUrl);
+            window.location.href = `${fullUrl}`;
+            
     }) 
 }
 
