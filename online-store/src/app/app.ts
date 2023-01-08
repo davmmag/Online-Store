@@ -57,8 +57,6 @@ function getUrlQuery() {
     }
 }
 
-
-
 function checked () {
     const clickFilters: NodeListOf<Element> = document.querySelectorAll('.filters-buttons');
     let checkboxes: NodeListOf<Element> = document.querySelectorAll('.checkbox-input');
@@ -123,6 +121,7 @@ function filtered () {
     }
     createTable(newArr);
 
+
     function sortered () {
         createTable(sortingArray (newArr, sortingValue));
         const selectSort = document.querySelector('.select-box') as HTMLInputElement;
@@ -136,30 +135,57 @@ function filtered () {
     }
     sortered ();
 
-    const presentValue: NodeListOf<Element> = document.querySelectorAll('.checkbox-label');
-    presentValue.forEach (el => {
-        const valElem = el.childNodes[0] as HTMLInputElement;
-        let sum = 0;
-            newArr.forEach(el => {
-                if (Object.values(el).includes(valElem.value)) {sum++}
-            });
-        let checkboxValue = el.childNodes[2].childNodes[0] as HTMLInputElement
-        checkboxValue.innerText = `${sum}`;
-    })
+    function sumofChange (arr: ProductDescription[]) {
+        const presentValue: NodeListOf<Element> = document.querySelectorAll('.checkbox-label');
+        presentValue.forEach (el => {
+            const valElem = el.childNodes[0] as HTMLInputElement;
+            let sum = 0;
+                arr.forEach(el => {
+                    if (Object.values(el).includes(valElem.value)) {
+                        sum++;
+                    }
+                });
+            let checkboxValue = el.childNodes[2].childNodes[0] as HTMLInputElement
+            checkboxValue.innerText = `${sum}`;
+        });
+    }
+    sumofChange(newArr);
+
+    function search() {
+        let searchInput: HTMLInputElement | null = document.querySelector('.header-input');
+        let searchArr;
+        if (searchInput){
+            searchInput.oninput = function (){
+                let valThis = this as HTMLInputElement;
+                let val = valThis.value.trim();
+                console.log (val);
+                searchArr = newArr.filter((el) => {
+                    if (el.country.toLowerCase().includes(val.toLowerCase()) || 
+                        el.brand.toLowerCase().includes(val.toLowerCase()) || 
+                        el.title.toLowerCase().includes(val.toLowerCase()) || 
+                        el.surface.toLowerCase().includes(val.toLowerCase()) || 
+                        el.drawing.toLowerCase().includes(val.toLowerCase())) {
+                        return true;
+                    }  else {
+                        return false;
+                    }
+                })
+                createTable(searchArr);
+                sumofChange (searchArr);
+            }
+        }
+    
+        let inputText = document.querySelector('.header-button') as HTMLInputElement;
+        inputText?.addEventListener('click', e => {
+            search();
+        })
+        
+    }
+    search();
     return newArr;
 }
 
-function search() {
-    let submitForm = document.querySelector('.header-searchbutton');
-    let inputText = document.querySelector('.search-text') as HTMLInputElement;
 
-    submitForm?.addEventListener('click', e => {
-        if (inputText) {
-            e.preventDefault();
-            createTable(searchFunction (productsArray, inputText.value));
-        }
-    })
-}
 
 function viewDisplay(view: string){
     if (view === 'table') {
@@ -256,7 +282,7 @@ function filtersSave() {
 export { 
     checked, 
     filtered, 
-    search, 
+    //search, 
     filtersObj, 
     viewDisplay, 
     changeView, 

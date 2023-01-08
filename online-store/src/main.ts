@@ -1,7 +1,7 @@
 import './style.scss';
 import './app/index';
 import { 
-  search, 
+  //search, 
   checked, 
   filtered, 
   viewDisplay, 
@@ -24,7 +24,7 @@ if (page === 'main') {
   filtered();
   slider(productsArray);
   checked();
-  search();
+  //search();
   viewDisplay('table');
   changeView();
   productSelection();

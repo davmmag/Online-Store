@@ -184,6 +184,7 @@
     padding: 15px;
 }
 .product-image {
+    cursor: pointer;
     width: 50%;
     height: 200px;
 }
@@ -195,6 +196,7 @@
 }
 .product-name {
     cursor: pointer;
+    color: inherit;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
