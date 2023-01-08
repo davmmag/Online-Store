@@ -31,7 +31,7 @@ function start(): void {
                     inputMax.max = `${filtersObj.price[1]}`;
                     inputMax.type = 'range';
                 }
-            createElement("div", "filters__content", "filter-title", "Фильтр по рейтингу:");
+            //createElement("div", "filters__content", "filter-title", "Фильтр по рейтингу:");
 
           
 
@@ -56,13 +56,13 @@ function start(): void {
                     option = document.createElement(`option`);
                     option.className = "select-input"
                     option.value = "sizeAscending";
-                    option.innerText = "Рейтинг по возрастанию";
+                    option.innerText = "Имя по возрастанию";
                     selectBox?.appendChild(option);
 
                     option = document.createElement(`option`);
                     option.className = "select-input"
                     option.value = "sizeDescending";
-                    option.innerText = "Рейтинг по убыванию";
+                    option.innerText = "Имя по убыванию";
                     selectBox?.appendChild(option);
                 
                 createElement("div", "table__toolbar", "found-goods");

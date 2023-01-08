@@ -2,7 +2,7 @@
   "products": [
     {
       "id":	1,
-      "title": "Керамогранит Bien 600x1200x9 Infinity Dark Rec Full Lap",
+      "title": "Bien 600x1200x9 Infinity Dark Rec Full Lap",
       "price": 3450,
       "rating":	4.5,
       "brand":	"Bien",
@@ -27,7 +27,7 @@
     },
       {
       "id":	2,
-      "title": "Керамогранит NORDIC WOOD Rectified MATT 60x120",
+      "title": "NORDIC WOOD Rectified MATT 60x120",
       "price": 3280,
       "rating":	4.5,
       "brand":	"KUTAHYA",
@@ -52,7 +52,7 @@
     },
       {
       "id":	3,
-      "title": "Керамогранит ALBATROS Rectified MATT 60x120",
+      "title": "ALBATROS Rectified MATT 60x120",
       "price": 3280,
       "rating":	4.5,
       "brand":	"KUTAHYA",
@@ -78,7 +78,7 @@
     },
       {
       "id":	4,
-      "title": "Керамогранит Bien 600x1200x9 Tiger Black Rec Full Lap",
+      "title": "Bien 600x1200x9 Tiger Black Rec Full Lap",
       "price": 2100,
       "rating":	4,
       "brand":	"Bien",
@@ -104,7 +104,7 @@
     },
       {
       "id":	5,
-      "title": "Керамогранит QUA 60х120х6,5 Alone Nocge Full Lap",
+      "title": "QUA 60х120х6,5 Alone Nocge Full Lap",
       "price": 3280,
       "rating":	4.5,
       "brand":	"QUA",
@@ -130,7 +130,7 @@
     },
       {
       "id":	6,
-      "title": "Керамогранит QUA 60x120 Crystal Black Full Lap",
+      "title": "QUA 60x120 Crystal Black Full Lap",
       "price": 3900,
       "rating":	3.7,
       "brand":	"QUA",
@@ -155,7 +155,7 @@
     },
       {
       "id":	7,
-      "title": "Керамогранит Liberty Light Rectified MATT 60x120",
+      "title": "Liberty Light Rectified MATT 60x120",
       "price": 3420,
       "rating":	4.1,
       "brand":	"QUTONE",
@@ -179,7 +179,7 @@
     },
       {
       "id":	8,
-      "title": "Керамогранит Liberty Dark Rectified MATT 60x120",
+      "title": "Liberty Dark Rectified MATT 60x120",
       "price": 3420,
       "rating":	4.1,
       "brand":	"QUTONE",
@@ -307,7 +307,7 @@
     },
       {
       "id":	13,
-      "title": "Керамогранит 20х80 RusticWood Черный Матовый Ректификат R10A (9мм)",
+      "title": "RusticWood 20x80 Черный Матовый Ректификат R10A (9мм)",
       "price": 1887,
       "rating":	3.9,
       "brand":	"Vitra",
@@ -437,7 +437,7 @@
     },
       {
       "id":	18,
-      "title": "Керамогранит Prime Ceramics Carrara Bronze 60x60",
+      "title": "Prime Ceramics Carrara Bronze 60x60",
       "price": 2130,
       "rating":	4.7,
       "brand":	"Prime Ceramics",

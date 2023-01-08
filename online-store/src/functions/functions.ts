@@ -95,10 +95,10 @@ function sortingArray(array: ProductDescription[], value: string): ProductDescri
     return array.sort((a, b) => (b.price > a.price ? 1 : -1));
   }
   if (value === 'sizeAscending') {
-    return array.sort((a, b) => (a.rating > b.rating ? 1 : -1));
+    return array.sort((a, b) => (a.title > b.title ? 1 : -1));
   }
   if (value === 'sizeDescending') {
-    return array.sort((a, b) => (b.rating > a.rating ? 1 : -1));
+    return array.sort((a, b) => (b.title > a.title ? 1 : -1));
   }
   return array.sort((a, b) => (a.price > b.price ? 1 : -1));
 }
