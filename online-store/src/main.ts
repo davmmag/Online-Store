@@ -15,6 +15,7 @@ import {
 import { start, renderCheckbox } from "./app/rendering";
 import { slider } from "./app/slider";
 import { productsArray } from './app/products';
+import { Cart } from './components/cart/cart';
 
 const page = document.body.className;
 if (page === 'main') {

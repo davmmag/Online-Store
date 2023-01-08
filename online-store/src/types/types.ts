@@ -58,13 +58,65 @@ interface checkedCategory {
 }
 type checkedArrayType = [checkedCategory];
 
-export { 
-  ProductTable, 
-  ProductDescription, 
-  productsArrayType, 
-  checkedArrayType, 
-  ProductFilters, 
-  CountryFilter, 
-  BrandFilter, 
-  ParamsUrl 
+interface ProductCartInfo {
+  id: number;
+  price: number;
+  packaging: number;
+  input: HTMLInputElement;
+  cost: number;
+  packagingAmount?: number;
+  costElement: HTMLElement;
+}
+
+interface LocalStorageCartInfo {
+  cost: number;
+  length: number;
+}
+
+interface CalculationTheCondition {
+  id: number;
+  price: number;
+  packaging: number;
+  input: HTMLInputElement;
+  cost?: number;
+  costElement: HTMLElement;
+  flag?: boolean | 'create';
+}
+
+interface CartInterface {
+  cart: HTMLElement;
+  totalCost: number;
+  priceCondition: Map<number, ProductCartInfo>;
+  totalCostElement: HTMLElement;
+  localStorageInfo: LocalStorageCartInfo;
+
+  draw(data: ProductDescription[]): void;
+  clearCart(e: Event): void;
+  deleteProduct(e: Event): void;
+  createCartItem(data: ProductDescription): HTMLElement;
+  calculationThePrice(args: CalculationTheCondition): number;
+  createCountPackage(
+    selector: string,
+    packaging: string,
+    weight: string,
+    price: number,
+    id: number,
+  ): HTMLElement;
+  countPackage(packaging: string, weight: string, e: Event, id: number): void;
+  createFooterCart(): HTMLElement[];
+}
+
+export {
+  ProductTable,
+  ProductDescription,
+  productsArrayType,
+  checkedArrayType,
+  ProductFilters,
+  CountryFilter,
+  BrandFilter,
+  ProductCartInfo,
+  LocalStorageCartInfo,
+  CalculationTheCondition,
+  CartInterface,
+  ParamsUrl
 };
