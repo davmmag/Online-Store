@@ -64,6 +64,11 @@ function start(): void {
                     option.value = "sizeDescending";
                     option.innerText = "Рейтинг по убыванию";
                     selectBox?.appendChild(option);
+                
+                createElement("div", "table__toolbar", "found-goods");
+                    createElement("span", "found-goods", "found-goods__text", "Найдено: ");
+                    createElement("span", "found-goods", "found-goods__num");
+                    createElement("span", "found-goods", "found-goods__text", " товара(ов)");
 
                 createElement("div", "table__toolbar", "view-mode");
                     createElement("div", "view-mode", "view-mode-btn view-mode__table");
@@ -96,6 +101,10 @@ function renderCheckbox () {
 function createTable (array: ProductDescription[]) {
     /*Создание таблицы с товарами*/
     document.querySelector('.table__products')?.remove();
+    const goodsNum = document.querySelector('.found-goods__num');
+    if (goodsNum) {
+        goodsNum.innerHTML = `${array.length}`;
+    }
         createElement("div", "main__table", "table__products");
             for (let i: number = 0; i < array.length; i++) {
                 const elParent = document.querySelector(`.table__products`);

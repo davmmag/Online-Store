@@ -237,7 +237,7 @@ function filtersSave() {
             const postUrl = new URL("posts", url);
             postUrl.search = params.toString();
             console.log (`${postUrl}`);
-            window.location.href = `${postUrl}`;
+            //window.location.href = `${postUrl}`;
     }) 
 }
 
