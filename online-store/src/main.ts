@@ -17,19 +17,7 @@ import { slider } from "./app/slider";
 import { productsArray } from './app/products';
 import { Cart } from './components/cart/cart';
 
-const page = document.body.className;
-if (page === 'main') {
-  start();
-  renderCheckbox();
-  filtered();
-  slider(productsArray);
-  checked();
-  //search();
-  viewDisplay('table');
-  changeView();
-  productSelection();
-  filtersReset();
-  filtersSave();
-  getUrlQuery
-  //window.addEventListener('load', getLocalStorage);
-}
+import { Prime } from './app/Prime';
+
+const prime = new Prime();
+prime.startMain();
