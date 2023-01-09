@@ -181,7 +181,9 @@ const amountPrices = (arr: LocalInfo[]): number => {
 };
 
 const loadingToStorage = (key: string, data: LocalInfo[]) => {
-  localStorage.setItem(key, JSON.stringify(data));
+  if (data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
 }
 
 const loadingCurrentState = (quantityElement: HTMLElement, costElement: HTMLElement, data: LocalInfo[]): void => {
@@ -193,7 +195,10 @@ const loadingCurrentState = (quantityElement: HTMLElement, costElement: HTMLElem
 const updatingShoppingCart = (target?: HTMLElement, data?: ProductDescription[] | ProductDescription): void => {
   const cartQuantity = document.querySelector('.number-goods') as HTMLElement;
   const cartTotalCost = document.querySelector('.sum-goods') as HTMLElement;
-  const previousData = JSON.parse(localStorage.getItem('cart-data') as string) as LocalInfo[];
+  const dataFromStorage = localStorage.getItem('cart-data') as string;
+  let previousData: LocalInfo[] | null = null;
+  if (dataFromStorage) previousData = JSON.parse(dataFromStorage) as LocalInfo[];
+  
   if (!target) {
     if (previousData !== null) {
       loadingCurrentState(cartQuantity, cartTotalCost, previousData);
@@ -237,6 +242,7 @@ const updatingShoppingCart = (target?: HTMLElement, data?: ProductDescription[] 
         const index = previousData.findIndex((item) => item.id === `${id}`);
         if (index === -1) {
           target.textContent = 'Удалить из корзины';
+          
           const newProduct = { id: `${id}`, cost, packaging: value.value } as LocalInfo;
           previousData.push(newProduct);
           loadingToStorage('cart-data', previousData);
@@ -258,6 +264,17 @@ const updatingShoppingCart = (target?: HTMLElement, data?: ProductDescription[] 
 
 }
 
+const loadingProductsForCart = (data: ProductDescription[]): ProductDescription[] | null => {
+  const cartData = JSON.parse(localStorage.getItem('cart-data') as string) as LocalInfo[];
+  if (cartData) {
+    const resultData = cartData.map((item) =>
+      findFromProduct(data, +item.id, 'id'),
+    ) as ProductDescription[];
+    return resultData;
+  }
+  return null;
+}
+
 export {
   createElement,
   uniqueArray,
@@ -277,4 +294,5 @@ export {
   findFromProduct,
   amountPrices,
   updatingShoppingCart,
+  loadingProductsForCart
 };
