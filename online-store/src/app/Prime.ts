@@ -16,17 +16,22 @@ import {
 import { start, renderCheckbox } from './rendering';
 import { slider } from './slider';
 import { productsArray } from './products';
-import { getProduct } from '../functions/functions';
+import { getProduct, loadingProductsForCart } from '../functions/functions';
 import Product from '../components/product/product';
 
 class Prime {
   cart: Cart;
+  cartElement: HTMLElement;
+  mainElement: HTMLElement | null;
   constructor() {
     this.cart = new Cart();
+    this.cartElement = document.querySelector('.header-main__basket') as HTMLElement;
+    this.mainElement = document.querySelector('main');
   }
 
   startMain() {
     const page = document.body.className;
+    this.cartElement.addEventListener('click', () => this.startCart());
     if (page === 'main') {
       start();
       renderCheckbox();
@@ -46,10 +51,21 @@ class Prime {
   }
 
   startGoods() {
-    const productData = getProduct(productsArray);
-    const product = new Product();
-    product.draw(productData);
-    updatingShoppingCart();
+    const page = document.body.className;
+    if (page === 'goods') {
+      const productData = getProduct(productsArray);
+      const product = new Product();
+      product.draw(productData);
+      updatingShoppingCart();
+    }
+  }
+
+  startCart() {
+    const cart = new Cart();
+    const dataForCart = loadingProductsForCart(productsArray);
+    if (this.mainElement) this.mainElement.classList.add('visually-hidden');
+    
+    cart.draw(dataForCart);
   }
 }
 
