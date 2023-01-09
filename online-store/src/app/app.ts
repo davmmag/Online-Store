@@ -19,7 +19,7 @@ function getUrlQuery() {
     
     const urlPage = window.location.href;
     toFilterObj (urlPage);
-    function toFilterObj (newUrl) {
+    function toFilterObj (newUrl: string) {
         const newObj = filtersObj;
         const newURL = new URL(newUrl);
         const searchParams = newURL.searchParams;
@@ -62,7 +62,10 @@ function getUrlQuery() {
     if(localStorage.getItem("myFilters")) {
         let jsonFilters = localStorage.getItem("myFilters");
         if (jsonFilters) {
-            filtersObj = JSON.parse(jsonFilters);
+
+
+            
+            filtersObj = toFilterObj(urlPage);
             filtered();
             slider(filtered());
             checkboxInput.forEach((el) => {
