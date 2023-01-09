@@ -1,4 +1,4 @@
-import { searchFunction, sortingArray, minPriceFunc, maxPriceFunc, toUrlParams  } from "../functions/functions";
+import { searchFunction, sortingArray, minPriceFunc, maxPriceFunc, toUrlParams, updatingShoppingCart  } from "../functions/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription, ProductFilters } from "../types/types";
 import { createTable, } from "../app/rendering";
@@ -286,7 +286,10 @@ function productSelection() {
                     if (element.title === titleProduct){
                         localStorage.setItem(`id`, `${element.id}`);
                     };
-                });           
+                });   
+                if (event.target.classList.contains('product-button')) {
+                  updatingShoppingCart(event.target, productsArray);
+                }        
             }   
         })
     }

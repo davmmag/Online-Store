@@ -2,11 +2,12 @@ import {
   ProductDescription,
   ProductCartInfo,
   LocalStorageCartInfo,
+  LocalInfo
 } from '../../types/types';
-import { returnElement } from "../../functions/functions";
+import { returnElement, findFromProduct, amountPrices, updatingShoppingCart } from "../../functions/functions";
 import Modal from "../modal/modal";
 import Form from "../form/form";
-
+import { productsArray } from '../../app/products';
 class Cart {
   cart: HTMLElement;
   totalCost: number;
@@ -15,6 +16,8 @@ class Cart {
   localStorageInfo!: LocalStorageCartInfo;
   clearCartBtn: HTMLElement;
   buyCartBtn: HTMLElement;
+  productsInCart!: ProductDescription[];
+  idProducts!: LocalInfo[];
   constructor() {
     this.cart = document.querySelector('.cart') as HTMLElement;
     this.priceCondition = new Map<number, ProductCartInfo>();
@@ -33,21 +36,23 @@ class Cart {
   }
 
   draw(data: ProductDescription[]): void {
-    const cartContainer = returnElement('div', 'container cart__container');
-    const listProducts = returnElement('ul', 'cart__products');
-    const cartHeader = returnElement('div', 'cart__head');
-    cartHeader.innerHTML = `
-      <div class="cart__head-item">Товар</div>
-      <div class="cart__head-item">Цена</div>
-      <div class="cart__head-item">Количество</div>
-      <div class="cart__head-item">Итого</div>
-      <div class="cart__head-item"> </div>
-    `;
-    const cartItems = data.map((item) => this.createCartItem(item));
-    listProducts.append( ...cartItems);
-    const footerCart = this.createFooterCart();
-    cartContainer.append(cartHeader, listProducts, ...footerCart);
-    this.cart.append(cartContainer);
+    if (data) {
+      const cartContainer = returnElement('div', 'container cart__container');
+      const listProducts = returnElement('ul', 'cart__products');
+      const cartHeader = returnElement('div', 'cart__head');
+      cartHeader.innerHTML = `
+        <div class="cart__head-item">Товар</div>
+        <div class="cart__head-item">Цена</div>
+        <div class="cart__head-item">Количество</div>
+        <div class="cart__head-item">Итого</div>
+        <div class="cart__head-item"> </div>
+      `;
+      const cartItems = data.map((item) => this.createCartItem(item));
+      listProducts.append(...cartItems);
+      const footerCart = this.createFooterCart();
+      cartContainer.append(cartHeader, listProducts, ...footerCart);
+      this.cart.append(cartContainer);
+    }
   }
 
   clearCart(e: Event): void {
@@ -203,6 +208,57 @@ class Cart {
     const form = new Form();
     modal.draw(form.create());
     Modal.switchModal();
+  }
+
+  getFromStorage(id: string) {
+    return JSON.parse(localStorage.getItem(id) as string) as LocalInfo[];
+  }
+
+  setFromStorage(id: string, data: string) {
+    localStorage.setItem(id, data);
+  }
+
+  // updateProductsInCart(data: ProductDescription[], target?: HTMLElement) {
+  //   const cartValue = document.querySelector('.number-goods') as HTMLElement;
+  //   const cartCost = document.querySelector('.sum-goods') as HTMLElement;
+  //   const prev = this.getFromStorage('cart-data');
+  //   if (target) {
+  //     const parent = target.closest('.product-item') as HTMLElement;
+  //     const name = parent.querySelector('.product-name') as HTMLElement;
+  //     const productId = findFromProduct(data, name.textContent!, 'title', 'id') as number;
+  //     const result: LocalInfo[] = [];
+  //     let cost: number = 0;
+  //     if (prev === null) {
+  //       const price = findFromProduct(data, productId, 'id', 'price') as number;
+  //       const newItem = { id: `${productId}`, price: `${price}` };
+  //       result.push(newItem);
+  //       cost = amountPrices(result);
+  //     } else if (prev.find((item) => item.id === `${productId}`)) {
+  //       result.push(...prev);
+  //       cost = amountPrices(result);
+  //     } else {
+  //       const price = findFromProduct(data, productId, 'id', 'price') as number;
+  //       const newItem = { id: `${productId}`, price: `${price}` };
+  //       result.push(newItem, ...prev);
+  //       cost = amountPrices(result);
+  //     }
+  //     cartValue.textContent = `${result.length}`;
+  //     cartCost.textContent = `${cost}`;
+  //     this.setFromStorage('cart-data', JSON.stringify(result));
+  //     this.loadCartInfo(result);
+  //   } else {
+  //     if (prev !== null) {
+  //       cartValue.textContent = `${prev.length}`;
+  //       const cost = amountPrices(prev);
+  //       cartCost.textContent = `${cost}`;
+  //       this.loadCartInfo(prev);
+  //     }
+  //   }
+  // }
+
+  loadCartInfo(data?: LocalInfo[]): LocalInfo[] {
+    if (data) this.idProducts = data;
+    return this.idProducts;
   }
 }
 

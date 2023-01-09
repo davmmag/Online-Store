@@ -1,4 +1,5 @@
 import { Cart } from "../components/cart/cart";
+import { updatingShoppingCart } from "../functions/functions";
 
 import {
   //search,
@@ -40,6 +41,7 @@ class Prime {
       filtersSave();
       getUrlQuery();
       //window.addEventListener('load', getLocalStorage);
+      updatingShoppingCart();
     }
   }
 
@@ -47,6 +49,7 @@ class Prime {
     const productData = getProduct(productsArray);
     const product = new Product();
     product.draw(productData);
+    updatingShoppingCart();
   }
 }
 
