@@ -35,23 +35,29 @@ class Cart {
     }
   }
 
-  draw(data: ProductDescription[]): void {
-    if (data) {
+  draw(data: ProductDescription[] | null): void {
+    try {
       const cartContainer = returnElement('div', 'container cart__container');
       const listProducts = returnElement('ul', 'cart__products');
       const cartHeader = returnElement('div', 'cart__head');
       cartHeader.innerHTML = `
-        <div class="cart__head-item">Товар</div>
-        <div class="cart__head-item">Цена</div>
-        <div class="cart__head-item">Количество</div>
-        <div class="cart__head-item">Итого</div>
-        <div class="cart__head-item"> </div>
-      `;
-      const cartItems = data.map((item) => this.createCartItem(item));
-      listProducts.append(...cartItems);
+          <div class="cart__head-item">Товар</div>
+          <div class="cart__head-item">Цена</div>
+          <div class="cart__head-item">Количество</div>
+          <div class="cart__head-item">Итого</div>
+          <div class="cart__head-item"> </div>
+        `;
       const footerCart = this.createFooterCart();
-      cartContainer.append(cartHeader, listProducts, ...footerCart);
+      cartContainer.append(cartHeader);
+      if (data) {
+        const cartItems = data.map((item) => this.createCartItem(item));
+        listProducts.append(...cartItems);
+        cartContainer.append(listProducts);
+      }
+      cartContainer.append(...footerCart);
       this.cart.append(cartContainer);
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -70,6 +76,7 @@ class Cart {
     this.localStorageInfo.cost = this.totalCost;
     this.localStorageInfo.length = this.priceCondition.size;
     localStorage.setItem('cart', JSON.stringify(this.localStorageInfo));
+    // localStorage.setItem('cart-data', JSON.stringify(this.idProducts));
   }
 
   deleteProduct(target: HTMLElement ): void {
