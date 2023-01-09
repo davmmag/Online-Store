@@ -90,7 +90,7 @@ function filterArray(array: ProductDescription[], arrayCheck: string[]): Product
 
 function removeArrEl(arr: ProductFilters[], value: Object) {}
 
-function sortingArray(array: ProductDescription[], value: string): ProductDescription[] {
+function sortingArray(array: ProductDescription[], value: string | null): ProductDescription[] {
   if (value === 'priceDescending') {
     return array.sort((a, b) => (b.price > a.price ? 1 : -1));
   }
@@ -117,20 +117,7 @@ function maxPriceFunc(array: ProductDescription[]): number {
   return array.reduce((max, p) => (p.price > max ? p.price : max), productsArray[0].price);
 }
 
-function toUrlParams (filterObj: ProductFilters) {
-  let newObj: Record<string, string> = {
-    minprice: `${filterObj.price[0]}`,
-    maxprice: `${filterObj.price[1]}`,
-  }
-  
-  if (filterObj.country) {
-    newObj.country = filterObj.country.join('+');
-  }
-  if (filterObj.brand) {
-    newObj.brand = filterObj.brand.join('+');
-  }
-  return newObj;
-}
+
 
 const getProduct = (products: ProductDescription[]): ProductDescription | undefined => {
   const id = localStorage.getItem('id');
@@ -183,5 +170,5 @@ export {
   getProduct,
   countPackage,
   createCountPackage,
-  toUrlParams
+  //toUrlParams
 };

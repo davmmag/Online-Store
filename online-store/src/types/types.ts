@@ -39,6 +39,7 @@ interface ProductFilters {
   rating?: number[];
   country?: CountryFilter;
   brand?: BrandFilter;
+  sorting: string | null;
 }
 interface ParamsUrl {
   minprice: string;

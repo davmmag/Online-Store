@@ -1,4 +1,4 @@
-import { searchFunction, sortingArray, minPriceFunc, maxPriceFunc, toUrlParams  } from "../functions/functions";
+import { searchFunction, sortingArray, minPriceFunc, maxPriceFunc  } from "../functions/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription, ProductFilters } from "../types/types";
 import { createTable, } from "../app/rendering";
@@ -8,9 +8,11 @@ import { slider } from "../app/slider";
 let countryArray: string [] = [];
 let brandArray: string [] = [];
 let sortArray = productsArray;
-let sortingValue: string = 'priceAscending';
+const currentUrl = window.location.href;
+//let sortingValue: string = 'priceAscending';
 let filtersObj: ProductFilters = {
     price: [minPriceFunc(productsArray), maxPriceFunc(productsArray)],
+    sorting: 'priceAscending'
 };
 
 
@@ -18,7 +20,7 @@ function getUrlQuery() {
     const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
     
     const urlPage = window.location.href;
-    toFilterObj (urlPage);
+
     function toFilterObj (newUrl: string) {
         const newObj = filtersObj;
         const newURL = new URL(newUrl);
@@ -42,63 +44,47 @@ function getUrlQuery() {
             const newBrand = searchParams.get('brand');
             newObj.brand = newBrand?.split("+");
         }
+        if (searchParams.get('sorting')) {
+            const newSort = searchParams.get('sorting');
+            if (newSort) {
+                newObj.sorting = newSort;
+            }
+            
+        }
         return newObj;
     }
     
-    /*
-    function getQueryParams(url: string) {
-        const paramArr = url.slice(url.indexOf('?') + 1).split('&');
-        console.log (paramArr);
-        const params = {};
-        paramArr.map(param => {
-            const [key, val] = param.split('=');
-            //params[key] = decodeURIComponent(val);
-        })
-        return params;
-    }
-    getQueryParams(urlPage);
-
-    //console.log(params.toString());
-    if(localStorage.getItem("myFilters")) {
-        let jsonFilters = localStorage.getItem("myFilters");
-        if (jsonFilters) {
-
-
-            
-            filtersObj = toFilterObj(urlPage);
-            filtered();
-            slider(filtered());
-            checkboxInput.forEach((el) => {
-                if (filtersObj.country) {
-                    if (filtersObj.country.includes(el.value)){
-                        el.checked = true;
-                    }
-                }
-                if (filtersObj.brand) {
-                    if (filtersObj.brand.includes(el.value)){
-                        el.checked = true;
-                    }
-                }               
-            });
-        } 
-    }
-
+    filtersObj = toFilterObj(urlPage);
+    filtered();
+    slider(filtered());
+    checkboxInput.forEach((el) => {
+        if (filtersObj.country) {
+            if (filtersObj.country.includes(el.value)){
+                el.checked = true;
+            }
+        }
+        if (filtersObj.brand) {
+            if (filtersObj.brand.includes(el.value)){
+                el.checked = true;
+            }
+        }               
+    });
+    
     const sortInput: NodeListOf<HTMLOptionElement> = document.querySelectorAll(".select-input");
     sortInput.forEach((el) => {
-        if (localStorage.getItem("mySort") === el.value) {
+        if (filtersObj.sorting === el.value) {
             el.selected = true;
         }
     })
     
-
-    if (localStorage.getItem("mySort")) {
-        let sortValue = localStorage.getItem("mySort");
+    if (filtersObj.sorting) {
+        let sortValue = filtersObj.sorting;
         if (sortValue) {
             createTable(sortingArray (filtered(), sortValue));
         }
 
     }
-    */
+    
 }
 
 function checked () {
@@ -167,13 +153,12 @@ function filtered () {
 
 
     function sortered () {
-        createTable(sortingArray (newArr, sortingValue));
+        createTable(sortingArray (newArr, filtersObj.sorting));
         const selectSort = document.querySelector('.select-box') as HTMLInputElement;
         if (selectSort) {
             selectSort.onchange = function() {
-                sortingValue = selectSort.value;
-                createTable(sortingArray (newArr, sortingValue));
-                localStorage.setItem("mySort", sortingValue);
+                filtersObj.sorting = selectSort.value;
+                createTable(sortingArray (newArr, filtersObj.sorting));
             };
         }
     }
@@ -228,8 +213,6 @@ function filtered () {
     search();
     return newArr;
 }
-
-
 
 function viewDisplay(view: string){
     if (view === 'table') {
@@ -298,29 +281,42 @@ function filtersReset() {
     filtersReset?.addEventListener('click', () => {
         filtersObj = {
             price: [minPriceFunc(productsArray), maxPriceFunc(productsArray)],
+            sorting: 'priceAscending'
         };
         filtered ();
         checkboxInput.forEach((el) => {
             el.checked = false;
         });
         slider(productsArray);
-        let localObj = JSON.stringify(filtersObj);
-        localStorage.setItem("myFilters", localObj);
     })
 }
 
 function filtersSave() {
     const filtersSave = document.querySelector('.filters-save');
     filtersSave?.addEventListener('click', () => {
-            const paramObj = toUrlParams (filtersObj);
-            const currentUrl = window.location.href;
-            const params = new URLSearchParams(paramObj);
-            const fullUrl = currentUrl + '?' + params;
-            console.log (fullUrl);
-            window.location.href = `${fullUrl}`;
             
+            const paramObj = toUrlParams (filtersObj);
+            const params = new URLSearchParams(paramObj);
+            const fullUrl = currentUrl + '?' + params.toString();
+            console.log (fullUrl);
+            window.location.href = `${fullUrl}`;          
     }) 
 }
+
+function toUrlParams (filtersObj: ProductFilters) {
+    let newObj: Record<string, string> = {
+      minprice: `${filtersObj.price[0]}`,
+      maxprice: `${filtersObj.price[1]}`,
+    }
+    
+    if (filtersObj.country) {
+      newObj.country = filtersObj.country.join('+');
+    }
+    if (filtersObj.brand) {
+      newObj.brand = filtersObj.brand.join('+');
+    }
+    return newObj;
+  }
 
 export { 
     checked, 
@@ -334,46 +330,3 @@ export {
     filtersSave, 
     getUrlQuery
 }
-
-/*
-function getLocalStorage() {
-    const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
-    
-    if(localStorage.getItem("myFilters")) {
-        let jsonFilters = localStorage.getItem("myFilters");
-        if (jsonFilters) {
-            filtersObj = JSON.parse(jsonFilters);
-            filtered();
-            slider(filtered());
-            checkboxInput.forEach((el) => {
-                if (filtersObj.country) {
-                    if (filtersObj.country.includes(el.value)){
-                        el.checked = true;
-                    }
-                }
-                if (filtersObj.brand) {
-                    if (filtersObj.brand.includes(el.value)){
-                        el.checked = true;
-                    }
-                }               
-            });
-        } 
-    }
-
-    const sortInput: NodeListOf<HTMLOptionElement> = document.querySelectorAll(".select-input");
-    sortInput.forEach((el) => {
-        if (localStorage.getItem("mySort") === el.value) {
-            el.selected = true;
-        }
-    })
-    
-
-    if (localStorage.getItem("mySort")) {
-        let sortValue = localStorage.getItem("mySort");
-        if (sortValue) {
-            createTable(sortingArray (filtered(), sortValue));
-        }
-
-    }
-}
-*/
