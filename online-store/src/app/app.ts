@@ -18,12 +18,33 @@ function getUrlQuery() {
     const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
     
     const urlPage = window.location.href;
-    console.log (urlPage);
-    const paramArr = new URLSearchParams (urlPage);
-    console.log (paramArr);
-    paramArr.forEach (el => {
-        console.log (el);
-    })
+    toFilterObj (urlPage);
+    function toFilterObj (newUrl) {
+        const newObj = filtersObj;
+        const newURL = new URL(newUrl);
+        const searchParams = newURL.searchParams;
+      
+        if (searchParams.get('minprice')) {
+            const minPrice = Number (searchParams.get('minprice'));
+            newObj.price[0] = minPrice;
+        }
+
+        if (searchParams.get('maxprice')) {
+            const maxPrice = Number (searchParams.get('maxprice'));
+            newObj.price[1] = maxPrice;
+        }
+        
+        if (searchParams.get('country')) {
+            const newCountry = searchParams.get('country');
+            newObj.country = newCountry?.split("+");
+        }
+        if (searchParams.get('brand')) {
+            const newBrand = searchParams.get('brand');
+            newObj.brand = newBrand?.split("+");
+        }
+        return newObj;
+    }
+    
     /*
     function getQueryParams(url: string) {
         const paramArr = url.slice(url.indexOf('?') + 1).split('&');
