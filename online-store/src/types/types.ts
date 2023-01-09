@@ -107,6 +107,12 @@ interface CartInterface {
   createFooterCart(): HTMLElement[];
 }
 
+  interface LocalInfo {
+    id: string;
+    cost: string;
+    packaging: string;
+  }
+
 export {
   ProductTable,
   ProductDescription,
@@ -119,5 +125,6 @@ export {
   LocalStorageCartInfo,
   CalculationTheCondition,
   CartInterface,
-  ParamsUrl
+  ParamsUrl,
+  LocalInfo
 };

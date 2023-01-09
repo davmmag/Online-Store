@@ -1,5 +1,5 @@
 import { productsArray } from '../app/products';
-import { ProductDescription, ProductFilters, ParamsUrl } from '../types/types';
+import { ProductDescription, ProductFilters, ParamsUrl, LocalInfo } from '../types/types';
 
 const returnElement = (selector: string, name: string, text?: string, attrs?: object) => {
   const element = document.createElement(selector);
@@ -155,6 +155,113 @@ const createCountPackage = (selector: string, packaging: string, weight: string)
   return countBlock;
 };
 
+const findFromProduct = (arr: ProductDescription[], name: string | number = '', key: keyof ProductDescription, returnKey?: keyof ProductDescription) => {
+  const result = arr.find((item) => item[key] === name);
+  if (result) {
+    if (returnKey) return result[returnKey];
+    return result;
+  }
+};
+
+const amountPrices = (arr: LocalInfo[]): number => {
+  return arr.reduce((sum: number, current: LocalInfo) => sum + +current.cost!, 0);
+};
+
+const loadingToStorage = (key: string, data: LocalInfo[]) => {
+  if (data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+}
+
+const loadingCurrentState = (quantityElement: HTMLElement, costElement: HTMLElement, data: LocalInfo[]): void => {
+  quantityElement.textContent = `${data.length}`;
+  const cost = amountPrices(data);
+  costElement.textContent = `${cost}`;
+};
+
+const updatingShoppingCart = (target?: HTMLElement, data?: ProductDescription[] | ProductDescription): void => {
+  const cartQuantity = document.querySelector('.number-goods') as HTMLElement;
+  const cartTotalCost = document.querySelector('.sum-goods') as HTMLElement;
+  const dataFromStorage = localStorage.getItem('cart-data') as string;
+  let previousData: LocalInfo[] | null = null;
+  if (dataFromStorage) previousData = JSON.parse(dataFromStorage) as LocalInfo[];
+  
+  if (!target) {
+    if (previousData !== null) {
+      loadingCurrentState(cartQuantity, cartTotalCost, previousData);
+      const btnCart = document.querySelector('.product__btn-product');
+      if (btnCart) {
+        const key = localStorage.getItem('id');
+        const flag = previousData.findIndex((item) => item.id === `${key}`);
+        if (flag !== -1) btnCart.textContent = 'Удалить из корзины';
+      }
+    }
+  } 
+  if (data && target) {
+    if (target.classList.contains('product-button') && data instanceof Array) {
+      const parent = target.closest('.product-item') as HTMLElement;
+      const name = parent.querySelector('.product-name') as HTMLElement;
+      const productId = findFromProduct(data, name.textContent!, 'title', 'id') as number;
+      if (previousData !== null) {
+        const index = previousData.findIndex((item) => item.id === `${productId}`);
+        const price = findFromProduct(data, productId, 'id', 'price') as number;
+        if (index === -1) {
+          const packaging = findFromProduct(data, productId, 'id', 'packaging');
+          const newProduct = { id: `${productId}`, cost: `${price}`, packaging } as LocalInfo;
+          previousData.push(newProduct);
+          loadingToStorage('cart-data', previousData);
+          loadingCurrentState(cartQuantity, cartTotalCost, previousData);
+        }
+      } else {
+        const packaging = findFromProduct(data, productId, 'id', 'packaging');
+        const price = findFromProduct(data, productId, 'id', 'price') as number;
+        const newProduct = { id: `${productId}`, cost: `${price}`, packaging } as LocalInfo;
+        loadingToStorage('cart-data', [newProduct]);
+        loadingCurrentState(cartQuantity, cartTotalCost, [newProduct]);
+      }
+    }
+    if (target.classList.contains('product__btn-product')) {
+      const { id, price, packaging } = data as ProductDescription;
+      const value = document.querySelector('.count__value') as HTMLInputElement;
+      const newP = value.value;
+      const cost = ((+newP / +packaging) * price).toFixed();
+      if (previousData !== null) {
+        const index = previousData.findIndex((item) => item.id === `${id}`);
+        if (index === -1) {
+          target.textContent = 'Удалить из корзины';
+          
+          const newProduct = { id: `${id}`, cost, packaging: value.value } as LocalInfo;
+          previousData.push(newProduct);
+          loadingToStorage('cart-data', previousData);
+          loadingCurrentState(cartQuantity, cartTotalCost, previousData);
+        } else {
+          target.textContent = 'Добавить в корзину';
+          previousData.splice(index, 1);
+          loadingToStorage('cart-data', previousData);
+          loadingCurrentState(cartQuantity, cartTotalCost, previousData);
+        }
+        
+      } else {
+        const newProduct = { id: `${id}`, cost, packaging: value.value } as LocalInfo;
+        loadingToStorage('cart-data', [newProduct]);
+        loadingCurrentState(cartQuantity, cartTotalCost, [newProduct]);    
+      }
+    }
+  } 
+
+}
+
+const loadingProductsForCart = (data: ProductDescription[]): ProductDescription[] | null => {
+  const cartData = JSON.parse(localStorage.getItem('cart-data') as string) as LocalInfo[];
+  if (cartData) {
+    const resultData = cartData.map((item) =>
+      findFromProduct(data, +item.id, 'id'),
+    ) as ProductDescription[];
+    return resultData;
+  }
+  return null;
+}
+
 export {
   createElement,
   uniqueArray,
@@ -170,5 +277,8 @@ export {
   getProduct,
   countPackage,
   createCountPackage,
-  //toUrlParams
+  findFromProduct,
+  amountPrices,
+  updatingShoppingCart,
+  loadingProductsForCart
 };

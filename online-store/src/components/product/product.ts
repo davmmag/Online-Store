@@ -1,4 +1,4 @@
-import { returnElement, countPackage, createCountPackage } from "../../functions/functions";
+import { returnElement, countPackage, createCountPackage, updatingShoppingCart } from "../../functions/functions";
 import { ProductTable, ProductDescription } from "../../types/types";
 import ModalZoom from "../modal/modal-zoom";
 class Product {
@@ -48,6 +48,9 @@ class Product {
         'btn btn--circle product__btn-product',
         'Добавить в корзину',
       );
+      btnProduct.addEventListener('click', (e) => {
+        updatingShoppingCart(e.target as HTMLElement, data);
+      });
       const btnPay = returnElement('button', 'btn btn--circle product__btn-pay', 'Купить сейчас');
       const featuresBottom = returnElement('div', 'product__features-bottom');
       const featuresBlocks = this.fillingProperties(data);
@@ -57,6 +60,7 @@ class Product {
       productData.append(productTitle, featuresTop, featuresBottom);
       productContainer.append(productData, productImages);
       this.product.append(productContainer);
+      updatingShoppingCart();
     }
   }
 
