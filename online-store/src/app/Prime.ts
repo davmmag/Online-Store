@@ -1,5 +1,5 @@
-import { Cart } from "../components/cart/cart";
-import { updatingShoppingCart } from "../functions/functions";
+import { Cart } from '../components/cart/cart';
+import { updatingShoppingCart } from '../functions/functions';
 
 import {
   //search,
@@ -16,7 +16,7 @@ import {
 import { start, renderCheckbox } from './rendering';
 import { slider } from './slider';
 import { productsArray } from './products';
-import { getProduct, loadingProductsForCart } from '../functions/functions';
+import { getProduct, loadingProductsForCart, addListenerBtn } from '../functions/functions';
 import Product from '../components/product/product';
 
 class Prime {
@@ -47,16 +47,21 @@ class Prime {
       getUrlQuery();
       //window.addEventListener('load', getLocalStorage);
       updatingShoppingCart();
+      addListenerBtn(productsArray);
     }
   }
 
   startGoods() {
     const page = document.body.className;
-    this.cartElement.addEventListener('click', () => {
-      this.startCart();
-      document.querySelector('.breadcrumbs')?.classList.add('visually-hidden');
-      document.querySelector('.product')?.classList.add('visually-hidden');
-    }, { once: true });
+    this.cartElement.addEventListener(
+      'click',
+      () => {
+        this.startCart();
+        document.querySelector('.breadcrumbs')?.classList.add('visually-hidden');
+        document.querySelector('.product')?.classList.add('visually-hidden');
+      },
+      { once: true },
+    );
     if (page === 'goods') {
       const productData = getProduct(productsArray);
       const product = new Product();

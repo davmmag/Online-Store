@@ -45,25 +45,25 @@ function createCheckbox<T extends keyof ProductDescription>(
   checkbox.value = `${value}`;
   label.appendChild(checkbox);
   label.appendChild(document.createTextNode(`${value} `));
-  
+
   let div = document.createElement('div');
   div.className = 'checkbox-values';
   label.appendChild(div);
 
-    let span = document.createElement('span');
-    span.className = 'checkbox-value';
-    span.innerHTML = `${amount} `;
-    div.appendChild(span);
+  let span = document.createElement('span');
+  span.className = 'checkbox-value';
+  span.innerHTML = `${amount} `;
+  div.appendChild(span);
 
-    span = document.createElement('span');
-    span.className = 'checkbox-jumper';
-    span.innerHTML = `/`;
-    div.appendChild(span);
+  span = document.createElement('span');
+  span.className = 'checkbox-jumper';
+  span.innerHTML = `/`;
+  div.appendChild(span);
 
-    span = document.createElement('span');
-    span.className = 'checkbox-amount';
-    span.innerHTML = ` ${amount}`;
-    div.appendChild(span);
+  span = document.createElement('span');
+  span.className = 'checkbox-amount';
+  span.innerHTML = ` ${amount}`;
+  div.appendChild(span);
 }
 
 function changeCheckbox(array: ProductDescription[], key: string) {
@@ -117,8 +117,6 @@ function maxPriceFunc(array: ProductDescription[]): number {
   return array.reduce((max, p) => (p.price > max ? p.price : max), productsArray[0].price);
 }
 
-
-
 const getProduct = (products: ProductDescription[]): ProductDescription | undefined => {
   const id = localStorage.getItem('id');
   if (id) {
@@ -129,17 +127,17 @@ const getProduct = (products: ProductDescription[]): ProductDescription | undefi
 };
 
 const countPackage = (packaging: string, weight: string, e: Event): void => {
-    const target = e.target as HTMLButtonElement;
-    const currentTarget = e.currentTarget as HTMLElement;
-    const inputValue = currentTarget.querySelector('.count__value') as HTMLInputElement;
-    if (target.classList.contains('count__plus')) {
-      const result = `${+inputValue.value + +packaging}`;
-      inputValue.value = result;
-    } else {
-      const result = `${+inputValue.value - +packaging}`;
-      if (+result > 0) inputValue.value = result;
-    }
-}
+  const target = e.target as HTMLButtonElement;
+  const currentTarget = e.currentTarget as HTMLElement;
+  const inputValue = currentTarget.querySelector('.count__value') as HTMLInputElement;
+  if (target.classList.contains('count__plus')) {
+    const result = `${+inputValue.value + +packaging}`;
+    inputValue.value = result;
+  } else {
+    const result = `${+inputValue.value - +packaging}`;
+    if (+result > 0) inputValue.value = result;
+  }
+};
 
 const createCountPackage = (selector: string, packaging: string, weight: string): HTMLElement => {
   const countBlock = returnElement('div', `${selector} count`);
@@ -155,7 +153,12 @@ const createCountPackage = (selector: string, packaging: string, weight: string)
   return countBlock;
 };
 
-const findFromProduct = (arr: ProductDescription[], name: string | number = '', key: keyof ProductDescription, returnKey?: keyof ProductDescription) => {
+const findFromProduct = (
+  arr: ProductDescription[],
+  name: string | number = '',
+  key: keyof ProductDescription,
+  returnKey?: keyof ProductDescription,
+) => {
   const result = arr.find((item) => item[key] === name);
   if (result) {
     if (returnKey) return result[returnKey];
@@ -171,33 +174,40 @@ const loadingToStorage = (key: string, data: LocalInfo[]) => {
   if (data) {
     localStorage.setItem(key, JSON.stringify(data));
   }
-}
+};
 
-const loadingCurrentState = (quantityElement: HTMLElement, costElement: HTMLElement, data: LocalInfo[]): void => {
+const loadingCurrentState = (
+  quantityElement: HTMLElement,
+  costElement: HTMLElement,
+  data: LocalInfo[],
+): void => {
   quantityElement.textContent = `${data.length}`;
   const cost = amountPrices(data);
   costElement.textContent = `${cost}`;
 };
 
-const updatingShoppingCart = (target?: HTMLElement, data?: ProductDescription[] | ProductDescription): void => {
+const updatingShoppingCart = (
+  target?: HTMLElement,
+  data?: ProductDescription[] | ProductDescription,
+): void => {
   const cartQuantity = document.querySelector('.number-goods') as HTMLElement;
   const cartTotalCost = document.querySelector('.sum-goods') as HTMLElement;
   const dataFromStorage = localStorage.getItem('cart-data') as string;
   let previousData: LocalInfo[] | null = null;
   if (dataFromStorage) previousData = JSON.parse(dataFromStorage) as LocalInfo[];
-  
+  const btnMains = Array.from(document.querySelectorAll('.product-button')) as HTMLButtonElement[];
   if (!target) {
     if (previousData !== null) {
       loadingCurrentState(cartQuantity, cartTotalCost, previousData);
       const btnCart = document.querySelector('.product__btn-product');
-      const btnMains = Array.from(document.querySelectorAll('[data-b]')) as HTMLButtonElement[];
+
       if (btnCart) {
         const key = localStorage.getItem('id');
         const flag = previousData.findIndex((item) => item.id === `${key}`);
         if (flag !== -1) btnCart.textContent = 'Удалить из корзины';
       }
       if (btnMains && btnMains.length) {
-        btnMains.forEach(btn => {
+        btnMains.forEach((btn) => {
           const id = btn.getAttribute('data-b');
           const res = previousData!.find((item) => {
             if (item.id === id) return item;
@@ -206,7 +216,7 @@ const updatingShoppingCart = (target?: HTMLElement, data?: ProductDescription[] 
         });
       }
     }
-  } 
+  }
   if (data && target) {
     if (target.classList.contains('product-button') && data instanceof Array) {
       const parent = target.closest('.product-item') as HTMLElement;
@@ -226,7 +236,7 @@ const updatingShoppingCart = (target?: HTMLElement, data?: ProductDescription[] 
           target.textContent = 'Добавить в корзину';
           previousData.splice(index, 1);
           loadingToStorage('cart-data', previousData);
-          loadingCurrentState(cartQuantity, cartTotalCost, previousData);          
+          loadingCurrentState(cartQuantity, cartTotalCost, previousData);
         }
       } else {
         const packaging = findFromProduct(data, productId, 'id', 'packaging');
@@ -245,7 +255,7 @@ const updatingShoppingCart = (target?: HTMLElement, data?: ProductDescription[] 
         const index = previousData.findIndex((item) => item.id === `${id}`);
         if (index === -1) {
           target.textContent = 'Удалить из корзины';
-          
+
           const newProduct = { id: `${id}`, cost, packaging: value.value } as LocalInfo;
           previousData.push(newProduct);
           loadingToStorage('cart-data', previousData);
@@ -256,16 +266,21 @@ const updatingShoppingCart = (target?: HTMLElement, data?: ProductDescription[] 
           loadingToStorage('cart-data', previousData);
           loadingCurrentState(cartQuantity, cartTotalCost, previousData);
         }
-        
       } else {
         const newProduct = { id: `${id}`, cost, packaging: value.value } as LocalInfo;
         loadingToStorage('cart-data', [newProduct]);
-        loadingCurrentState(cartQuantity, cartTotalCost, [newProduct]);    
+        loadingCurrentState(cartQuantity, cartTotalCost, [newProduct]);
       }
     }
-  } 
+  }
+};
 
-}
+const addListenerBtn = (data: ProductDescription[] | ProductDescription) => {
+  const tableProducts = document.querySelector('.table__products');
+  tableProducts?.addEventListener('click', (e) => {
+    updatingShoppingCart(e.target as HTMLElement, data);
+  });
+};
 
 const loadingProductsForCart = (data: ProductDescription[]): ProductDescription[] | null => {
   const cartData = JSON.parse(localStorage.getItem('cart-data') as string) as LocalInfo[];
@@ -276,7 +291,7 @@ const loadingProductsForCart = (data: ProductDescription[]): ProductDescription[
     return resultData;
   }
   return null;
-}
+};
 
 export {
   createElement,
@@ -296,5 +311,6 @@ export {
   findFromProduct,
   amountPrices,
   updatingShoppingCart,
-  loadingProductsForCart
+  loadingProductsForCart,
+  addListenerBtn,
 };
