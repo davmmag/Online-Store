@@ -131,6 +131,7 @@ function createTable (array: ProductDescription[]) {
                             productShop.append(div);
                             div = document.createElement(`div`);
                             div.className = `product-button`;
+                            div.setAttribute('data-b', `${array[i].id}`);
                             div.innerHTML = "Добавить в корзину"
                             productShop.append(div);
                 }
