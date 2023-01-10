@@ -31,7 +31,7 @@ class Prime {
 
   startMain() {
     const page = document.body.className;
-    this.cartElement.addEventListener('click', () => this.startCart());
+    this.cartElement.addEventListener('click', () => this.startCart(), { once: true });
     if (page === 'main') {
       start();
       renderCheckbox();
@@ -52,6 +52,11 @@ class Prime {
 
   startGoods() {
     const page = document.body.className;
+    this.cartElement.addEventListener('click', () => {
+      this.startCart();
+      document.querySelector('.breadcrumbs')?.classList.add('visually-hidden');
+      document.querySelector('.product')?.classList.add('visually-hidden');
+    }, { once: true });
     if (page === 'goods') {
       const productData = getProduct(productsArray);
       const product = new Product();
@@ -64,7 +69,6 @@ class Prime {
     const cart = new Cart();
     const dataForCart = loadingProductsForCart(productsArray);
     if (this.mainElement) this.mainElement.classList.add('visually-hidden');
-    
     cart.draw(dataForCart);
   }
 }
