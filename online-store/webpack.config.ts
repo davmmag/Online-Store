@@ -8,7 +8,8 @@ import { Configuration } from 'webpack';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const config: Configuration & Record<string, any> = {
   mode: 'development',
-  entry: ['./src/main.ts', './src/goods.ts'],
+  // entry: ['./src/main.ts', './src/goods.ts'],
+  entry: './src/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name][hash].js',
