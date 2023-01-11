@@ -5,7 +5,6 @@ declare function checked(): void;
 declare function filtered(): ProductDescription[];
 declare function viewDisplay(view: string): void;
 declare function changeView(): void;
-declare function productSelection(): void;
 declare function filtersReset(): void;
 declare function filtersSave(): void;
-export { checked, filtered, filtersObj, viewDisplay, changeView, productSelection, filtersReset, filtersSave, getUrlQuery };
+export { checked, filtered, filtersObj, viewDisplay, changeView, filtersReset, filtersSave, getUrlQuery };

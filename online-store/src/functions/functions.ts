@@ -314,7 +314,18 @@ const updatingShoppingCart = (
 const addListenerBtn = (data: ProductDescription[] | ProductDescription) => {
   const tableProducts = document.querySelector('.table__products');
   tableProducts?.addEventListener('click', (e) => {
-    updatingShoppingCart(e.target as HTMLElement, data);
+    if (e.target instanceof HTMLElement) {
+    const target = e.target;
+    updatingShoppingCart(target, data);
+    if (target.classList.contains('product-name') && Array.isArray(data)) {
+      const titleProduct = target.textContent;
+      data.forEach((element) => {
+        if (element.title === titleProduct) {
+          localStorage.setItem(`id`, `${element.id}`);
+        }
+      });
+    }
+    }
   });
 };
 
