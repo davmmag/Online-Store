@@ -97,13 +97,14 @@ class Product {
   countPackage(packaging: string, weight: string, e: Event): void {
     const target = e.target as HTMLButtonElement;
     const flag = target.classList.contains('count__plus');
-    const inputValue = document.querySelector('.count__value') as HTMLInputElement;
+    const input = document.querySelector('.count__value') as HTMLInputElement;
+    const inputValue = (+input.value).toFixed();
     if (flag === true) {
-      const result = `${+inputValue.value + +packaging}`;
-      inputValue.value = result;
+      const result = `${+inputValue + +packaging}`;
+      input.value = result;
     } else {
-      const result = `${+inputValue.value - +packaging}`;
-      if (+result > 0) inputValue.value = result;
+      const result = `${+inputValue - +packaging}`;
+      if (+result > 0) input.value = result;
     }
   }
 }

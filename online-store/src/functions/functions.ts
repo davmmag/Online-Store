@@ -221,9 +221,6 @@ const loadingCurrentState = (
     quantityElement.textContent = `${data.length}`;
     const cost = amountPrices(data);
     costElement.textContent = `${cost}`;
-  } else {
-    quantityElement.textContent = `0`;
-    costElement.textContent = '0';
   }
 };
 
@@ -313,8 +310,6 @@ const updatingShoppingCart = (
         loadingCurrentState(cartQuantity, cartTotalCost, [newProduct]);
       }
     }
-  } else {
-    loadingCurrentState(cartQuantity, cartTotalCost);
   }
 };
 
