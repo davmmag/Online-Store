@@ -215,11 +215,13 @@ const loadingToStorage = (key: string, data: LocalInfo[]) => {
 const loadingCurrentState = (
   quantityElement: HTMLElement,
   costElement: HTMLElement,
-  data: LocalInfo[],
+  data?: LocalInfo[],
 ): void => {
-  quantityElement.textContent = `${data.length}`;
-  const cost = amountPrices(data);
-  costElement.textContent = `${cost}`;
+  if (data) {
+    quantityElement.textContent = `${data.length}`;
+    const cost = amountPrices(data);
+    costElement.textContent = `${cost}`;
+  }
 };
 
 const updatingShoppingCart = (

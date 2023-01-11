@@ -14,7 +14,8 @@ declare class Cart {
     clearCart(e: Event): void;
     loadToLocalStorage(): void;
     deleteProduct(target: HTMLElement): void;
-    createCartItem(data: ProductDescription): HTMLElement;
+    getDataFromStorage(id: number): LocalInfo | undefined;
+    createCartItem(data: ProductDescription): Node | string;
     calculationThePrice(args: ProductCartInfo, flag: boolean | 'create'): void;
     createCountPackage(selector: string, packaging: string, weight: string, price: number, id: number): HTMLElement;
     countPackage(e: Event, idElem: number): void;
