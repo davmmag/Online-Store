@@ -366,7 +366,8 @@ legend {
           align-items: center;
   gap: 20px;
   font-size: 30px;
-  font-weight: 500; }
+  font-weight: 500;
+  color: inherit; }
 
 .header-main__logo img {
   width: 30px;
@@ -782,6 +783,9 @@ legend {
     min-width: 207px;
     min-height: 40px; } }
 
+.breadcrumbs__container {
+  padding-top: 10px; }
+
 .breadcrumbs__list {
   list-style: none;
   display: -webkit-box;
@@ -800,16 +804,16 @@ legend {
     vertical-align: middle;
     content: ">";
     font-size: 14px;
-    margin-right: 10px;
+    margin-right: 15px;
     font-style: normal;
     font-weight: normal;
     line-height: 1;
     right: -50%;
-    top: 25%;
+    top: 18%;
     color: #93a6b3; }
 
 .breadcrumbs__link {
-  font-size: 12px;
+  font-size: 16px;
   color: #93a6b3;
   -webkit-transition: all .3;
   transition: all .3; }
@@ -1045,7 +1049,8 @@ legend {
   visibility: visible;
   overflow: auto;
   -webkit-transition: all .5s ease;
-  transition: all .5s ease; }
+  transition: all .5s ease;
+  z-index: 21; }
 
 .modal__container {
     background-color: #ffffff;
@@ -1067,7 +1072,7 @@ legend {
     top: 0;
     right: 5px;
     font-size: 1.5em;
-    z-index: 3; }
+    z-index: 21; }
 
 .modal__body {
     padding: 25px;
@@ -1257,8 +1262,7 @@ legend {
   width: 100%; }
 
 .card__container {
-    max-width: 360px;
-    min-width: 140px;
+    width: 350px;
     height: 210px;
     background-color: #fff;
     border-radius: 8px;
@@ -1283,7 +1287,7 @@ legend {
 .card__container:not(:last-child) {
       position: absolute;
       top: 4%;
-      right: 30%; }
+      right: 35%; }
 
 .card__container.break {
       background-color: #6d6464;
@@ -1296,8 +1300,8 @@ legend {
       -webkit-box-align: end;
           -ms-flex-align: end;
               align-items: flex-end;
-      min-width: 218px;
-      max-width: 311px;
+      max-width: 360px;
+      min-width: 140px;
       width: 100%; }
 
 .card__number {
@@ -1370,7 +1374,7 @@ legend {
 
 .modal-zoom {
   position: fixed;
-  z-index: 3;
+  z-index: 21;
   max-height: 100%;
   max-width: 527px;
   width: 100%;
@@ -1401,7 +1405,7 @@ legend {
   height: 32px;
   opacity: 0.5;
   cursor: pointer;
-  z-index: 4; }
+  z-index: 22; }
 
 .close:hover {
     opacity: 1; }

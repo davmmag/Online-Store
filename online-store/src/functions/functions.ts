@@ -215,11 +215,16 @@ const loadingToStorage = (key: string, data: LocalInfo[]) => {
 const loadingCurrentState = (
   quantityElement: HTMLElement,
   costElement: HTMLElement,
-  data: LocalInfo[],
+  data?: LocalInfo[],
 ): void => {
-  quantityElement.textContent = `${data.length}`;
-  const cost = amountPrices(data);
-  costElement.textContent = `${cost}`;
+  if (data) {
+    quantityElement.textContent = `${data.length}`;
+    const cost = amountPrices(data);
+    costElement.textContent = `${cost}`;
+  } else {
+    quantityElement.textContent = `0`;
+    costElement.textContent = '0';
+  }
 };
 
 const updatingShoppingCart = (
@@ -308,6 +313,8 @@ const updatingShoppingCart = (
         loadingCurrentState(cartQuantity, cartTotalCost, [newProduct]);
       }
     }
+  } else {
+    loadingCurrentState(cartQuantity, cartTotalCost);
   }
 };
 

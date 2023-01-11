@@ -3,6 +3,8 @@ declare class Prime {
     cart: Cart;
     cartElement: HTMLElement;
     mainElement: HTMLElement | null;
+    cartSection: HTMLElement | null;
+    goodsElement: HTMLElement | null;
     constructor();
     startMain(): void;
     startGoods(): void;

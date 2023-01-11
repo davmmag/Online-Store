@@ -4,7 +4,7 @@ import {
   LocalStorageCartInfo,
   LocalInfo
 } from '../../types/types';
-import { returnElement, findFromProduct, amountPrices, updatingShoppingCart } from "../../functions/functions";
+import { returnElement, findFromProduct, amountPrices, updatingShoppingCart, loadingProductsForCart } from "../../functions/functions";
 import Modal from "../modal/modal";
 import Form from "../form/form";
 import { productsArray } from '../../app/products';
@@ -37,6 +37,8 @@ class Cart {
 
   draw(data: ProductDescription[] | null): void {
     try {
+      const breadcrumbsLink = document.querySelector('.breadcrumbs__link--title') as HTMLElement;
+      breadcrumbsLink.textContent = 'Корзина';
       const cartContainer = returnElement('div', 'container cart__container');
       const listProducts = returnElement('ul', 'cart__products');
       const cartHeader = returnElement('div', 'cart__head');
@@ -69,7 +71,9 @@ class Cart {
     this.priceCondition.clear();
     this.totalCost = 0;
     this.totalCostElement.textContent = `${this.totalCost} рублей`;
+    localStorage.removeItem('cart-data');
     this.loadToLocalStorage();
+    updatingShoppingCart();
   }
 
   loadToLocalStorage() {
@@ -224,44 +228,6 @@ class Cart {
   setFromStorage(id: string, data: string) {
     localStorage.setItem(id, data);
   }
-
-  // updateProductsInCart(data: ProductDescription[], target?: HTMLElement) {
-  //   const cartValue = document.querySelector('.number-goods') as HTMLElement;
-  //   const cartCost = document.querySelector('.sum-goods') as HTMLElement;
-  //   const prev = this.getFromStorage('cart-data');
-  //   if (target) {
-  //     const parent = target.closest('.product-item') as HTMLElement;
-  //     const name = parent.querySelector('.product-name') as HTMLElement;
-  //     const productId = findFromProduct(data, name.textContent!, 'title', 'id') as number;
-  //     const result: LocalInfo[] = [];
-  //     let cost: number = 0;
-  //     if (prev === null) {
-  //       const price = findFromProduct(data, productId, 'id', 'price') as number;
-  //       const newItem = { id: `${productId}`, price: `${price}` };
-  //       result.push(newItem);
-  //       cost = amountPrices(result);
-  //     } else if (prev.find((item) => item.id === `${productId}`)) {
-  //       result.push(...prev);
-  //       cost = amountPrices(result);
-  //     } else {
-  //       const price = findFromProduct(data, productId, 'id', 'price') as number;
-  //       const newItem = { id: `${productId}`, price: `${price}` };
-  //       result.push(newItem, ...prev);
-  //       cost = amountPrices(result);
-  //     }
-  //     cartValue.textContent = `${result.length}`;
-  //     cartCost.textContent = `${cost}`;
-  //     this.setFromStorage('cart-data', JSON.stringify(result));
-  //     this.loadCartInfo(result);
-  //   } else {
-  //     if (prev !== null) {
-  //       cartValue.textContent = `${prev.length}`;
-  //       const cost = amountPrices(prev);
-  //       cartCost.textContent = `${cost}`;
-  //       this.loadCartInfo(prev);
-  //     }
-  //   }
-  // }
 
   loadCartInfo(data?: LocalInfo[]): LocalInfo[] {
     if (data) this.idProducts = data;

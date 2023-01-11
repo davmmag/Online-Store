@@ -8,6 +8,7 @@
   visibility: visible;
   overflow: auto;
   transition: all .5s ease;
+  z-index: 21;
 
   &__container {
     background-color: #ffffff;
@@ -29,7 +30,7 @@
     top: 0;
     right: 5px;
     font-size: 1.5em;
-    z-index: 3;
+    z-index: 21;
   }
 
   &__body {
