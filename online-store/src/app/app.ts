@@ -227,25 +227,6 @@ function changeView () {
     });
 }
 
-function productSelection() {
-    const tableProducts = document.querySelector('.table__products');
-    if (tableProducts instanceof HTMLElement) {
-        tableProducts.addEventListener('click', (event) => {
-            if (event.target instanceof HTMLElement) {
-                const titleProduct = event.target.textContent;
-                productsArray.forEach(element => {
-                    if (element.title === titleProduct){
-                        localStorage.setItem(`id`, `${element.id}`);
-                    };
-                });   
-                if (event.target.classList.contains('product-button')) {
-                  updatingShoppingCart(event.target, productsArray);
-                }        
-            }   
-        })
-    }
-}
-
 function filtersReset() {
     const filtersReset = document.querySelector('.filters-reset');
     const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
@@ -291,7 +272,6 @@ export {
     filtersObj, 
     viewDisplay, 
     changeView, 
-    productSelection, 
     filtersReset, 
     filtersSave, 
     getUrlQuery

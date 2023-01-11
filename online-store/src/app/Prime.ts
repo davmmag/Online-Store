@@ -7,7 +7,6 @@ import {
   filtered,
   viewDisplay,
   changeView,
-  productSelection,
   filtersReset,
   filtersSave,
   getUrlQuery,
@@ -41,7 +40,6 @@ class Prime {
       //search();
       viewDisplay('table');
       changeView();
-      productSelection();
       filtersReset();
       filtersSave();
       getUrlQuery();

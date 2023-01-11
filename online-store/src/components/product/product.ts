@@ -33,16 +33,6 @@ class Product {
       const productCount = createCountPackage('product', packaging, weight);
       const breadcrumbs = document.querySelector('.breadcrumbs__link--title') as HTMLLinkElement;
       breadcrumbs.textContent = data.title;
-      // const btnRemove = returnElement('button', 'btn btn count__minus', '-');
-      // const inputValue = returnElement('input', 'count__value', '', {
-      //   type: 'text',
-      //   placeholder: `${packaging}`,
-      //   value: `${packaging}`,
-      // });
-      // const btnAdd = returnElement('button', 'btn btn count__plus', '+');
-      // btnRemove.addEventListener('click', (e: Event) => countPackage(packaging, weight, e));
-      // btnAdd.addEventListener('click', (e: Event) => countPackage(packaging, weight, e));
-      // productCount.append(btnRemove, inputValue, btnAdd);
       const btnProduct = returnElement(
         'button',
         'btn btn--circle product__btn-product',
