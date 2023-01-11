@@ -1,9 +1,8 @@
-import { searchFunction, sortingArray, minPriceFunc, maxPriceFunc, updatingShoppingCart  } from "../functions/functions";
+import { addFiltersToUrl, sortingArray, minPriceFunc, maxPriceFunc, updatingShoppingCart, parseStringAndAddToObject  } from "../functions/functions";
 import { productsArray } from "../app/products";
 import { ProductDescription, ProductFilters } from "../types/types";
 import { createTable, } from "../app/rendering";
 import { slider } from "../app/slider";
-
 
 let countryArray: string [] = [];
 let brandArray: string [] = [];
@@ -15,48 +14,17 @@ let filtersObj: ProductFilters = {
     sorting: 'priceAscending'
 };
 
+  
 
 function getUrlQuery() {
     const checkboxInput: NodeListOf<HTMLInputElement>  = document.querySelectorAll('.checkbox-input');
-    
-    const urlPage = window.location.href;
+    const url = window.location.href;
+    const searchParams = new URLSearchParams(new URL(url).search).toString();
+    parseStringAndAddToObject(searchParams, filtersObj);
+    console.log (filtersObj);
+    //filtered();
+    //slider(filtered());
 
-    function toFilterObj (newUrl: string) {
-        const newObj = filtersObj;
-        const newURL = new URL(newUrl);
-        const searchParams = newURL.searchParams;
-      
-        if (searchParams.get('minprice')) {
-            const minPrice = Number (searchParams.get('minprice'));
-            newObj.price[0] = minPrice;
-        }
-
-        if (searchParams.get('maxprice')) {
-            const maxPrice = Number (searchParams.get('maxprice'));
-            newObj.price[1] = maxPrice;
-        }
-        
-        if (searchParams.get('country')) {
-            const newCountry = searchParams.get('country');
-            newObj.country = newCountry?.split("+");
-        }
-        if (searchParams.get('brand')) {
-            const newBrand = searchParams.get('brand');
-            newObj.brand = newBrand?.split("+");
-        }
-        if (searchParams.get('sorting')) {
-            const newSort = searchParams.get('sorting');
-            if (newSort) {
-                newObj.sorting = newSort;
-            }
-            
-        }
-        return newObj;
-    }
-    
-    filtersObj = toFilterObj(urlPage);
-    filtered();
-    slider(filtered());
     checkboxInput.forEach((el) => {
         if (filtersObj.country) {
             if (filtersObj.country.includes(el.value)){
@@ -84,7 +52,7 @@ function getUrlQuery() {
         }
 
     }
-    
+
 }
 
 function checked () {
@@ -297,12 +265,7 @@ function filtersReset() {
 function filtersSave() {
     const filtersSave = document.querySelector('.filters-save');
     filtersSave?.addEventListener('click', () => {
-            
-            const paramObj = toUrlParams (filtersObj);
-            const params = new URLSearchParams(paramObj);
-            const fullUrl = currentUrl + '?' + params.toString();
-            console.log (fullUrl);
-            window.location.href = `${fullUrl}`;          
+        addFiltersToUrl(filtersObj);        
     }) 
 }
 

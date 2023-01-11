@@ -16,7 +16,7 @@ import {
 import { start, renderCheckbox } from './rendering';
 import { slider } from './slider';
 import { productsArray } from './products';
-import { getProduct, loadingProductsForCart, addListenerBtn } from '../functions/functions';
+import { getProduct, loadingProductsForCart, addListenerBtn} from '../functions/functions';
 import Product from '../components/product/product';
 
 class Prime {

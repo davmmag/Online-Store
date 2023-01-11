@@ -1,4 +1,6 @@
 import { ProductDescription, ProductFilters, LocalInfo } from '../types/types';
+declare function addFiltersToUrl(filters: ProductFilters): void;
+declare function parseStringAndAddToObject(str: string, target: ProductFilters): ProductFilters;
 declare const returnElement: (selector: string, name: string, text?: string, attrs?: object) => HTMLElement;
 declare function createElement(type: string, parent: string, children: string, text?: string): void;
 declare function createCheckbox<T extends keyof ProductDescription>(value: string, container: string, key: T): void;
@@ -21,4 +23,4 @@ declare const amountPrices: (arr: LocalInfo[]) => number;
 declare const updatingShoppingCart: (target?: HTMLElement, data?: ProductDescription[] | ProductDescription) => void;
 declare const addListenerBtn: (data: ProductDescription[] | ProductDescription) => void;
 declare const loadingProductsForCart: (data: ProductDescription[]) => ProductDescription[] | null;
-export { createElement, uniqueArray, createCheckbox, removeArrEl, sortingArray, filterArray, searchFunction, minPriceFunc, maxPriceFunc, changeCheckbox, returnElement, getProduct, countPackage, createCountPackage, findFromProduct, amountPrices, updatingShoppingCart, loadingProductsForCart, addListenerBtn, };
+export { addFiltersToUrl, parseStringAndAddToObject, createElement, uniqueArray, createCheckbox, removeArrEl, sortingArray, filterArray, searchFunction, minPriceFunc, maxPriceFunc, changeCheckbox, returnElement, getProduct, countPackage, createCountPackage, findFromProduct, amountPrices, updatingShoppingCart, loadingProductsForCart, addListenerBtn, };

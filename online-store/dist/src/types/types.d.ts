@@ -34,9 +34,8 @@ interface ProductDescription {
 }
 interface ProductFilters {
     price: number[];
-    rating?: number[];
-    country?: CountryFilter;
-    brand?: BrandFilter;
+    country?: string[];
+    brand?: string[];
     sorting: string | null;
 }
 interface ParamsUrl {

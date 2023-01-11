@@ -1,6 +1,42 @@
 import { productsArray } from '../app/products';
 import { ProductDescription, ProductFilters, ParamsUrl, LocalInfo } from '../types/types';
 
+function addFiltersToUrl(filters: ProductFilters) {
+  let url = new URL(window.location.href);
+  if (filters.price) {
+    url.searchParams.set('price_min', filters.price[0].toString());
+    url.searchParams.set('price_max', filters.price[1].toString());
+  }
+  if (filters.country) {
+    url.searchParams.set('country', filters.country.join(','));
+  }
+  if (filters.brand) {
+    url.searchParams.set('brand', filters.brand.join(','));
+  }
+  if (filters.sorting) {
+    url.searchParams.set('sorting', filters.sorting);
+  }
+  window.history.pushState({}, '', url.href);
+}
+
+function parseStringAndAddToObject(str: string, target: ProductFilters) {
+  let data = new URLSearchParams(str);
+  if (data.has("price_min") && data.has("price_max")) {
+      target.price = [Number(data.get("price_min")), Number(data.get("price_max"))];
+  }
+  if (data.has("country")) {
+      target.country = data.get("country")!.split(",");
+  }
+  if (data.has("brand")) {
+      target.brand = data.get("brand")!.split(",");
+  }
+  if (data.has("sorting")) {
+      target.sorting = data.get("sorting");
+  }
+  return target
+}
+
+
 const returnElement = (selector: string, name: string, text?: string, attrs?: object) => {
   const element = document.createElement(selector);
   element.className = name;
@@ -294,6 +330,8 @@ const loadingProductsForCart = (data: ProductDescription[]): ProductDescription[
 };
 
 export {
+  addFiltersToUrl,
+  parseStringAndAddToObject,
   createElement,
   uniqueArray,
   createCheckbox,
