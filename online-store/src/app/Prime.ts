@@ -71,10 +71,45 @@ class Prime {
   }
 
   startCart() {
-    const cart = new Cart();
-    const dataForCart = loadingProductsForCart(productsArray);
-    if (this.mainElement) this.mainElement.classList.add('visually-hidden');
-    cart.draw(dataForCart);
+    this.cartSection = document.querySelector('.cart');
+    const breadcrumbsLink = document.querySelector('.breadcrumbs__link--title') as HTMLElement;
+    if (this.cartSection) {
+      if (this.mainElement) {
+        this.mainElement.classList.add('visually-hidden');
+        const logoElement = document.querySelector('.header-main__logo');
+        if (logoElement) {
+          logoElement.addEventListener(
+            'click',
+            (e) => {
+              e.preventDefault();
+              updatingShoppingCart();
+              this.mainElement?.classList.remove('visually-hidden');
+              breadcrumbsLink.textContent = '';
+              this.cartSection!.innerHTML = '';
+            },
+            { once: true },
+          );
+        }
+      }
+      if (this.goodsElement) {
+        this.goodsElement.classList.add('visually-hidden');
+        const logoElement = document.querySelector('.header-main__logo');
+        if (logoElement) {
+          logoElement.addEventListener(
+            'click',
+            (e) => {
+              this.goodsElement?.classList.remove('visually-hidden');
+              this.cartSection!.innerHTML = '';
+            },
+            { once: true },
+          );
+        }
+      }
+      this.cartSection.innerHTML = '';
+      const cart = new Cart();
+      const dataForCart = loadingProductsForCart(productsArray);
+      cart.draw(dataForCart);
+    }
   }
 }
 
