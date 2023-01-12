@@ -366,4 +366,5 @@ export {
   updatingShoppingCart,
   loadingProductsForCart,
   addListenerBtn,
+  loadingToStorage,
 };

@@ -10,6 +10,7 @@ import {
   amountPrices,
   updatingShoppingCart,
   loadingProductsForCart,
+  loadingToStorage
 } from '../../functions/functions';
 import Modal from '../modal/modal';
 import Form from '../form/form';
@@ -87,9 +88,17 @@ class Cart {
   }
 
   loadToLocalStorage() {
-    this.localStorageInfo.cost = this.totalCost;
-    this.localStorageInfo.length = this.priceCondition.size;
     localStorage.setItem('cart', JSON.stringify(this.localStorageInfo));
+    const newLocalInfo: LocalInfo[] = [];
+    this.priceCondition.forEach(item => {
+      const { id, cost, packagingAmount: packaging } = item;
+      if (id !== undefined && packaging !== undefined) {
+        const newData = { id: `${id}`, cost: `${cost}`, packaging: `${packaging}` };
+        if (newData) newLocalInfo.push(newData);
+      }
+    });
+    loadingToStorage('cart-data' ,newLocalInfo);
+    updatingShoppingCart();
     // localStorage.setItem('cart-data', JSON.stringify(this.idProducts));
   }
 
@@ -113,7 +122,7 @@ class Cart {
   }
 
   createCartItem(data: ProductDescription): Node | string {
-    const { title, thumbnail, category, rating, weight, id } = data;
+    const { title, thumbnail, category, rating, weight, id, packaging: packagingDef, price: priceDef } = data;
     const dataFromStorage = this.getDataFromStorage(id);
     if (dataFromStorage) {
       const { cost: price, packaging } = dataFromStorage;
@@ -139,8 +148,8 @@ class Cart {
       this.calculationThePrice(
         {
           id,
-          price: +price,
-          packaging: +packaging,
+          price: priceDef,
+          packaging: +packagingDef,
           input: countBlock.children[1] as HTMLInputElement,
           cost: 0,
           costElement: cartCost,
@@ -170,7 +179,7 @@ class Cart {
     const del = document.querySelector('.cart__trash') as HTMLElement;
     if (flag !== undefined) {
       if (flag === 'create') {
-        const amount = +input.value / packaging;
+        const amount = +(+input.value / packaging).toFixed();
         const newCost = amount * price;
         costElement.textContent = `${newCost} рублей`;
         this.priceCondition.set(id, {
@@ -179,7 +188,7 @@ class Cart {
           packaging,
           input,
           cost: newCost,
-          packagingAmount: packaging,
+          packagingAmount: +input.value,
           costElement,
         });
         this.totalCost += newCost;
@@ -200,6 +209,7 @@ class Cart {
           costElement,
         });
         this.totalCost = this.totalCost + price;
+        this.loadToLocalStorage();
       }
       if (flag === false) {
         const newPackaging = +(+input.value - packaging).toFixed(2);
@@ -220,9 +230,9 @@ class Cart {
           this.totalCost = this.totalCost - newCost;
         }
         this.totalCost = this.totalCost - price;
+        this.loadToLocalStorage();
       }
       this.totalCostElement.textContent = `${this.totalCost} рублей`;
-      this.loadToLocalStorage();
     }
   }
 
