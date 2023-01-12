@@ -239,6 +239,7 @@ class Cart {
       type: 'text',
       placeholder: `${packaging}`,
       value: `${packaging}`,
+      readonly: true,
     }) as HTMLInputElement;
     const btnAdd = returnElement('button', 'btn btn count__plus', '+');
     countBlock.addEventListener('click', (e: Event) => this.countPackage(e, id));

@@ -165,13 +165,14 @@ const getProduct = (products: ProductDescription[]): ProductDescription | undefi
 const countPackage = (packaging: string, weight: string, e: Event): void => {
   const target = e.target as HTMLButtonElement;
   const currentTarget = e.currentTarget as HTMLElement;
-  const inputValue = currentTarget.querySelector('.count__value') as HTMLInputElement;
+  const input = currentTarget.querySelector('.count__value') as HTMLInputElement;
+  const inputValue = (+input.value);
   if (target.classList.contains('count__plus')) {
-    const result = `${+inputValue.value + +packaging}`;
-    inputValue.value = result;
+    const result = inputValue + +packaging;
+    input.value = result.toFixed(2);
   } else {
-    const result = `${+inputValue.value - +packaging}`;
-    if (+result > 0) inputValue.value = result;
+    const result = inputValue - +packaging;
+    if (+result > 0) input.value = result.toFixed(2);
   }
 };
 
@@ -182,6 +183,7 @@ const createCountPackage = (selector: string, packaging: string, weight: string)
     type: 'text',
     placeholder: `${packaging}`,
     value: `${packaging}`,
+    readonly: true,
   });
   const btnAdd = returnElement('button', 'btn btn count__plus', '+');
   countBlock.addEventListener('click', (e: Event) => countPackage(packaging, weight, e));
