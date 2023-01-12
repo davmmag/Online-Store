@@ -18,7 +18,8 @@ declare const findFromProduct: (arr: ProductDescription[], name: string | number
     height: number;
 } | undefined;
 declare const amountPrices: (arr: LocalInfo[]) => number;
+declare const loadingToStorage: (key: string, data: LocalInfo[]) => void;
 declare const updatingShoppingCart: (target?: HTMLElement, data?: ProductDescription[] | ProductDescription) => void;
 declare const addListenerBtn: (data: ProductDescription[] | ProductDescription) => void;
 declare const loadingProductsForCart: (data: ProductDescription[]) => ProductDescription[] | null;
-export { createElement, uniqueArray, createCheckbox, removeArrEl, sortingArray, filterArray, searchFunction, minPriceFunc, maxPriceFunc, changeCheckbox, returnElement, getProduct, countPackage, createCountPackage, findFromProduct, amountPrices, updatingShoppingCart, loadingProductsForCart, addListenerBtn, };
+export { createElement, uniqueArray, createCheckbox, removeArrEl, sortingArray, filterArray, searchFunction, minPriceFunc, maxPriceFunc, changeCheckbox, returnElement, getProduct, countPackage, createCountPackage, findFromProduct, amountPrices, updatingShoppingCart, loadingProductsForCart, addListenerBtn, loadingToStorage, };
