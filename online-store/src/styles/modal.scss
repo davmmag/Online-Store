@@ -8,6 +8,7 @@
   visibility: visible;
   overflow: auto;
   transition: all .5s ease;
+  z-index: 23;
 
   &__container {
     background-color: #ffffff;
