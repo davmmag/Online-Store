@@ -251,10 +251,14 @@ class Cart {
   }
 
   buy() {
-    const modal = new Modal();
-    const form = new Form();
-    modal.draw(form.create());
-    Modal.switchModal();
+    const modalElement = document.querySelector('.modal');
+    if (modalElement) {
+      Modal.switchModal();
+    } else {
+      const modal = new Modal();
+      const form = new Form();
+      modal.draw(form.create());
+    }
   }
 
   getFromStorage(id: string) {
