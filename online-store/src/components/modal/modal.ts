@@ -2,7 +2,7 @@ import { returnElement } from '../../functions/functions';
 class Modal {
   modal: HTMLElement;
   constructor() {
-    this.modal = returnElement('div', 'modal visually-hidden');
+    this.modal = returnElement('div', 'modal');
   }
 
   draw(data: HTMLElement): void {
@@ -17,6 +17,13 @@ class Modal {
     container.append(body);
     this.modal.append(container);
     document.body.append(this.modal);
+    this.modal.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains('modal')) {
+        Modal.switchModal();
+      }
+      
+    });
   }
 
   static switchModal(): void {
