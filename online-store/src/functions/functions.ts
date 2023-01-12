@@ -236,6 +236,7 @@ const updatingShoppingCart = (
   let previousData: LocalInfo[] | null = null;
   if (dataFromStorage) previousData = JSON.parse(dataFromStorage) as LocalInfo[];
   const btnMains = Array.from(document.querySelectorAll('.product-button')) as HTMLButtonElement[];
+  if (!data && !target && previousData?.length === 0) btnMains.forEach(item => item.textContent = 'Добавить в корзину')
   if (!target) {
     if (previousData !== null) {
       loadingCurrentState(cartQuantity, cartTotalCost, previousData);

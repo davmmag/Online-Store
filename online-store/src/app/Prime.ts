@@ -82,6 +82,7 @@ class Prime {
           if (logoElement) { 
             logoElement.addEventListener('click', (e) => {
               e.preventDefault();
+              updatingShoppingCart();
               this.mainElement?.classList.remove('visually-hidden');
               breadcrumbsLink.textContent = '';
               this.cartSection!.innerHTML = '';
