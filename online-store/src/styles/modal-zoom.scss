@@ -1,0 +1,53 @@
+.modal-zoom {
+  position: fixed;
+  z-index: 21;
+  max-height: 100%;
+  max-width: 527px;
+  width: 100%;
+  transition: all .3s;
+
+  &__container {
+    padding: 25px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__img {
+    max-width: 100%;
+  }
+}
+
+.close {
+  position: absolute;
+  right: -6%;
+  top: -2%;
+  width: 32px;
+  height: 32px;
+  opacity: 0.5;
+  cursor: pointer;
+  z-index: 22;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::before,
+  &::after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #ffffff;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}

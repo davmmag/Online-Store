@@ -1,0 +1,10 @@
+import { ProductDescription, ProductFilters } from "../types/types";
+declare let filtersObj: ProductFilters;
+declare function getUrlQuery(): void;
+declare function checked(): void;
+declare function filtered(): ProductDescription[];
+declare function viewDisplay(view: string): void;
+declare function changeView(): void;
+declare function filtersReset(): void;
+declare function filtersSave(): void;
+export { checked, filtered, filtersObj, viewDisplay, changeView, filtersReset, filtersSave, getUrlQuery };

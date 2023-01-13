@@ -1,0 +1,147 @@
+/* Header  */
+.header {
+    position: relative;
+    z-index: 20;
+}
+.header-top {
+    color: aliceblue;
+    background-color: black;
+    height: 30px;
+    color: white;
+    font-size: 14px;
+}
+.header-top__container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.header-top__nav {
+    height: 100%;
+}
+.header-top__menu {
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-top__item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+}
+.header-top__item:hover {
+    background-color: rgb(83, 83, 83);
+}
+.header-top__item img {
+    margin: 0 5px 0 0;
+    width: 17px;
+    height: 17px;
+}
+
+.header-main {
+    height: 70px;
+    color: black;
+}
+.header-main__container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+.header-main__logo {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 30px;
+    font-weight: 500;
+    color: inherit;
+}
+.header-main__logo img {
+    width: 30px;
+    height: 30px;
+}
+.header-main__search {
+    flex: 1 1 auto;
+}
+.header-form {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid rgb(126, 126, 126);
+  border-radius: 35px;
+  overflow: hidden;
+}
+.header-input {
+  border: none;
+  outline: none;
+  background: transparent;
+
+
+  width: 100%;
+  height: 42px;
+  padding-left: 15px;
+}
+.header-button {
+  height: 44px;
+  width: 40px;
+  position: absolute;
+  top: 0;
+  right: 0px;
+  cursor: pointer;
+}
+
+.header-button img {
+    width: 25px;
+    height: 25px;
+}
+
+.header-button img {
+    width: 25px;
+    height: 25px;
+}
+.header-main__basket{
+    width: 282px;
+    display: flex;
+    align-items: center;
+}
+
+.header-main__basket img {
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    margin: 20px;
+}
+
+.header-bottom {
+    height: 30px;
+}
+.header-bottom__container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-bottom__nav {
+    height: 100%;
+}
+.header-bottom__menu {
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.header-bottom__item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+}
+.header-bottom__item:hover {
+    color: rgb(138, 138, 138);
+}
