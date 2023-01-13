@@ -44,8 +44,7 @@
   },
   "scripts": {
     "serve": "webpack serve --mode=development --progress",
-    "build": "webpack",
-    "build:prod": "webpack --config webpack.config.prod.ts"
+    "build": "webpack"
   },
   "engines": {
     "node": ">=16.0.0"
